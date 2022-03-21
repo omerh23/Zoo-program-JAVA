@@ -1,5 +1,6 @@
 package diet;
 
+import animals.Animal;
 import food.EFoodType;
 import food.IEdible;
 

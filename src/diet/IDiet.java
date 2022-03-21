@@ -1,4 +1,5 @@
 package diet;
+import animals.*;
 import  food.*;
 public interface IDiet {
 	public boolean canEat(EFoodType food);

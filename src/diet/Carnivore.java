@@ -1,5 +1,8 @@
 package diet;
-import food.*;
+import animals.Animal;
+import food.EFoodType;
+import food.IEdible;
+
 
 
 public class Carnivore implements IDiet {
