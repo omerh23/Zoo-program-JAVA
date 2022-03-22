@@ -15,11 +15,12 @@ public abstract class Animal extends Mobile implements IEdible {
 	public Animal(String name, Point location) {
 		super(location);
 		this.name = name;
+		MessageUtility.logConstractor("Animal", name);
 	}
 	public void makeSound() {}
-	public boolean eat(IEdible food) {
-		return false;
-	}
+	
+	public  boolean eat(IEdible food) {return false;};
+	
 	public boolean setWeight(double weight) {
 		if (weight > 0) {
 			this.weight = weight;
@@ -32,11 +33,7 @@ public abstract class Animal extends Mobile implements IEdible {
 		return true;
 	}
 	
-	@Override
-	public EFoodType getFoodtype() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 	public String getName() {
 		return this.name;

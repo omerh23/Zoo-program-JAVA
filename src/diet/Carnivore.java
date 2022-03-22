@@ -18,8 +18,11 @@ public class Carnivore implements IDiet {
 
 	@Override
 	public double eat(Animal animal, IEdible food) {
-		// to add 10% to weight
-		return 0;
+		double W = 0;
+		if(this.canEat(food.getFoodtype())) 
+			W = animal.getWeight()+(animal.getWeight()/10);
+	
+		return W;
 	}
 	
 
