@@ -30,6 +30,7 @@ public class Lion extends Animal {
 		MessageUtility.logSound(super.getName(), "roar");
 	}
 	
+	
 	public boolean eat(IEdible IE) {
 		if(diet.canEat(IE.getFoodtype())) {
 			double W = super.getWeight()+ (super.getWeight()/10);
