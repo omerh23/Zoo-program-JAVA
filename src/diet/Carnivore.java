@@ -9,7 +9,10 @@ public class Carnivore implements IDiet {
 	
 	@Override
 	public boolean canEat(EFoodType food) {
-		// TODO Auto-generated method stub
+		if (food == EFoodType.MEAT) {
+			return true;
+		}
+		
 		return false;
 	}
 
