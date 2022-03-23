@@ -24,10 +24,6 @@ public class Lion extends Animal {
 		super.setDiet(diet);
 	}
 	
-	public EFoodType getFoodType() {
-		MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.NOTFOOD);
-		return EFoodType.NOTFOOD;
-	}
 	
 	public void roar() {
 		MessageUtility.logSound(super.getName(), "Roars, then stretches and shakes its mane");
@@ -56,6 +52,12 @@ public class Lion extends Animal {
 	public String toString() {
 		return "[" + this.getClass().getSimpleName() + "] ";
 		
+	}
+
+	@Override
+	public EFoodType getFoodtype() {
+		MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.NOTFOOD);
+		return EFoodType.NOTFOOD;
 	}
 
 }

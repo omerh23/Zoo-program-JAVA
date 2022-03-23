@@ -42,5 +42,6 @@ public abstract class Animal extends Mobile implements IEdible {
 	public double getWeight() {
 		return this.weight;
 	}
+	
 
 }

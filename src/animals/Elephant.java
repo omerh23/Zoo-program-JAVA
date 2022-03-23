@@ -24,7 +24,7 @@ public class Elephant extends Animal{
 	
 	@Override
 	public EFoodType getFoodtype() {
-		MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.NOTFOOD);
+		MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.MEAT);
 		return EFoodType.MEAT;
 	}
 	

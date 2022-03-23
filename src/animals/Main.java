@@ -12,6 +12,7 @@ public class Main {
 		IEdible dambo = new Elephant("dambo");
 		Animal simba = new Lion("simba");
 		simba.eat(dambo);
+		simba.getFoodtype();
 		
 	
 
