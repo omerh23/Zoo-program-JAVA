@@ -8,7 +8,9 @@ public class Omnivore implements IDiet{
 
 	@Override
 	public boolean canEat(EFoodType food) {
-		// TODO Auto-generated method stub
+		if (food == EFoodType.MEAT || food == EFoodType.VEGETABLE) {
+			return true;
+		}
 		return false;
 	}
 
@@ -16,7 +18,17 @@ public class Omnivore implements IDiet{
 	public double eat(Animal animal, IEdible food) {
 		// add 10% to weight when eating meat
 		// add 7% to weight when eating vegetable
-		return 0;
+		double W = 0;
+		if(this.canEat(food.getFoodtype())) { 	
+			if(food.getFoodtype() == EFoodType.MEAT) {
+				W = animal.getWeight()+(animal.getWeight()/10);
+			}
+			if(food.getFoodtype() == EFoodType.VEGETABLE) {
+				W = animal.getWeight()+(animal.getWeight()*0.07);				
+			}
+		}
+	
+		return W;
 	}
 	
 	

@@ -1,5 +1,4 @@
 package animals;
-
 import diet.*;
 import utilities.*;
 import food.*;
@@ -17,9 +16,28 @@ public abstract class Animal extends Mobile implements IEdible {
 		this.name = name;
 		MessageUtility.logConstractor("Animal", name);
 	}
-	public void makeSound() {}
+	public void makeSound() {
+		
+		if(this.getClass()== Lion.class) {
+			Lion temp = (Lion)this;
+			temp.roar();
+		}
+		
+		if(this.getClass()== Bear.class) {
+			Bear temp = (Bear)this;
+			temp.roar();
+		}
+		
+		if(this.getClass()== Elephant.class) {
+			
+		}
+			
+		
+	}
+
 	
-	public  boolean eat(IEdible food) {return false;};
+	
+	public abstract boolean eat(IEdible food);
 	
 	public boolean setWeight(double weight) {
 		if (weight > 0) {

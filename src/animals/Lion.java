@@ -30,19 +30,16 @@ public class Lion extends Animal {
 			
 	}
 	
-	public void makeSound() {
-		this.roar();
-		
-	}
-	
+
 	
 	public boolean eat(IEdible IE) {//check the func eat in carnivore
 		double W = diet.eat(this, IE);
-		if(W != 0) {
+		if(W > 0) {
 			super.setWeight(W);
 			boolean val = new Random().nextInt(50)==0;
 			if (val)
 				this.scarCount += 1;
+			super.makeSound();
 			return true;
 		}
 		return false;
