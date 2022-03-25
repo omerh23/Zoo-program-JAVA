@@ -22,10 +22,10 @@ public class Omnivore implements IDiet{
 		EFoodType foodType  = food.getFoodtype();
 		if(this.canEat(foodType)) { 	
 			if(foodType == EFoodType.MEAT) {
-				W = animal.getWeight()+(animal.getWeight()/10);
+				W = (animal.getWeight()/10);
 			}
 			if(foodType == EFoodType.VEGETABLE) {
-				W = animal.getWeight()+(animal.getWeight()*0.07);				
+				W = (animal.getWeight()*0.07);				
 			}
 		}
 	

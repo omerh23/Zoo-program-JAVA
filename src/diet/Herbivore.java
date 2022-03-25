@@ -20,7 +20,7 @@ public class Herbivore implements IDiet{
 		// add 7% to weight when eating vegetable
 		double W = 0;
 		if(this.canEat(food.getFoodtype())) 
-			W = animal.getWeight()+(animal.getWeight()*0.07);
+			W = (animal.getWeight()*0.07);
 	
 		return W;
 	}

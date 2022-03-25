@@ -17,8 +17,7 @@ public abstract class Mobile implements Ilocatable {
 			this.location = new Point(point);
 			return true;
 		}
-		return false;
-			
+		return false;			
 	}
 	
 	public Mobile(Point location) {

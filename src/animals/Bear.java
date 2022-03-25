@@ -21,11 +21,13 @@ public class Bear extends Animal  {
 		}
 		else
 			this.furColor = "gray";
+		MessageUtility.logConstractor("Bear", name);
 	}
 	public Bear(String name) {
 		super(name,starting_location);
 		this.furColor = "gray";
 		super.setWeight(308.2);
+		MessageUtility.logConstractor("Bear", name);
 		
 	}
 	
@@ -42,7 +44,7 @@ public class Bear extends Animal  {
 	public boolean eat(IEdible food) {
 		double W = diet.eat(this, food);
 		if(W > 0) {
-			super.setWeight(W);
+			super.setWeight(super.getWeight()+W);
 			super.makeSound();
 			return true;
 		}

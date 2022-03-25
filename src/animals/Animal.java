@@ -29,6 +29,8 @@ public abstract class Animal extends Mobile implements IEdible {
 		}
 		
 		if(this.getClass()== Elephant.class) {
+			Elephant temp = (Elephant)this;
+			temp.chew();
 			
 		}
 			
@@ -60,8 +62,12 @@ public abstract class Animal extends Mobile implements IEdible {
 	public double getWeight() {
 		return this.weight;
 	}
-	public abstract void Move(Point p);
-	
+	public void walk(Point d) //helper function for movement different from "move"
+	{
+		double distacne = super.move(d);
+		double W = this.getWeight()-(distacne*this.getWeight()*0.00025);
+		this.setWeight(W);
+	}
 	
 
 }
