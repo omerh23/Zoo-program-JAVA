@@ -19,11 +19,12 @@ public class Omnivore implements IDiet{
 		// add 10% to weight when eating meat
 		// add 7% to weight when eating vegetable
 		double W = 0;
-		if(this.canEat(food.getFoodtype())) { 	
-			if(food.getFoodtype() == EFoodType.MEAT) {
+		EFoodType foodType  = food.getFoodtype();
+		if(this.canEat(foodType)) { 	
+			if(foodType == EFoodType.MEAT) {
 				W = animal.getWeight()+(animal.getWeight()/10);
 			}
-			if(food.getFoodtype() == EFoodType.VEGETABLE) {
+			if(foodType == EFoodType.VEGETABLE) {
 				W = animal.getWeight()+(animal.getWeight()*0.07);				
 			}
 		}

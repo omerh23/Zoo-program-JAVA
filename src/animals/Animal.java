@@ -60,6 +60,8 @@ public abstract class Animal extends Mobile implements IEdible {
 	public double getWeight() {
 		return this.weight;
 	}
+	public abstract void Move(Point p);
+	
 	
 
 }

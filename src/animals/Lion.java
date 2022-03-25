@@ -56,5 +56,15 @@ public class Lion extends Animal {
 		MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.NOTFOOD);
 		return EFoodType.NOTFOOD;
 	}
+	
+	
+	public void Move(Point d)
+	{
+		double distacne = super.move(d);
+		double W = this.getWeight()-(distacne*this.getWeight()*0.00025);
+		super.setWeight(W);
+	}
+	
+	
 
 }

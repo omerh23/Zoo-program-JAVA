@@ -49,6 +49,10 @@ public class Bear extends Animal  {
 		return false;
 	}
 	
+	public String toString() {
+		return "[" + this.getClass().getSimpleName() + "] ";
+		
+	}
 	
 
 }

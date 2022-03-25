@@ -28,5 +28,9 @@ public class Elephant extends Animal{
 		return EFoodType.MEAT;
 	}
 	
+	public String toString() {
+		return "[" + this.getClass().getSimpleName() + "] ";
+		
+	}
 
 }
