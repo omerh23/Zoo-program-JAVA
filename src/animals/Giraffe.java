@@ -54,8 +54,14 @@ public class Giraffe extends ChewAnimal {
 
 	@Override
 	public boolean eat(IEdible food) {
-		// TODO Auto-generated method stub
-		return false;
+		double W = diet.eat(this, food);
+		if(W > 0) {
+			super.setWeight(super.getWeight()+W);
+			super.makeSound();
+			return true;
+		}
+	
+	return false;
 	}
 
 	@Override

@@ -41,7 +41,6 @@ public class Elephant extends ChewAnimal{
 		double W = diet.eat(this, food);
 		if(W > 0) {
 			super.setWeight(super.getWeight()+W);
-		
 			super.makeSound();
 			return true;
 		}
@@ -61,7 +60,6 @@ public class Elephant extends ChewAnimal{
 	}
 	
 	public void chew() {
-		
 		MessageUtility.logSound(super.getName(), "Trumpets with joy while flapping its ears, then chews");
 		
 	}
