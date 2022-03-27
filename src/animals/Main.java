@@ -12,9 +12,10 @@ public class Main {
 		Animal simba = new Lion("simba");
 		simba.eat(dambo);
 		mobility.Point p  = new mobility.Point(405,13);
-		System.out.println(simba.getWeight());
-		simba.walk(p);
-		System.out.println(simba.getWeight());
+		simba.move(p);
+		System.out.println(simba.toString());
+		simba.makeSound();
+		
 		
 		//simba.getFoodtype();
 		

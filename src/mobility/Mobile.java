@@ -44,4 +44,17 @@ public abstract class Mobile implements Ilocatable {
 		return temp;
 	}
 	
+	public double getDistance() {
+		return this.totalDistance;
+	}
+	
+	public static boolean checkBoundaries( Point point ){
+		
+		if (point.get_x() <= point.get_max_x()&& point.get_x() >= point.get_min_x() &&
+				point.get_y() <= point.get_max_y() && point.get_y() >= point.get_min_y())
+			return true;
+		
+		return false;
+	}
+	
 }

@@ -6,7 +6,7 @@ import food.IEdible;
 import mobility.Point;
 import utilities.MessageUtility;
 
-public class Giraffe extends Animal {
+public class Giraffe extends ChewAnimal {
 	
 	
 	private static final Herbivore diet = new Herbivore();
@@ -14,15 +14,13 @@ public class Giraffe extends Animal {
 	private double neckLength;
 	
 	
-	public Giraffe(String name,Point location, double neckLength){
+	public Giraffe(String name,Point location){
 		super(name,location);
 		super.setWeight(450);
 		super.setDiet(diet);
 		MessageUtility.logConstractor("Giraffe", name);
-		if(1 <= neckLength && neckLength >= 2.5) {
-			this.neckLength = neckLength;
-		}
-		else {this.neckLength = 1.5 ;}
+		this.neckLength = 1.5 ;
+			
 	}
 	
 	public Giraffe(String name) {
@@ -33,6 +31,17 @@ public class Giraffe extends Animal {
 		this.neckLength = 1.5 ;
 			
 	}
+	
+	public boolean setNeck(double neck) {
+		if(1 <= neck && neck >= 2.5) {
+			this.neckLength = neck;
+			MessageUtility.logSetter(super.getName(), "setNeck", neck, true);
+			return true;
+		}
+		MessageUtility.logSetter(super.getName(), "setNeck", neck, false);
+		return false;
+		
+	}
 
 
 	@Override
@@ -40,12 +49,19 @@ public class Giraffe extends Animal {
 		MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.MEAT);
 		return EFoodType.MEAT;
 	}
+	
 
 
 	@Override
 	public boolean eat(IEdible food) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void chew() {
+		MessageUtility.logSound(super.getName(), "Bleats and Stomps its legs, then chews");
+		
 	}
 
 }

@@ -1,25 +1,20 @@
 package animals;
 
-import diet.Carnivore;
 import diet.Herbivore;
 import food.EFoodType;
 import food.IEdible;
 import mobility.Point;
 import utilities.MessageUtility;
 
-public class Elephant extends Animal{
+public class Elephant extends ChewAnimal{
 	private double trunkLength ;
 	private static final Herbivore diet = new Herbivore();
 	private static final Point starting_location = new Point(50,90);
-	public Elephant(String name,double trunkLength) {
-		super(name, starting_location);
-		super.setWeight(500);
-		if(0.5 <= trunkLength && trunkLength >= 3) {
-			this.trunkLength = trunkLength;
-		}
-		else {this.trunkLength = 1;}
-		MessageUtility.logConstractor("Elephant", name);
-		
+	public Elephant(String name,Point location) {
+		super(name, location);
+		super.setWeight(500);	
+		this.trunkLength = 1;
+		MessageUtility.logConstractor("Elephant", name);	
 	}
 	
 	public Elephant(String name){
@@ -27,6 +22,17 @@ public class Elephant extends Animal{
 		super.setWeight(500);
 		this.trunkLength = 1;
 		MessageUtility.logConstractor("Elephant", name);
+	}
+	
+	
+	public boolean setTrunk(double trunk) {
+		if(0.5 <= trunk && trunk >= 3) {
+			this.trunkLength = trunk;
+			MessageUtility.logSetter(super.getName(), "setTrunk", trunk, true);
+			return true;
+		}
+		MessageUtility.logSetter(super.getName(), "setTrunk", trunk, false);
+		return false;
 	}
 	
 	

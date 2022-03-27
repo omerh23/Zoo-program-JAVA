@@ -16,29 +16,10 @@ public abstract class Animal extends Mobile implements IEdible {
 		this.name = name;
 		MessageUtility.logConstractor("Animal", name);
 	}
-	public void makeSound() {
-		
-		if(this.getClass()== Lion.class) {
-			Lion temp = (Lion)this;
-			temp.roar();
-		}
-		
-		if(this.getClass()== Bear.class) {
-			Bear temp = (Bear)this;
-			temp.roar();
-		}
-		
-		if(this.getClass()== Elephant.class) {
-			Elephant temp = (Elephant)this;
-			temp.chew();
-			
-		}
-			
-		
-	}
-
 	
-	
+	public abstract void makeSound();
+		
+		
 	public abstract boolean eat(IEdible food);
 	
 	public boolean setWeight(double weight) {
@@ -52,7 +33,6 @@ public abstract class Animal extends Mobile implements IEdible {
 		this.diet = diet;
 		return true;
 	}
-	
 	
 	
 	public String getName() {
@@ -69,5 +49,10 @@ public abstract class Animal extends Mobile implements IEdible {
 		this.setWeight(W);
 	}
 	
+public String toString() {
+	
+		return "[" + this.getClass().getSimpleName() +  "]" + this.name + "\ttotal distance:" + String.format("%.2f", super.getDistance())+ "\tweight:" + this.getWeight();
+		
+	}
 
 }

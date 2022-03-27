@@ -1,26 +1,19 @@
 package animals;
-
-import java.util.Random;
-
 import diet.Omnivore;
 import food.EFoodType;
 import food.IEdible;
 import mobility.Point;
 import utilities.MessageUtility;
 
-public class Bear extends Animal  {
+public class Bear extends RoarAnimal  {
 	
 	private String furColor ;
 	private static final Point starting_location = new Point(100,5);
 	private static final Omnivore diet = new Omnivore();
-	public Bear(String name, String fur) {
-		super(name,starting_location);
+	public Bear(String name, Point location) {
+		super(name,location);
 		super.setWeight(308.2);
-		if(fur == "white" ||fur == "black" || fur == "gray") {
-			this.furColor = fur;
-		}
-		else
-			this.furColor = "gray";
+		this.furColor = "gray";
 		MessageUtility.logConstractor("Bear", name);
 	}
 	public Bear(String name) {
@@ -30,6 +23,17 @@ public class Bear extends Animal  {
 		MessageUtility.logConstractor("Bear", name);
 		
 	}
+	
+	public boolean setFur(String fur) {
+		if(fur == "gray" || fur == "white" || fur == "black") {
+			this.furColor = fur;
+			MessageUtility.logSetter(super.getName(), "setFur", fur, true);
+			return true;
+		}
+		MessageUtility.logSetter(super.getName(), "setFur", fur, false);
+		return false;
+	}
+	
 	
 	public void roar() {
 		MessageUtility.logSound(super.getName(), "Stands on its hind legs, roars and scratches its belly");

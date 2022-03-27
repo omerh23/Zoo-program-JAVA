@@ -7,15 +7,17 @@ import food.IEdible;
 import mobility.Point;
 import utilities.MessageUtility;
 
-public class Lion extends Animal {
+public class Lion extends RoarAnimal {
 
 	private static final Point starting_location = new Point(20,0);
 	private static final Carnivore diet = new Carnivore();
-	private int scarCount = 0;
+	private int scarCount ;
+	
 	public Lion(String name) {
 		super(name,starting_location);
 		super.setWeight(408.2);
 		super.setDiet(diet);
+		this.scarCount = 0;
 		MessageUtility.logConstractor("Lion", name);
 	}
 	
@@ -23,6 +25,7 @@ public class Lion extends Animal {
 		super(name,location);
 		super.setWeight(408.2);
 		super.setDiet(diet);
+		this.scarCount = 0 ;
 		MessageUtility.logConstractor("Lion", name);
 	}
 	
@@ -47,16 +50,27 @@ public class Lion extends Animal {
 			
 		
 	}
-	public String toString() {
-		return "[" + this.getClass().getSimpleName() + "] ";
-		
-	}
+//	public String toString() {
+//		return "[" + this.getClass().getSimpleName() + "] ";
+//		
+//	}
 
 	@Override
 	public EFoodType getFoodtype() {
 		MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.NOTFOOD);
 		return EFoodType.NOTFOOD;
 	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }
