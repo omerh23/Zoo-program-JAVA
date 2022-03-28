@@ -12,8 +12,7 @@ public abstract class Mobile implements Ilocatable {
 
 	@Override
 	public boolean setLocation(Point point) {
-		if (point.get_x() <= point.get_max_x()&& point.get_x() >= point.get_min_x() &&
-				point.get_y() <= point.get_max_y() && point.get_y() >= point.get_min_y()) {
+		if (Point.checkBoundaris(point)) {
 			this.location = new Point(point);
 			return true;
 		}
@@ -47,14 +46,4 @@ public abstract class Mobile implements Ilocatable {
 	public double getDistance() {
 		return this.totalDistance;
 	}
-	
-	public static boolean checkBoundaries( Point point ){
-		
-		if (point.get_x() <= point.get_max_x()&& point.get_x() >= point.get_min_x() &&
-				point.get_y() <= point.get_max_y() && point.get_y() >= point.get_min_y())
-			return true;
-		
-		return false;
-	}
-	
 }

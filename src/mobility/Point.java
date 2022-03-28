@@ -9,12 +9,16 @@ public class Point {
 	private final int min_y = 0;
 	
 	public Point(int x,int y) {
-		if (x <= max_x&& x >= min_x && y <= max_y && y >= min_y){
 			this.x = x;
-			this.y = y;
-		}	
+			this.y = y;	
 	}
 	
+	public static boolean checkBoundaris(Point point) {
+		if (point.get_x() <= point.get_max_x()&& point.get_x() >= point.get_min_x() && point.get_y() <= point.get_max_y() && point.get_y() >= point.get_min_y()){
+			return true;
+		}
+		return false;
+	}
 	
 	
 	public Point(Point location) {

@@ -48,12 +48,7 @@ public abstract class Animal extends Mobile implements IEdible {
 		MessageUtility.logGetter(this.name, "getWeight", this.weight);
 		return this.weight;
 	}
-	public void walk(Point d) //helper function for movement different from "move"
-	{
-		double distacne = super.move(d);
-		double W = this.getWeight()-(distacne*this.getWeight()*0.00025);
-		this.setWeight(W);
-	}
+	
 	
 public String toString() {
 	
