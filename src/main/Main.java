@@ -112,22 +112,24 @@ public class Main {
 					
 					
 					
-					if(animal_choice == 5 && choose_location == 1 ) { //Turtle
-						Animal turtle = new Turtle(animal_name,new Point(x,y));
-						animal_arr[i] = turtle;
-					}
-							
-					else if(animal_choice == 5 && choose_location != 1 ) {
-						Animal turtle = new Turtle(animal_name);
-						animal_arr[i] = turtle;
-						}
-					
-					
-											
-						
-					x = -1;
-					y = -1;
-					choose_location = 0;
+//					if(animal_choice == 5 && choose_location == 1 ) { //Turtle
+//						Animal turtle = new Turtle(animal_name,new Point(x,y));
+//						animal_arr[i] = turtle;
+//					}
+//							
+//					else if(animal_choice == 5 && choose_location != 1 ) {
+//						Animal turtle = new Turtle(animal_name);
+//						animal_arr[i] = turtle;
+//						}
+//					
+//					
+//											
+//						
+//					x = -1;
+//					y = -1;
+//					choose_location = 0;
+					int x5 =1;
+					int x2 = 3;
 					
 					
 		
