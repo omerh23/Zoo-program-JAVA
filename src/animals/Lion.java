@@ -50,10 +50,7 @@ public class Lion extends RoarAnimal {
 			
 		
 	}
-//	public String toString() {
-//		return "[" + this.getClass().getSimpleName() + "] ";
-//		
-//	}
+
 
 	@Override
 	public EFoodType getFoodtype() {

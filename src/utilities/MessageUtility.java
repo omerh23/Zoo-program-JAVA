@@ -1,5 +1,5 @@
 package utilities;
-
+import diet.*;
 /**
  * A set of Logging functions to be used in appropriate classes
  * 

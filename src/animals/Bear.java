@@ -55,10 +55,7 @@ public class Bear extends RoarAnimal  {
 		return false;
 	}
 	
-	public String toString() {
-		return "[" + this.getClass().getSimpleName() + "] ";
-		
-	}
+	
 	
 
 }

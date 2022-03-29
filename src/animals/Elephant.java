@@ -54,10 +54,7 @@ public class Elephant extends ChewAnimal{
 		return EFoodType.MEAT;
 	}
 	
-	public String toString() {
-		return "[" + this.getClass().getSimpleName() + "] ";
-		
-	}
+	
 	
 	public void chew() {
 		MessageUtility.logSound(super.getName(), "Trumpets with joy while flapping its ears, then chews");
