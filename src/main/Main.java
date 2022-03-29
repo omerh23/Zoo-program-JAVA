@@ -142,9 +142,10 @@ public class Main {
 		
 				}//for
 		
-//		for(int j = 0; j<animal_arr.length;j++) {
-//			System.out.println(animal_arr[j]);
-//		}
+		for(int j = 0; j<animal_arr.length;j++) {
+			System.out.println(animal_arr[j]);
+			
+		}
 			
 		}//args
 					
