@@ -18,8 +18,11 @@ public class Main {
 		Scanner sd = new Scanner(System.in);
 		int arr_size = -1;
 		while(arr_size <3) {
-			System.out.println("Enter a size of array (minimun 3): ");
-			arr_size = sc.nextInt();
+			try {
+				System.out.println("Enter a size of array (minimun 3): ");
+				arr_size = sc.nextInt();
+			}
+			catch(InputMismatchException e){System.out.println("Please enter only numbers");sc.nextLine();}
 		}
 		Animal animal_arr[] = new Animal[arr_size];
 		int animal_choice = -1;
@@ -125,9 +128,9 @@ public class Main {
 					
 											
 						
-//					x = -1;
-//					y = -1;
-//					choose_location = 0;
+					x = -1;
+					y = -1;
+					choose_location = 0;
 					
 					
 		
