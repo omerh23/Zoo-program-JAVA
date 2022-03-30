@@ -44,10 +44,10 @@ public abstract class Animal extends Mobile implements IEdible {
 		return this.name;
 	}
 	
-	public double getWeight() {
-		MessageUtility.logGetter(this.name, "getWeight", this.weight);
-		return this.weight;
-	}
+//	public double getWeight() {
+//		MessageUtility.logGetter(this.name, "getWeight", this.weight);
+//		return this.weight;
+//	}
 	
 	
 public String toString() {
