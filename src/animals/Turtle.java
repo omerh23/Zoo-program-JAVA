@@ -15,19 +15,20 @@ public class Turtle extends ChewAnimal{
 	
 	public Turtle(String name, Point location) {
 		super(name,location);
+		MessageUtility.logConstractor("Turtle", name);
 		super.setWeight(1);
 		super.setDiet(diet);
 		this.Age = 1;
-		MessageUtility.logConstractor("Turtle", name);
+		
 		
 	}
 	
 	public Turtle(String name) {
 		super(name,starting_location);
+		MessageUtility.logConstractor("Turtle", name);
 		super.setWeight(1);
 		super.setDiet(diet);
 		this.Age = 1;
-		MessageUtility.logConstractor("Turtle", name);
 		
 	}
 	

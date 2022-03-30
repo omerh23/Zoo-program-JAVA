@@ -12,20 +12,24 @@ public class Bear extends RoarAnimal  {
 	private static final Omnivore diet = new Omnivore();
 	public Bear(String name, Point location) {
 		super(name,location);
-		super.setWeight(308.2);
-		this.furColor = "gray";
 		MessageUtility.logConstractor("Bear", name);
+		super.setWeight(308.2);
+		super.setDiet(diet);
+		this.furColor = "GRAY";
+		
 	}
 	public Bear(String name) {
 		super(name,starting_location);
-		this.furColor = "gray";
-		super.setWeight(308.2);
 		MessageUtility.logConstractor("Bear", name);
+		super.setWeight(308.2);
+		super.setDiet(diet);
+		this.furColor = "GRAY";
+		
 		
 	}
 	
 	public boolean setFur(String fur) {
-		if(fur == "gray" || fur == "white" || fur == "black") {
+		if(fur == "GRAY" || fur == "WHITE" || fur == "BLACK") {
 			this.furColor = fur;
 			MessageUtility.logSetter(super.getName(), "setFur", fur, true);
 			return true;

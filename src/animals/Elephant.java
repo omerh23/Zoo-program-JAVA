@@ -12,16 +12,20 @@ public class Elephant extends ChewAnimal{
 	private static final Point starting_location = new Point(50,90);
 	public Elephant(String name,Point location) {
 		super(name, location);
-		super.setWeight(500);	
+		MessageUtility.logConstractor("Elephant", name);
+		super.setWeight(500);
+		super.setDiet(diet);
 		this.trunkLength = 1;
-		MessageUtility.logConstractor("Elephant", name);	
+			
 	}
 	
 	public Elephant(String name){
 		super(name, starting_location);
-		super.setWeight(500);
-		this.trunkLength = 1;
 		MessageUtility.logConstractor("Elephant", name);
+		super.setWeight(500);
+		super.setDiet(diet);
+		this.trunkLength = 1;
+		
 	}
 	
 	
@@ -60,6 +64,8 @@ public class Elephant extends ChewAnimal{
 		MessageUtility.logSound(super.getName(), "Trumpets with joy while flapping its ears, then chews");
 		
 	}
+
+
 	
 
 }

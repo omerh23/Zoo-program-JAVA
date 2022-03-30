@@ -16,18 +16,18 @@ public class Giraffe extends ChewAnimal {
 	
 	public Giraffe(String name,Point location){
 		super(name,location);
+		MessageUtility.logConstractor("Giraffe", name);
 		super.setWeight(450);
 		super.setDiet(diet);
-		MessageUtility.logConstractor("Giraffe", name);
 		this.neckLength = 1.5 ;
 			
 	}
 	
 	public Giraffe(String name) {
 		super(name,starting_location);
+		MessageUtility.logConstractor("Giraffe", name);
 		super.setWeight(450);
 		super.setDiet(diet);
-		MessageUtility.logConstractor("Giraffe", name);
 		this.neckLength = 1.5 ;
 			
 	}
@@ -69,5 +69,7 @@ public class Giraffe extends ChewAnimal {
 		MessageUtility.logSound(super.getName(), "Bleats and Stomps its legs, then chews");
 		
 	}
+
+
 
 }

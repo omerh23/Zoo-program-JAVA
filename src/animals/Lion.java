@@ -15,18 +15,20 @@ public class Lion extends RoarAnimal {
 	
 	public Lion(String name) {
 		super(name,starting_location);
+		MessageUtility.logConstractor("Lion", name);
 		super.setWeight(408.2);
 		super.setDiet(diet);
 		this.scarCount = 0;
-		MessageUtility.logConstractor("Lion", name);
+		
 	}
 	
 	public Lion(String name, Point location) {
 		super(name,location);
+		MessageUtility.logConstractor("Lion", name);
 		super.setWeight(408.2);
 		super.setDiet(diet);
 		this.scarCount = 0 ;
-		MessageUtility.logConstractor("Lion", name);
+		
 	}
 	
 	
