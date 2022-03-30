@@ -125,9 +125,9 @@ public class Main {
 					
 											
 						
-					x = -1;
-					y = -1;
-					choose_location = 0;
+//					x = -1;
+//					y = -1;
+//					choose_location = 0;
 					
 					
 		
