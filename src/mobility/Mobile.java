@@ -88,7 +88,7 @@ public abstract class Mobile implements Ilocatable {
 	 * Getter method for the distance variable
 	 * 
 	 * @return distance
-	 *            - Returns the distance the animal has travaled
+	 *            - Returns the distance the animal has traveled
 	 */
 	public double getDistance() {
 		return this.totalDistance;
