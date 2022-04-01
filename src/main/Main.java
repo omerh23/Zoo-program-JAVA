@@ -11,7 +11,11 @@ import mobility.Point;
 import zoo.*;
 
 
-
+/**
+ * the main class that is running the program
+ *
+ * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ */
 public class Main {
 
 	public static void main(String[] args) {
