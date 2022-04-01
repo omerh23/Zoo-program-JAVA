@@ -6,7 +6,7 @@ import mobility.*;
 
 
 /**
- * A class describing animals inherits from mobile class and implaments IEdible interface
+ * An abstract class describing animals inherits from mobile class and implaments IEdible interface
  *
  * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     Mobile, IEdible
