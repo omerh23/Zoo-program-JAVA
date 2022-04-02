@@ -4,7 +4,7 @@ import mobility.Point;
 /**
  * An abstract class describing animals that chew implementing the makeSound method and defines the chew method, inherits from Animal class
  *
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     Animal
  */
 public abstract class ChewAnimal extends Animal {

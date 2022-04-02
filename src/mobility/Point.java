@@ -2,7 +2,7 @@ package mobility;
 /**
  * A class describing animal a point
  *
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  */
 public class Point {
 	private int x;

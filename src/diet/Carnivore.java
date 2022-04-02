@@ -6,7 +6,7 @@ import food.IEdible;
 /**
  * A class organizing the carnivore diet for the animals implementing the canEat and eat methods
  * for the carnivore animals
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     IDiet
  */
 

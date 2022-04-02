@@ -3,7 +3,7 @@ package mobility;
 /**
  * An interface organizing the location of the animals declaring the getLocation and setLocation methods
  *
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  */
 public interface Ilocatable {
 	/*

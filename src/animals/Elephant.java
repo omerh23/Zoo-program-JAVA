@@ -8,7 +8,7 @@ import utilities.MessageUtility;
 /**
  * A class describing an elephant inherits from ChewAnimal
  *
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     ChewAnimal
  */
 public class Elephant extends ChewAnimal{

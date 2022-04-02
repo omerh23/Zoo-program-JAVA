@@ -4,7 +4,7 @@ import  food.*;
 /**
  * An interface organizing the diet of the animals declaring the canEat and eat methods
  *
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     EFoodType
  */
 

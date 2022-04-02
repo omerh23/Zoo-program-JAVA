@@ -9,7 +9,7 @@ import utilities.MessageUtility;
 /**
  * A class describing a Lion inherits from RoarAnimal
  *
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     RoarAnimal
  */
 public class Lion extends RoarAnimal {

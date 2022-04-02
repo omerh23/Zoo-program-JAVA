@@ -6,7 +6,7 @@ import food.IEdible;
 /**
  * A class organizing the omnivore diet for the animals implementing the canEat and eat methods
  * for the omnivore animals
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     IDiet
  */
 public class Omnivore implements IDiet{

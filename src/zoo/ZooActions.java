@@ -7,7 +7,7 @@ import mobility.Point;
 /**
  * An abstract class describing general Zoo actions implementing static methods eat and move
  *
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     animals
  */
 public abstract class ZooActions {

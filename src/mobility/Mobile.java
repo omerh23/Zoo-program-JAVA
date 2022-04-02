@@ -2,7 +2,7 @@ package mobility;
 /**
  * An abstract class describing animal mobility implements the Ilocatable interface
  *
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     Ilocatable
  */
 public abstract class Mobile implements Ilocatable {

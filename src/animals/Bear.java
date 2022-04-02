@@ -7,7 +7,7 @@ import utilities.MessageUtility;
 /**
  * A class describing a bear inherits from RoarAnimal
  *
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     RoarAnimal
  */
 public class Bear extends RoarAnimal  {

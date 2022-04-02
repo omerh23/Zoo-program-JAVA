@@ -5,7 +5,7 @@ import mobility.Point;
 /**
  * An abstract class describing animals that roar implementing the makeSound method and defines the roar method, inherits from Animal class
  *
- * @authors  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     Animal
  */
 public abstract class RoarAnimal extends Animal{
