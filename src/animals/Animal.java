@@ -72,7 +72,7 @@ public abstract class Animal extends Mobile implements IEdible {
 	 */
 	public boolean setDiet(IDiet diet) { 
 		this.diet = diet;
-		MessageUtility.logSetter(this.name, "setDiet", this.diet, true);
+		MessageUtility.logSetter(this.name, "setDiet", this.diet.getClass().getSimpleName(), true);
 		return true;
 		}
 	

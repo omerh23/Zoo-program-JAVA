@@ -85,35 +85,36 @@ public abstract class ZooActions {
 		// else move on to check animals
 		if(animal instanceof Lion)
 		{
-			distance = ((Lion) animal).calcDistance(point);
+			
+			distance = ((Lion) animal).move(point);
 			double animal_weight = ((Lion) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
 			return ((Lion) animal).setWeight(weight);
 		}
 		if(animal instanceof Bear)
 		{
-			distance = ((Bear) animal).calcDistance(point);
+			distance = ((Bear) animal).move(point);
 			double animal_weight = ((Bear) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
 			return ((Bear) animal).setWeight(weight);
 		}
 		if(animal instanceof Elephant)
 		{
-			distance = ((Elephant) animal).calcDistance(point);
+			distance = ((Elephant) animal).move(point);
 			double animal_weight = ((Elephant) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
 			return ((Elephant) animal).setWeight(weight);
 		}
 		if(animal instanceof Giraffe)
 		{
-			distance = ((Giraffe) animal).calcDistance(point);
+			distance = ((Giraffe) animal).move(point);
 			double animal_weight = ((Giraffe) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
 			return ((Giraffe) animal).setWeight(weight);
 		}
 		if(animal instanceof Turtle)
 		{
-			distance = ((Turtle) animal).calcDistance(point);
+			distance = ((Turtle) animal).move(point);
 			double animal_weight = ((Turtle) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
 			return ((Turtle) animal).setWeight(weight);

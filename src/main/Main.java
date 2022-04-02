@@ -22,6 +22,7 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		Scanner sd = new Scanner(System.in);
+		
 		int arr_size = -1;
 		while(arr_size <3) {
 			try {
@@ -150,19 +151,34 @@ public class Main {
 		
 				}//for
 		
-		System.out.println("\n*****weight of animals after random movment*********");
-		ThreadLocalRandom rand = ThreadLocalRandom.current();
+		
 		for(int j = 0; j<animal_arr.length;j++) {
-			System.out.println(ZooActions.move(animal_arr[j], new Point(rand.nextInt(0,800),rand.nextInt(0,600))));	
+			System.out.println("\n\n");
+			animal_arr[j].getName();
+			
+			do {
+				try {
+					
+					System.out.println("\nEnter location for X:(max X is 800)");
+					x = sc.nextInt();
+					System.out.println("Enter location for Y:(max Y is 600)");
+					y = sc.nextInt();
+					if(!Point.checkBoundaris(new Point(x,y))){
+						System.out.println("\nThe point entered is invalid, please try again");
+					}
+				}
+				catch(InputMismatchException e){System.out.println("Please enter only numbers, max Y is 600 and max X is 800");sc.nextLine();}
+				}while(!Point.checkBoundaris(new Point(x,y)));
+	
+			ZooActions.move(animal_arr[j], new Point(x,y));	
 			
 		}
 		
 		
-		System.out.println("*****eat method*********");
 		
 		for(int j = 0; j<animal_arr.length / 2 ;j++) {
-			int random_Animal_1 = (int)Math.floor(Math.random()*(animal_arr.length)+0);
-			int random_Animal_2 = (int)Math.floor(Math.random()*(animal_arr.length)+0);
+			int random_Animal_1 = (int)Math.floor(Math.random()*(animal_arr.length));
+			int random_Animal_2 = (int)Math.floor(Math.random()*(animal_arr.length));
 			System.out.println(ZooActions.eat(animal_arr[random_Animal_1], animal_arr[random_Animal_2]));
 			
 				
