@@ -4,6 +4,8 @@ import animals.*;
 import food.IEdible;
 import mobility.Ilocatable;
 import mobility.Point;
+import plants.Plant;
+import utilities.MessageUtility;
 /**
  * An abstract class describing general Zoo actions implementing static methods eat and move
  *
@@ -27,41 +29,55 @@ public abstract class ZooActions {
 		{
 			if(((Lion) animal).eat(food)) 
 			{
+				MessageUtility.logBooleanFunction(((Lion)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]"+((Animal)food).getName(), true);
 				return true;
 			}
-			else { return false;}
+			else {MessageUtility.logBooleanFunction(((Lion)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]"+((Animal)food).getName(), false); return false;}
 		}
 		if(animal instanceof Bear)
 		{
 			if(((Bear) animal).eat(food)) 
 			{
+				if(food instanceof Animal) {
+				MessageUtility.logBooleanFunction(((Bear)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]"+((Animal)food).getName(), true);
 				return true;
 			}
-			else { return false;}
+			else {MessageUtility.logBooleanFunction(((Bear)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]"+((Animal)food).getName(), false); return false;}
+			}
+			if(food instanceof Plant) {
+				MessageUtility.logBooleanFunction(((Lion)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]", true);
+				return true;
+			}
+			else {MessageUtility.logBooleanFunction(((Lion)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]", false); return false;}
+				
 		}
+		
 		if(animal instanceof Elephant)
 		{
 			if(((Elephant) animal).eat(food)) 
 			{
+				MessageUtility.logBooleanFunction(((Elephant)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]", true);
 				return true;
 			}			
-			else { return false;}
+			else {MessageUtility.logBooleanFunction(((Elephant)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]"+((Animal)food).getName(), false); return false;}
 		}
 		if(animal instanceof Giraffe)
 		{
 			if(((Giraffe) animal).eat(food)) 
 			{
+				MessageUtility.logBooleanFunction(((Giraffe)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]", true);
 				return true;
 			}
-			else { return false;}
+			else {MessageUtility.logBooleanFunction(((Giraffe)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]"+((Animal)food).getName(), false); return false;}
 		}
 		if(animal instanceof Turtle)
 		{
 			if(((Turtle) animal).eat(food)) 
 			{
+				MessageUtility.logBooleanFunction(((Turtle)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]", true);
 				return true;
 			}
-			else { return false;}
+			else {MessageUtility.logBooleanFunction(((Turtle)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]"+((Animal)food).getName(), false); return false;}
 		}
 		//if animal is not a known animal		
 		return false; 
@@ -81,14 +97,15 @@ public abstract class ZooActions {
 		
 		double distance = 0;
 		double weight = 0;
-		if(!Point.checkBoundaris(point)) { return false; }
+		if(!Point.checkBoundaris(point)) {MessageUtility.logBooleanFunction(((Animal)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", false);
+		return false; }
 		// else move on to check animals
 		if(animal instanceof Lion)
 		{
-			
 			distance = ((Lion) animal).move(point);
 			double animal_weight = ((Lion) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
+			MessageUtility.logBooleanFunction(((Lion)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
 			return ((Lion) animal).setWeight(weight);
 		}
 		if(animal instanceof Bear)
@@ -96,6 +113,7 @@ public abstract class ZooActions {
 			distance = ((Bear) animal).move(point);
 			double animal_weight = ((Bear) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
+			MessageUtility.logBooleanFunction(((Bear)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
 			return ((Bear) animal).setWeight(weight);
 		}
 		if(animal instanceof Elephant)
@@ -103,6 +121,7 @@ public abstract class ZooActions {
 			distance = ((Elephant) animal).move(point);
 			double animal_weight = ((Elephant) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
+			MessageUtility.logBooleanFunction(((Elephant)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
 			return ((Elephant) animal).setWeight(weight);
 		}
 		if(animal instanceof Giraffe)
@@ -110,6 +129,7 @@ public abstract class ZooActions {
 			distance = ((Giraffe) animal).move(point);
 			double animal_weight = ((Giraffe) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
+			MessageUtility.logBooleanFunction(((Giraffe)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
 			return ((Giraffe) animal).setWeight(weight);
 		}
 		if(animal instanceof Turtle)
@@ -117,6 +137,7 @@ public abstract class ZooActions {
 			distance = ((Turtle) animal).move(point);
 			double animal_weight = ((Turtle) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
+			MessageUtility.logBooleanFunction(((Turtle)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
 			return ((Turtle) animal).setWeight(weight);
 		}
 		//if animal is not a known animal		

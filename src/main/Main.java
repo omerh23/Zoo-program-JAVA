@@ -170,18 +170,21 @@ public class Main {
 				catch(InputMismatchException e){System.out.println("Please enter only numbers, max Y is 600 and max X is 800");sc.nextLine();}
 				}while(!Point.checkBoundaris(new Point(x,y)));
 	
-			ZooActions.move(animal_arr[j], new Point(x,y));	
+			ZooActions.move(animal_arr[j], new Point(x,y));
+			System.out.print("\n");
 			
 		}
 		
-		
+		int random_Animal_1 = -1;
+		int random_Animal_2 = -1;
 		
 		for(int j = 0; j<animal_arr.length / 2 ;j++) {
-			int random_Animal_1 = (int)Math.floor(Math.random()*(animal_arr.length));
-			int random_Animal_2 = (int)Math.floor(Math.random()*(animal_arr.length));
-			System.out.println(ZooActions.eat(animal_arr[random_Animal_1], animal_arr[random_Animal_2]));
 			
-				
+			do {
+				random_Animal_1 = (int)Math.floor(Math.random()*(animal_arr.length));
+				random_Animal_2 = (int)Math.floor(Math.random()*(animal_arr.length));
+			}while(random_Animal_1 == random_Animal_2);
+			ZooActions.eat(animal_arr[random_Animal_1], animal_arr[random_Animal_2]);
 			
 		}
 		

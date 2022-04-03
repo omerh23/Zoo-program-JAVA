@@ -99,9 +99,10 @@ public class Giraffe extends ChewAnimal {
 		if(W > 0) {
 			super.setWeight(super.getWeight()+W);
 			super.makeSound();
+			MessageUtility.logBooleanFunction(this.getName(), "eat", food.getClass().getSimpleName(), true);
 			return true;
 		}
-	
+		MessageUtility.logBooleanFunction(this.getName(), "eat", food.getClass().getSimpleName(), false);
 	return false;
 	}
 	/**

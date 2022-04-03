@@ -81,7 +81,6 @@ public class Elephant extends ChewAnimal{
 			super.makeSound();
 			return true;
 		}
-	
 	return false;
 	}
 	/**

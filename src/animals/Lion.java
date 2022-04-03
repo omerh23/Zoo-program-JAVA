@@ -65,8 +65,8 @@ public class Lion extends RoarAnimal {
 	 * @return boolean
 	 *            - Return true if the Lion can eat this food and false if not
 	 */
-	public boolean eat(IEdible IE) {
-		double W = diet.eat(this, IE);
+	public boolean eat(IEdible food) {
+		double W = diet.eat(this, food);
 		if(W > 0) {
 			super.setWeight(super.getWeight()+W);
 			boolean val = new Random().nextInt(50)==0;
