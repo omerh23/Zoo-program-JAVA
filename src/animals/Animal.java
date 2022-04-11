@@ -1,7 +1,10 @@
 package animals;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import diet.*;
 import utilities.*;
 import food.*;
+import graphics.*;
 import mobility.*;
 
 
@@ -12,12 +15,23 @@ import mobility.*;
  * @see     Mobile, IEdible
  */
 
-public abstract class Animal extends Mobile implements IEdible {
+public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,IDrawable {
 
 	private String name;
 	private double weight;
 	private IDiet diet;
-	
+	private final int EAT_DISTANCE = 5;
+	private int size;
+	private Color col;
+	private int horSpeed;
+	private int verSpeed;
+	private boolean coordChanged;
+	private Thread thread;
+	private int x_dir;
+	private int y_dir;
+	private int eatCount;
+	private ZooPanel pan;
+	private BufferedImage img1, img2;
 	
 	/**
 	 * A constructor for the animal class.

@@ -23,8 +23,6 @@ public class Lion extends RoarAnimal {
 	 * 
 	 * @param name
 	 *            - Name of the Lion
-	 * @param location
-	 *            - Starting location of the Lion
 	 */
 	public Lion(String name) {
 		super(name,starting_location);
