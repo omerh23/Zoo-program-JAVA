@@ -2,6 +2,7 @@ package graphics;
 
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,10 @@ import javax.swing.*;
 
 
 public class ZooFrame extends JFrame implements ActionListener {
+	
+	
+	
+	
 	private JMenuBar menubar;
 	private JMenu file;
 	private JMenu background;
@@ -20,13 +25,17 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private JMenuItem none;
 	private JMenuItem help_item;
 	private JLabel label;
+	JButton add_animal;
 
 	private ImageIcon image_background;
 	public ZooFrame() {
 		super("Zoo");
-		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.menubar = new JMenuBar();
-		super.setJMenuBar(this.menubar);
+		this.setJMenuBar(this.menubar);
+		
+		
+
 		
 		this.file = new JMenu("File");
 		this.menubar.add(this.file);
@@ -40,6 +49,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.image = new JMenuItem("Image");
 		this.background.add(this.image);
 		this.image.addActionListener(this);
+		
 		this.green = new JMenuItem("Green");
 		this.green.addActionListener(this);
 		this.background.add(green);
@@ -50,11 +60,27 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.help = new JMenu("Help");
 		this.menubar.add(this.help);
 		this.help_item = new JMenuItem("Help");
-		this.help.addActionListener(this);
 		this.help.add(help_item);
+		this.help_item.addActionListener(this);
+		
 		this.label = new JLabel();
 		this.add(label);
 		this.image_background = new ImageIcon("hh.jpg");
+		
+		ZooPanel southPanel = new  ZooPanel();
+		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.LINE_AXIS));
+		this.add_animal = new JButton("Add animal");
+		southPanel.add(add_animal);
+		this.add_animal.addActionListener(this);
+		southPanel.add(new JButton("Move animal"));
+		southPanel.add(new JButton("Clear"));
+		southPanel.add(new JButton("Food"));
+		southPanel.add(new JButton("Info"));
+		southPanel.add(new JButton("Exit"));
+		this.add(southPanel, BorderLayout.SOUTH);
+
+		
+		
 		
 		
 		this.setVisible(true);
@@ -90,6 +116,33 @@ public class ZooFrame extends JFrame implements ActionListener {
 			this.label.setIcon(null);
 			this.label.setBackground(Color.WHITE);
 			this.label.setOpaque(true);
+		}
+		
+		if (e.getSource() ==this.help_item) {
+		
+			JButton ok = new JButton("ok");
+			ok.setFocusable(false);
+			ok.setBounds(150,150,70,30);
+			JFrame Mframe = new JFrame("Message");
+			Mframe.add(ok);
+			JLabel Mlabel = new JLabel("Home Work 2 GUI");
+			ImageIcon Icon =new ImageIcon("Mpicture.png");
+			Mlabel.setIcon(Icon);
+			Mframe.add(Mlabel);
+			Mframe.setVisible(true);
+			Mframe.pack();
+			Mframe.setSize(300,300);
+			ok.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e)
+				{  
+					Mframe.dispose();
+			    }
+			});
+		}
+		
+		
+		if (e.getSource() ==this.add_animal) {
+			int x = 1 ;
 		}
 		
 	}
