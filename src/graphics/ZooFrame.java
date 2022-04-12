@@ -19,9 +19,9 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private JMenuItem green;
 	private JMenuItem none;
 	private JMenuItem help_item;
-	private JLabel green_label;
-	private JLabel label_image;
-	private ImageIcon hen_image;
+	private JLabel label;
+
+	private ImageIcon image_background;
 	public ZooFrame() {
 		super("Zoo");
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,36 +39,30 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.menubar.add(this.background);
 		this.image = new JMenuItem("Image");
 		this.background.add(this.image);
+		this.image.addActionListener(this);
 		this.green = new JMenuItem("Green");
 		this.green.addActionListener(this);
 		this.background.add(green);
 		this.none = new JMenuItem("None");
 		this.background.add(none);
+		this.none.addActionListener(this);
 		
 		this.help = new JMenu("Help");
 		this.menubar.add(this.help);
 		this.help_item = new JMenuItem("Help");
+		this.help.addActionListener(this);
 		this.help.add(help_item);
-		this.green_label = new JLabel();
-		this.green_label.setBackground(Color.GREEN);
-		this.add(green_label);
-//		this.hen_image = new ImageIcon("hen.jpeg");
-//		this.label_image = new JLabel();
-//		this.label_image.setIcon(hen_image);
-//		this.label_image.setBounds(0, 0, 600, 600);
-//		this.label_image.setVisible(false);
-//		this.add(label_image);
+		this.label = new JLabel();
+		this.add(label);
+		this.image_background = new ImageIcon("hh.jpg");
 		
-		
-
 		
 		this.setVisible(true);
 		this.pack();
-		this.setSize(600,600);
+		this.setSize(450,300);
 		
 	}
 	
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -80,19 +74,24 @@ public class ZooFrame extends JFrame implements ActionListener {
 		
 		if (e.getSource() == this.image) {
 			
-			
-			this.label_image.setVisible(true);
-			
-			
-			
+			this.label.setIcon(null);
+			this.label.setIcon(image_background);
+			this.label.setOpaque(true);
 		}
 		if(e.getSource() == this.green) {
-			//this.label_image.setIcon(null);
-			//this.remove(this.label_image);
+			this.label.setIcon(null);
+			this.label.setBackground(Color.GREEN);
+			this.label.setOpaque(true);
 			
-			this.green_label.setOpaque(true);
-			
+		
 		}
+		
+		if(e.getSource() == this.none) {
+			this.label.setIcon(null);
+			this.label.setBackground(Color.WHITE);
+			this.label.setOpaque(true);
+		}
+		
 	}
 	
 	
