@@ -25,7 +25,8 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private JMenuItem none;
 	private JMenuItem help_item;
 	private JLabel label;
-	JButton add_animal;
+	private JButton add_animal;
+	
 
 	private ImageIcon image_background;
 	public ZooFrame() {
@@ -119,30 +120,16 @@ public class ZooFrame extends JFrame implements ActionListener {
 		}
 		
 		if (e.getSource() ==this.help_item) {
-		
-			JButton ok = new JButton("ok");
-			ok.setFocusable(false);
-			ok.setBounds(150,150,70,30);
-			JFrame Mframe = new JFrame("Message");
-			Mframe.add(ok);
-			JLabel Mlabel = new JLabel("Home Work 2 GUI");
-			ImageIcon Icon =new ImageIcon("Mpicture.png");
-			Mlabel.setIcon(Icon);
-			Mframe.add(Mlabel);
-			Mframe.setVisible(true);
-			Mframe.pack();
-			Mframe.setSize(300,300);
-			ok.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e)
-				{  
-					Mframe.dispose();
-			    }
-			});
+	
+			ImageIcon icon = new ImageIcon("Mpicture.png");
+	        JOptionPane.showMessageDialog(null, "Home Work 2 GUI", 
+	                "Message", JOptionPane.INFORMATION_MESSAGE, icon);
+			
 		}
 		
 		
 		if (e.getSource() ==this.add_animal) {
-			int x = 1 ;
+			new AddAnimalDialog(this);
 		}
 		
 	}

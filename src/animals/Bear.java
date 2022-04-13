@@ -1,4 +1,6 @@
 package animals;
+import java.awt.Graphics;
+
 import diet.Omnivore;
 import food.EFoodType;
 import food.IEdible;
@@ -24,9 +26,9 @@ public class Bear extends RoarAnimal  {
 	 * @param location
 	 *            - Starting location of the Bear
 	 */
-	public Bear(String name, Point location) {
+	public Bear(String name, Point location,float weight) {
 		super(name,location);
-		super.setWeight(308.2);
+		super.setWeight(weight);
 		this.furColor = "gray";
 		MessageUtility.logConstractor("Bear", name);
 	}
@@ -37,10 +39,10 @@ public class Bear extends RoarAnimal  {
 	 * @param name
 	 *            - Name of the Bear
 	 */
-	public Bear(String name) {
+	public Bear(String name,float weight) {
 		super(name,starting_location);
 		this.furColor = "gray";
-		super.setWeight(308.2);
+		super.setWeight(weight);
 		MessageUtility.logConstractor("Bear", name);
 		
 	}
@@ -99,6 +101,51 @@ public class Bear extends RoarAnimal  {
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public String getAnimalName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void eatInc() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public int getEatCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public boolean getChanges() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void setChanges(boolean state) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void loadImages(String nm) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void drawObject(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public String getColor() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

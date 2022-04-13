@@ -6,6 +6,7 @@ import utilities.*;
 import food.*;
 import graphics.*;
 import mobility.*;
+import mobility.Point;
 
 
 /**
@@ -20,7 +21,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	private String name;
 	private double weight;
 	private IDiet diet;
-	private final int EAT_DISTANCE = 5;
+	private final int EAT_DISTANCE = 10;
 	private int size;
 	private Color col;
 	private int horSpeed;
@@ -46,6 +47,8 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		this.name = name;
 		MessageUtility.logConstractor("Animal", name);
 	}
+	
+	
 	
 	
 	/**

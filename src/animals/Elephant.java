@@ -1,5 +1,7 @@
 package animals;
 
+import java.awt.Graphics;
+
 import diet.Herbivore;
 import food.EFoodType;
 import food.IEdible;
@@ -24,9 +26,9 @@ public class Elephant extends ChewAnimal{
 	 * @param location
 	 *            - Starting location of the Elephant
 	*/
-	public Elephant(String name,Point location) {
+	public Elephant(String name,Point location, float weight) {
 		super(name, location);
-		super.setWeight(500);	
+		super.setWeight(weight);	
 		this.trunkLength = 1;
 		MessageUtility.logConstractor("Elephant", name);	
 	}
@@ -37,9 +39,9 @@ public class Elephant extends ChewAnimal{
 	 * @param name
 	 *            - Name of the Elephant
 	*/
-	public Elephant(String name){
+	public Elephant(String name,float weight){
 		super(name, starting_location);
-		super.setWeight(500);
+		super.setWeight(weight);
 		this.trunkLength = 1;
 		MessageUtility.logConstractor("Elephant", name);
 	}
@@ -101,6 +103,51 @@ public class Elephant extends ChewAnimal{
 	public void chew() {
 		MessageUtility.logSound(super.getName(), "Trumpets with joy while flapping its ears, then chews");
 		
+	}
+	@Override
+	public String getAnimalName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void eatInc() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public int getEatCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public boolean getChanges() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void setChanges(boolean state) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void loadImages(String nm) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void drawObject(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public String getColor() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

@@ -1,4 +1,5 @@
 package animals;
+import java.awt.Graphics;
 import java.util.Random;
 
 import diet.Carnivore;
@@ -24,9 +25,9 @@ public class Lion extends RoarAnimal {
 	 * @param name
 	 *            - Name of the Lion
 	 */
-	public Lion(String name) {
+	public Lion(String name,float weight) {
 		super(name,starting_location);
-		super.setWeight(408.2);
+		super.setWeight(weight);
 		super.setDiet(diet);
 		this.scarCount = 0;
 		MessageUtility.logConstractor("Lion", name);
@@ -38,9 +39,9 @@ public class Lion extends RoarAnimal {
 	 * @param name
 	 *            - Name of the Lion
 	 */
-	public Lion(String name, Point location) {
+	public Lion(String name, Point location, float weight) {
 		super(name,location);
-		super.setWeight(408.2);
+		super.setWeight(weight);
 		super.setDiet(diet);
 		this.scarCount = 0 ;
 		MessageUtility.logConstractor("Lion", name);
@@ -87,6 +88,51 @@ public class Lion extends RoarAnimal {
 	public EFoodType getFoodtype() {
 		MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.NOTFOOD);
 		return EFoodType.NOTFOOD;
+	}
+	@Override
+	public String getAnimalName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void eatInc() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public int getEatCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public boolean getChanges() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void setChanges(boolean state) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void loadImages(String nm) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void drawObject(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public String getColor() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
