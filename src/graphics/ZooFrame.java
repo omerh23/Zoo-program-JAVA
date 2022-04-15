@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import animals.Animal;
+import animals.Lion;
+
 
 public class ZooFrame extends JFrame implements ActionListener {
 	
@@ -26,6 +29,11 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private JMenuItem help_item;
 	private JLabel label;
 	private JButton add_animal;
+	private JButton move_animal;
+	private Animal animals_list[];
+	private int count_animals = 0;
+	private String[] animals_names;
+	
 	
 
 	private ImageIcon image_background;
@@ -35,7 +43,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.menubar = new JMenuBar();
 		this.setJMenuBar(this.menubar);
 		
-		
+		animals_list = new Animal[10]; 
 
 		
 		this.file = new JMenu("File");
@@ -73,7 +81,9 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.add_animal = new JButton("Add animal");
 		southPanel.add(add_animal);
 		this.add_animal.addActionListener(this);
-		southPanel.add(new JButton("Move animal"));
+		this.move_animal = new JButton("Move animal");
+		southPanel.add(this.move_animal);
+		this.move_animal.addActionListener(this);
 		southPanel.add(new JButton("Clear"));
 		southPanel.add(new JButton("Food"));
 		southPanel.add(new JButton("Info"));
@@ -132,14 +142,35 @@ public class ZooFrame extends JFrame implements ActionListener {
 			new AddAnimalDialog(this);
 		}
 		
+		if (e.getSource() ==this.move_animal) {
+			new MoveAnimalDialog(this);
+		}
+		
 	}
 	
 	
 	public static void main(String[] args) {
 		
+		
 		new ZooFrame();
 	
 	}
 
+	public void addAnimalAlist(Animal animal) {
+		try {
+			this.animals_list[count_animals] =  animal;
+			this.count_animals ++;
+			
+		}
+		catch(ArrayIndexOutOfBoundsException error) {
+			ImageIcon icon =new ImageIcon("Mpicture.png");
+			JOptionPane.showMessageDialog(null, "Max animals in the zoo", 
+                "Message", JOptionPane.ERROR_MESSAGE, icon);
+	}
+	}
+	
+	public Animal[] getAnimals() {
+		return this.animals_list;
+	}
 
 }

@@ -25,27 +25,27 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 	private  JTextField vertical_speed_field;
 	private JPanel displayPanel;
 	private JComboBox<String> animal_color;
-	private JButton add_animal;
-	private Animal animals_array[];
-	private int count_animals;
+	private JButton create;
+	//private Animal animals_array[];
+	//private int count_animals = 0;
 	private String colors[]= {"Red","Blue","Natural"};
 	private String[] animals = {"Lion","Bear","Elephant","Giraffe","Turtle"};
 	
 	
 	
-	public AddAnimalDialog(JFrame Zoo) {
+	
+	public AddAnimalDialog(ZooFrame Zoo) {
 		super(Zoo, "Add animal", true);
 		displayPanel = new JPanel();
-		add_animal = new JButton("Create");
-		add_animal.addActionListener(this);
+		create = new JButton("Create");
+		create.addActionListener(this);
 		box = new JComboBox(animals);
 		box.addActionListener(this);
 		animal_color = new JComboBox(colors);
 		animal_color.addActionListener(this);
 		displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.PAGE_AXIS));
-		count_animals = 0;
 		ImageIcon icon =new ImageIcon("Mpicture.png");
-		animals_array = new Animal[10]; 
+		//animals_array = new Animal[10]; 
 
 		this.label = new JLabel();
 		this.label = new JLabel("Select animal");
@@ -60,7 +60,9 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 		displayPanel.add(vertical_speed_label = new JLabel("Vertical speed:"));
 		displayPanel.add(vertical_speed_field= new JTextField());
 		displayPanel.add(animal_color);
-		add_animal.addActionListener(new ActionListener(){
+		
+		create.addActionListener(new ActionListener(){
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
@@ -78,34 +80,58 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 					switch(animal_choosen) { //need to change all animals constructors to add weight
 					case "Lion":
 						weight = (float) (size * 0.8);
-						animals_array[count_animals] = new Lion(name,weight);
-						count_animals ++;
+						//animals_array[count_animals] = new Lion(name,weight);
+						//count_animals ++;
+						Animal lion = new Lion(name,weight);
+						Zoo.addAnimalAlist(lion);
+						//this.count_animals += 1;
 						break;
 						
 					case "Bear":
 						weight = (float) (size * 1.5);
-						animals_array[count_animals] = new Bear(name,weight);
-						count_animals ++;
+//						animals_array[count_animals] = new Bear(name,weight);
+//						count_animals ++;
+						Animal bear = new Bear(name,weight);
+						Zoo.addAnimalAlist(bear);
+						//count_animals ++;
+						
+						
 						break;
 						
 					case "Giraffe":
 						weight = (float) (size * 2.2);
-						animals_array[count_animals] = new Giraffe(name,weight);
-						count_animals ++;
+//						animals_array[count_animals] = new Giraffe(name,weight);
+//						count_animals ++;
+						
+						Animal giraffe = new Giraffe(name,weight);
+						Zoo.addAnimalAlist(giraffe);
+						//count_animals ++;
+						
+						
 						break;
 
 						
 					case "Elephant":
 						weight = size * 10;
-						animals_array[count_animals] = new Elephant(name,weight);
-						count_animals ++;
+//						animals_array[count_animals] = new Elephant(name,weight);
+//						count_animals ++;
+						
+						Animal elephant = new Elephant(name,weight);
+						Zoo.addAnimalAlist(elephant);
+						//count_animals ++;
+						
 						break;
 
 						
 					case "Turtle":
-						weight = (float) (size * 0.5);
-						animals_array[count_animals] = new Turtle(name,weight);
-						count_animals ++;
+   					    weight = (float) (size * 0.5);
+//						animals_array[count_animals] = new Turtle(name,weight);
+//						count_animals ++;
+						
+						Animal turtle = new Turtle(name,weight);
+						Zoo.addAnimalAlist(turtle);
+						//count_animals ++;
+						
 						break;
 
 						
@@ -120,16 +146,16 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 			                "Message", JOptionPane.ERROR_MESSAGE, icon);
 				}
 				
-				catch(ArrayIndexOutOfBoundsException error) {
-					JOptionPane.showMessageDialog(null, "Max animals in the zoo", 
-			                "Message", JOptionPane.ERROR_MESSAGE, icon);
-				}
+//				catch(ArrayIndexOutOfBoundsException error) {
+//					JOptionPane.showMessageDialog(null, "Max animals in the zoo", 
+//			                "Message", JOptionPane.ERROR_MESSAGE, icon);
+//				}
 						
-						
+			dispose();	
 			
 			}});
 		
-		displayPanel.add(add_animal);
+		displayPanel.add(create);
 		
 		this.add(displayPanel);
 		
@@ -137,6 +163,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 		this.pack();
 		this.setVisible(true);
 	}
+	
 	
 	
 	
@@ -202,41 +229,18 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//"choose animal","Lion","Bear","Elephant","Giraffe","Turtle"}
-	
-		if(e.getSource()== box) {
-			
-//			switch(box.getItemAt(box.getSelectedIndex())) {
-//			
-//			case "Lion":
-			
-				
-				
-				
-				
-				
-				
-				
-				
-				
-//				break;
-				
-//			case "Bear":break;
-//			
-//			case "Elephant" : break;
-//			
-//			case "Giraffe" : break;
-//			
-//			case "Turtle" : break;
-			
-			
-			
-			}
-			
-			
-			
-		}
+		// TODO Auto-generated method stub
+		
 	}
+
+	
+
+	
+	
+	
+
+
+}//class
 		
 	
 
