@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -19,6 +21,7 @@ import animals.Giraffe;
 import animals.Lion;
 import animals.Turtle;
 import mobility.Point;
+import zoo.ZooActions;
 
 public class MoveAnimalDialog extends JDialog implements ActionListener {
 	
@@ -32,12 +35,16 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 	private JPanel displayPanel;
 	private JButton move;
 	
+	
 	public MoveAnimalDialog(ZooFrame Zoo) {
 		super(Zoo, "Move animal", true);
 		displayPanel = new JPanel();
 		displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.PAGE_AXIS));
 		move = new JButton("Move");
 		move.addActionListener(this);
+		
+		
+		
 		int size = Zoo.getAnimals().length ;
 		int counter = 0;
 		animals_string = new String[size];
@@ -78,6 +85,7 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 			}
 			
 		}
+		ImageIcon icon =new ImageIcon("Mpicture.png");
 		animals_box = new JComboBox(animals_string);
 		animals_box.addActionListener(this);
 		displayPanel.add(animals_box);
@@ -85,10 +93,40 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 		displayPanel.add(x_field= new JTextField());
 		displayPanel.add(labelY = new JLabel("Enter Y:"));
 		displayPanel.add(y_field= new JTextField());
+		
+		
+		move.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+					int x = Integer.parseInt(x_field.getText());
+					int y = Integer.parseInt(y_field.getText());
+					int array_index = animals_box.getSelectedIndex();
+					if(ZooActions.move(Zoo.getAnimals()[array_index],new Point(x,y))) {
+						
+					}
+					else {
+						 JOptionPane.showMessageDialog(null, "Out of bounds", 
+					                "Message", JOptionPane.ERROR_MESSAGE, icon);
+					}
+						
+				
+				}
+				catch(NumberFormatException err) {
+			        JOptionPane.showMessageDialog(null, "Wrong input entered", 
+			                "Message", JOptionPane.ERROR_MESSAGE, icon);
+				}
+				dispose();
+			}
+		
+		});
+		
+		
+		
 		displayPanel.add(move);
 		this.add(displayPanel);
-		
-		
 		this.pack();
 		this.setVisible(true);
 		
@@ -99,6 +137,7 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 	
 

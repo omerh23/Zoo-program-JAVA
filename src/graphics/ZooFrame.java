@@ -33,6 +33,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private Animal animals_list[];
 	private int count_animals = 0;
 	private String[] animals_names;
+	private JButton clear; 
 	
 	
 
@@ -41,7 +42,9 @@ public class ZooFrame extends JFrame implements ActionListener {
 		super("Zoo");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.menubar = new JMenuBar();
-		this.setJMenuBar(this.menubar);
+		this.setJMenuBar(this.menubar);	
+		
+		
 		
 		animals_list = new Animal[10]; 
 
@@ -84,11 +87,14 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.move_animal = new JButton("Move animal");
 		southPanel.add(this.move_animal);
 		this.move_animal.addActionListener(this);
-		southPanel.add(new JButton("Clear"));
+		southPanel.add(clear = new JButton("Clear"));
+		clear.addActionListener(this);
 		southPanel.add(new JButton("Food"));
 		southPanel.add(new JButton("Info"));
 		southPanel.add(new JButton("Exit"));
 		this.add(southPanel, BorderLayout.SOUTH);
+		
+		
 
 		
 		
@@ -146,6 +152,11 @@ public class ZooFrame extends JFrame implements ActionListener {
 			new MoveAnimalDialog(this);
 		}
 		
+		if(e.getSource() == clear) {
+			this.DeleteAllAnimals();
+			
+		}
+		
 	}
 	
 	
@@ -171,6 +182,12 @@ public class ZooFrame extends JFrame implements ActionListener {
 	
 	public Animal[] getAnimals() {
 		return this.animals_list;
+	}
+	
+	public void DeleteAllAnimals() {
+		for(int i = 0 ; i < animals_list.length ; i++ ) {
+			animals_list[i] = null;
+		}
 	}
 
 }

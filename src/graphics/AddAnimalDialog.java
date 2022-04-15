@@ -33,7 +33,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 	
 	
 	
-	
+	// TODO add color logic and size to animals 
 	public AddAnimalDialog(ZooFrame Zoo) {
 		super(Zoo, "Add animal", true);
 		displayPanel = new JPanel();
