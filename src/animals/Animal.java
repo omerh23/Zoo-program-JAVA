@@ -23,7 +23,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	private IDiet diet;
 	private final int EAT_DISTANCE = 10;
 	private int size;
-	private Color col;
+	private String col;
 	private int horSpeed;
 	private int verSpeed;
 	private boolean coordChanged;
