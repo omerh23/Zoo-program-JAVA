@@ -44,7 +44,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		
 	}
 	
-	public ZooPanel(BufferedImage i) {
+	public ZooPanel(BufferedImage i) { //to change the parameters in the constractor
 		
 		img = i;
 	}

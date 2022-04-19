@@ -46,7 +46,9 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private int count_animals = 0;
 	private String[] animals_names;
 	private JButton clear; 
-	private JButton food; 
+	private JButton food;
+	private JButton info;
+	private JButton exit_button;
 	private ImageIcon icon;
 	private Image food_icon;
 	private JPanel food_panel;
@@ -65,7 +67,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 		icon =new ImageIcon("Mpicture.png");
 		
 		
-		animals_list = new Animal[10]; 
+		 
 
 		
 		this.file = new JMenu("File");
@@ -110,8 +112,10 @@ public class ZooFrame extends JFrame implements ActionListener {
 		clear.addActionListener(this);
 		southPanel.add(this.food = new JButton("Food"));
 		food.addActionListener(this);
-		southPanel.add(new JButton("Info"));
-		southPanel.add(new JButton("Exit"));
+		southPanel.add(info = new JButton("Info"));
+		info.addActionListener(this);
+		southPanel.add(exit_button = new JButton("Exit"));
+		exit_button.addActionListener(this);
 		this.add(southPanel, BorderLayout.SOUTH);
 		
 	
@@ -267,8 +271,32 @@ public class ZooFrame extends JFrame implements ActionListener {
 	        
 			
 		}
+		if(e.getSource() == info) {
+			JDialog info_dialog = new JDialog(this,"Zoo info",true);
+			AnimalTable at = new AnimalTable(this);
+			JTable table = new JTable(at);
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+			table.setFillsViewportHeight(true);
+			info_dialog.add(new JScrollPane(table));
+			
+			info_dialog.pack();
+			info_dialog.setVisible(true);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		}
 		
-	
+		if(e.getSource() == exit_button) {
+			System.exit(0);
+			
+		}
 		
 	
 		
@@ -277,6 +305,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 	
 	
 	public static void main(String[] args) {
+		
 		
 		new ZooFrame();
         
@@ -287,6 +316,17 @@ public class ZooFrame extends JFrame implements ActionListener {
 
 	public void addAnimalAlist(Animal animal) {
 		try {
+			if (count_animals == 10) {
+				throw new ArrayIndexOutOfBoundsException();
+			}
+			Animal[] temp = new Animal[count_animals];
+			for(int i=0; i<count_animals; i++) {
+				temp[i]=this.animals_list[i];
+			}
+			this.animals_list = new Animal[count_animals+1];
+			for(int i=0; i<count_animals; i++) {
+				this.animals_list[i]=temp[i];
+			}
 			this.animals_list[count_animals] =  animal;
 			this.count_animals ++;
 			
@@ -306,6 +346,8 @@ public class ZooFrame extends JFrame implements ActionListener {
 		for(int i = 0 ; i < animals_list.length ; i++ ) {
 			animals_list[i] = null;
 		}
+		
+		
 	}
 	
 	

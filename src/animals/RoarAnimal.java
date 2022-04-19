@@ -17,8 +17,8 @@ public abstract class RoarAnimal extends Animal{
 	 * @param location
 	 *            - Starting location of the RoarAnimal
 	 */
-	public RoarAnimal(String name, Point location) {
-		super(name, location);
+	public RoarAnimal(String name, Point location,String color) {
+		super(name, location,color);
 	}
 
 	/**

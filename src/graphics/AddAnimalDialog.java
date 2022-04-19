@@ -72,7 +72,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 					int size = Integer.parseInt(size_field.getText());
 					int horizon_speed = Integer.parseInt(horizon_speed_field.getText());
 					int vertical_speed = Integer.parseInt(vertical_speed_field.getText());
-					
+					String color = animal_color.getItemAt(box.getSelectedIndex());
 					
 					
 					String name = "default";
@@ -80,58 +80,50 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 					switch(animal_choosen) { //need to change all animals constructors to add weight
 					case "Lion":
 						weight = (float) (size * 0.8);
-						//animals_array[count_animals] = new Lion(name,weight);
-						//count_animals ++;
-						Animal lion = new Lion(name,weight);
-						Zoo.addAnimalAlist(lion);
-						//this.count_animals += 1;
+						
+						Animal lion = new Lion(name,weight,color);
+						lion.setHorSpeed(horizon_speed);
+						lion.setVerSpeed(vertical_speed);
+						lion.setSize(size);
+						Zoo.addAnimalAlist(lion);				
 						break;
 						
 					case "Bear":
 						weight = (float) (size * 1.5);
-//						animals_array[count_animals] = new Bear(name,weight);
-//						count_animals ++;
-						Animal bear = new Bear(name,weight);
-						Zoo.addAnimalAlist(bear);
-						//count_animals ++;
-						
-						
+						Animal bear = new Bear(name,weight,color);
+						bear.setHorSpeed(horizon_speed);
+						bear.setVerSpeed(vertical_speed);
+						bear.setSize(size);
+						Zoo.addAnimalAlist(bear);						
 						break;
 						
 					case "Giraffe":
-						weight = (float) (size * 2.2);
-//						animals_array[count_animals] = new Giraffe(name,weight);
-//						count_animals ++;
-						
-						Animal giraffe = new Giraffe(name,weight);
-						Zoo.addAnimalAlist(giraffe);
-						//count_animals ++;
-						
-						
+						weight = (float) (size * 2.2);					
+						Animal giraffe = new Giraffe(name,weight,color);
+						giraffe.setHorSpeed(horizon_speed);
+						giraffe.setVerSpeed(vertical_speed);
+						giraffe.setSize(size);
+						Zoo.addAnimalAlist(giraffe);					
 						break;
 
 						
 					case "Elephant":
-						weight = size * 10;
-//						animals_array[count_animals] = new Elephant(name,weight);
-//						count_animals ++;
-						
-						Animal elephant = new Elephant(name,weight);
-						Zoo.addAnimalAlist(elephant);
-						//count_animals ++;
-						
+						weight = size * 10;				
+						Animal elephant = new Elephant(name,weight,color);
+						elephant.setHorSpeed(horizon_speed);
+						elephant.setVerSpeed(vertical_speed);
+						elephant.setSize(size);
+						Zoo.addAnimalAlist(elephant);						
 						break;
 
 						
 					case "Turtle":
-   					    weight = (float) (size * 0.5);
-//						animals_array[count_animals] = new Turtle(name,weight);
-//						count_animals ++;
-						
-						Animal turtle = new Turtle(name,weight);
-						Zoo.addAnimalAlist(turtle);
-						//count_animals ++;
-						
+   					    weight = (float) (size * 0.5);		
+						Animal turtle = new Turtle(name,weight,color);
+						turtle.setHorSpeed(horizon_speed);
+						turtle.setVerSpeed(vertical_speed);
+						turtle.setSize(size);
+						Zoo.addAnimalAlist(turtle);						
 						break;
 
 						

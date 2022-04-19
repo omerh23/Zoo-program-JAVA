@@ -25,8 +25,8 @@ public class Lion extends RoarAnimal {
 	 * @param name
 	 *            - Name of the Lion
 	 */
-	public Lion(String name,float weight) {
-		super(name,starting_location);
+	public Lion(String name,float weight , String color) {
+		super(name,starting_location,color);
 		super.setWeight(weight);
 		super.setDiet(diet);
 		this.scarCount = 0;
@@ -39,13 +39,13 @@ public class Lion extends RoarAnimal {
 	 * @param name
 	 *            - Name of the Lion
 	 */
-	public Lion(String name, Point location, float weight) {
-		super(name,location);
-		super.setWeight(weight);
-		super.setDiet(diet);
-		this.scarCount = 0 ;
-		MessageUtility.logConstractor("Lion", name);
-	}
+//	public Lion(String name, Point location, float weight) {
+//		super(name,location);
+//		super.setWeight(weight);
+//		super.setDiet(diet);
+//		this.scarCount = 0 ;
+//		MessageUtility.logConstractor("Lion", name);
+//	}
 	
 	/**
 	 * An implementation of the roar method using the MessageUtility method and the Lion special message 
@@ -89,62 +89,7 @@ public class Lion extends RoarAnimal {
 		MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.NOTFOOD);
 		return EFoodType.NOTFOOD;
 	}
-	@Override
-	public String getAnimalName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public void eatInc() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public int getEatCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public boolean getChanges() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public void setChanges(boolean state) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void loadImages(String nm) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void drawObject(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public String getColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

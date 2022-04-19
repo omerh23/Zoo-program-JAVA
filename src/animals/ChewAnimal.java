@@ -16,8 +16,8 @@ public abstract class ChewAnimal extends Animal {
 	 * @param location
 	 *            - Starting location of the ChewAnimal
 	 */
-	public ChewAnimal(String name, Point location) {
-		super(name, location);
+	public ChewAnimal(String name, Point location,String color) {
+		super(name, location,color);
 		
 	}
 	/**

@@ -26,12 +26,12 @@ public class Bear extends RoarAnimal  {
 	 * @param location
 	 *            - Starting location of the Bear
 	 */
-	public Bear(String name, Point location,float weight) {
-		super(name,location);
-		super.setWeight(weight);
-		this.furColor = "gray";
-		MessageUtility.logConstractor("Bear", name);
-	}
+//	public Bear(String name, Point location,float weight) {
+//		super(name,location);
+//		super.setWeight(weight);
+//		this.furColor = "gray";
+//		MessageUtility.logConstractor("Bear", name);
+//	}
 	/**
 	 * A constructor for the Bear class with a default starting location.
 	 * sets default furColor and weight and diet.
@@ -39,8 +39,8 @@ public class Bear extends RoarAnimal  {
 	 * @param name
 	 *            - Name of the Bear
 	 */
-	public Bear(String name,float weight) {
-		super(name,starting_location);
+	public Bear(String name,float weight,String color) {
+		super(name,starting_location,color);
 		this.furColor = "gray";
 		super.setWeight(weight);
 		MessageUtility.logConstractor("Bear", name);
@@ -102,51 +102,7 @@ public class Bear extends RoarAnimal  {
 		}
 		return false;
 	}
-	@Override
-	public String getAnimalName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public void eatInc() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public int getEatCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public boolean getChanges() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public void setChanges(boolean state) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void loadImages(String nm) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void drawObject(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public String getColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 
 }

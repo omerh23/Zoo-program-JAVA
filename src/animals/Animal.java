@@ -42,10 +42,13 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	 * @param location
 	 *            - Starting location of the animal
 	 */
-	public Animal(String name, Point location) {
+	public Animal(String name, Point location , String col) {
 		super(location);
 		this.name = name;
 		MessageUtility.logConstractor("Animal", name);
+		eatCount = 0 ;
+		this.col = col;
+		
 	}
 	
 	
@@ -122,10 +125,82 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	 * @return String
 	 *            - Returns String representation of the object of this class
 	 */
-public String toString() {
+	public String toString() {
 	
 		return "[" + this.getClass().getSimpleName() +  "]" + this.name + "\ttotal distance:" + String.format("%.2f", super.getDistance())+ "\tweight:" + this.getWeight();
 		
 	}
+	
+	public String getAnimalName() {
+		
+		return this.getClass().getSimpleName();
+	
+	}
+	public int getSize() {
+		
+		return this.size;
+	
+	}
+	public void eatInc() {
+		this.eatCount++;
+	
+	}
+	public int getEatCount() {
+		return this.eatCount;
+	
+	}
+
+	public boolean getChanges () {
+		//TODO 
+		return false;
+	
+	}
+
+	public void setChanges (boolean state) {
+	
+	}
+	
+	public String getColor() {
+		return this.col;
+	}
+
+
+
+
+	public int getHorSpeed() {
+		
+		return this.horSpeed;
+	}
+
+
+
+
+	public int getVerSpeed() {
+		
+		return this.verSpeed;
+	}
+
+	public boolean setEat(int eat) {
+		this.eatCount = eat;
+		return true;
+	}
+	
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+
+	public boolean setHorSpeed(int hor) {
+		this.horSpeed = hor;
+		return true;
+	}
+	
+	public boolean setVerSpeed(int hor) {
+		this.verSpeed = hor;
+		return true;
+	}
+
+
+
 
 }
