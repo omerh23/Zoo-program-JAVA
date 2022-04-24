@@ -45,7 +45,7 @@ public abstract class Mobile implements Ilocatable {
 	 *            - location of the Animal
 	 */
 	public Mobile(Point location) {
-		this.location = new Point(location);
+		this.location = new Point(location.get_x(),location.get_y());
 		this.totalDistance = 0;
 	}
 	/**

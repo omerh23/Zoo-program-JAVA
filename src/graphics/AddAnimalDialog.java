@@ -26,6 +26,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 	private JPanel displayPanel;
 	private JComboBox<String> animal_color;
 	private JButton create;
+	private ZooPanel zoopanel;
 	//private Animal animals_array[];
 	//private int count_animals = 0;
 	private String colors[]= {"Red","Blue","Natural"};
@@ -34,9 +35,10 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 	
 	
 	// TODO add color logic and size to animals 
-	public AddAnimalDialog(ZooFrame Zoo) {
+	public AddAnimalDialog(ZooPanel zoopanel, ZooFrame Zoo) {
 		super(Zoo, "Add animal", true);
 		displayPanel = new JPanel();
+		this.zoopanel = zoopanel;
 		create = new JButton("Create");
 		create.addActionListener(this);
 		box = new JComboBox(animals);
@@ -73,19 +75,21 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 					int horizon_speed = Integer.parseInt(horizon_speed_field.getText());
 					int vertical_speed = Integer.parseInt(vertical_speed_field.getText());
 					String color = animal_color.getItemAt(box.getSelectedIndex());
-					
-					
 					String name = "default";
 					float weight = 0;
 					switch(animal_choosen) { //need to change all animals constructors to add weight
 					case "Lion":
 						weight = (float) (size * 0.8);
 						
-						Animal lion = new Lion(name,weight,color);
+						
+						Animal lion = new Lion(name,weight,color,zoopanel);
+						lion.drawObject(getGraphics());
+						Zoo.add(lion.getPanel());
+						Zoo.setVisible(true);
 						lion.setHorSpeed(horizon_speed);
 						lion.setVerSpeed(vertical_speed);
 						lion.setSize(size);
-						Zoo.addAnimalAlist(lion);				
+						zoopanel.addAnimallist(lion);				
 						break;
 						
 					case "Bear":
@@ -94,7 +98,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 						bear.setHorSpeed(horizon_speed);
 						bear.setVerSpeed(vertical_speed);
 						bear.setSize(size);
-						Zoo.addAnimalAlist(bear);						
+						zoopanel.addAnimallist(bear);						
 						break;
 						
 					case "Giraffe":
@@ -103,7 +107,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 						giraffe.setHorSpeed(horizon_speed);
 						giraffe.setVerSpeed(vertical_speed);
 						giraffe.setSize(size);
-						Zoo.addAnimalAlist(giraffe);					
+						zoopanel.addAnimallist(giraffe);					
 						break;
 
 						
@@ -113,7 +117,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 						elephant.setHorSpeed(horizon_speed);
 						elephant.setVerSpeed(vertical_speed);
 						elephant.setSize(size);
-						Zoo.addAnimalAlist(elephant);						
+						zoopanel.addAnimallist(elephant);						
 						break;
 
 						
@@ -123,7 +127,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 						turtle.setHorSpeed(horizon_speed);
 						turtle.setVerSpeed(vertical_speed);
 						turtle.setSize(size);
-						Zoo.addAnimalAlist(turtle);						
+						zoopanel.addAnimallist(turtle);						
 						break;
 
 						

@@ -45,8 +45,8 @@ public class Point {
 	 *            - a point object
 	 */
 	public Point(Point location) {
-		this.x = location.x ;
-		this.y = location.y;
+		this.x = location.get_x();
+		this.y = location.get_y();
 	}
 
 	/**
@@ -103,4 +103,12 @@ public class Point {
 	public int get_y() {
 		return this.y;
 	}
+	public void set_x(int x) {
+		this.x = x;
+	}
+	
+	public void set_y(int y) {
+		this.y = y;
+	}
+	
 }

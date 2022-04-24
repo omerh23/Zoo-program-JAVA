@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JTable;
@@ -14,30 +15,31 @@ import mobility.Point;
 public class AnimalTable extends AbstractTableModel  {
 	
 	private JTable table;
-	private ZooFrame zoo;
+	
 	private int sizeRow;
-	private Animal[] animals;
+	private ArrayList<Animal> animals;
+	private ZooPanel zoopanel;
 	private final String[] columnNames = {"Name","Color","Weight","Hor","Ver","Eat"};
 	
-	public AnimalTable(ZooFrame zoo) {
+	public AnimalTable(ZooPanel zoopanel) {
+		this.zoopanel = zoopanel;
 		
-		sizeRow = zoo.getAnimals().length;
-		animals = new Animal[sizeRow+1];
+		animals = new ArrayList<Animal>();
 		int tot_eat = 0;
-		for(int i = 0; i<sizeRow; i++) {
-			animals[i] = zoo.getAnimals()[i];
-			tot_eat += zoo.getAnimals()[i].getEatCount();
+		for(int i = 0; i< zoopanel.getAnimalSize(); i++) {
+			animals.add(zoopanel.getAnimals().get(i));
+			tot_eat += zoopanel.getAnimals().get(i).getEatCount();
 		}
 		Animal total = new Lion("Total",10,"Red");
 		total.setEat(tot_eat);
-		animals[sizeRow]=total;
+		animals.add(total);
 		
 	}
 
 	@Override
 	public int getRowCount() {
 		
-		return sizeRow+1;
+		return animals.size();
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class AnimalTable extends AbstractTableModel  {
 	}
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		Animal a = animals[rowIndex];
+		Animal a = animals.get(rowIndex);
 		switch(columnIndex) {
 		case 0: if(a.getName()=="default") {return a.getAnimalName();}
 		else {return a.getName();}

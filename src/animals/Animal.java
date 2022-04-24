@@ -1,6 +1,11 @@
 package animals;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import diet.*;
 import utilities.*;
 import food.*;
@@ -28,11 +33,13 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	private int verSpeed;
 	private boolean coordChanged;
 	private Thread thread;
-	private int x_dir;
-	private int y_dir;
+	private int x_dir = 1;
+	private int y_dir = 1;
 	private int eatCount;
 	private ZooPanel pan;
 	private BufferedImage img1, img2;
+	private Point location;
+	//private static final String BACKGROUND_PATH = "C:\\Users\\omerh\\OneDrive\\שולחן העבודה\\לימודים שנה ב\\סימסטר ב\\מונחה עצמים מתקדם\\Home Work\\HW1\\HW1";
 	
 	/**
 	 * A constructor for the animal class.
@@ -42,12 +49,18 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	 * @param location
 	 *            - Starting location of the animal
 	 */
-	public Animal(String name, Point location , String col) {
+	public Animal(String name, Point location , String col ,ZooPanel zoopanel) {
 		super(location);
 		this.name = name;
 		MessageUtility.logConstractor("Animal", name);
 		eatCount = 0 ;
 		this.col = col;
+		this.img1 = null;
+		this.img2 =null;
+		this.pan = zoopanel;
+		
+			
+			
 		
 	}
 	
@@ -151,12 +164,14 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	}
 
 	public boolean getChanges () {
-		//TODO 
-		return false;
+		
+		return this.coordChanged;
 	
 	}
 
 	public void setChanges (boolean state) {
+		
+		this.coordChanged = state;
 	
 	}
 	
@@ -188,6 +203,8 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	public void setSize(int size) {
 		this.size = size;
 	}
+	
+	
 
 
 	public boolean setHorSpeed(int hor) {
@@ -199,8 +216,83 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		this.verSpeed = hor;
 		return true;
 	}
+	
+	public void loadImages(String nm)
+	{
+		if(this.col == "Red")
+		{
+			try
+			{
+				this.img1 = ImageIO.read(new File(PICTURE_PATH +"\\"+ nm + "_r_1.png"));
+				this.img2 = ImageIO.read(new File(PICTURE_PATH +"\\"+ nm + "_r_2.png"));
+			} 
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+    	}
+		else if(this.col == "Blue")
+		{
+	    	try
+	    	{
+				this.img1 = ImageIO.read(new File(PICTURE_PATH +"\\"+ nm + "_b_1.png"));
+				this.img2 = ImageIO.read(new File(PICTURE_PATH +"\\"+ nm + "_b_2.png"));
+			} 
+	    	catch (IOException e)
+	    	{
+				e.printStackTrace();
+			
+			}
+		}
+		else
+		{
+	    	try
+	    	{
+				this.img1 = ImageIO.read(new File(PICTURE_PATH +"\\"+ nm + "_n_1.png"));
+				this.img2 = ImageIO.read(new File(PICTURE_PATH +"\\"+ nm + "_n_2.png"));
+			} 
+	    	catch (IOException e)
+	    	{
+				e.printStackTrace();
+				
+			}
+		}
+	}
 
-
-
+	
+	public String getPicturePath() {
+		return this.PICTURE_PATH;
+	}
+	
+	public BufferedImage getImage1() {
+		return this.img1;
+	}
+	
+	public BufferedImage getImage2() {
+		return this.img2;
+	}
+	
+	
+	
+	
+	public int getXdir() {
+		return this.x_dir;
+	}
+	
+	public ZooPanel getPanel() {
+		return this.pan;
+	}
+	public void drawObject (Graphics g)
+	{
+	 int size =this.getSize();
+	 
+	
+	 if(this.getXdir() == 1) 
+	g.drawImage(this.getImage1(), this.getLocation().get_x()-size/2, this.getLocation().get_y()-size/10, size/2, size, pan);
+	 else 
+	g.drawImage(this.getImage2(), this.getLocation().get_x(), this.getLocation().get_y()-size/10, size/2, size, pan);
+	}
+	
+	
 
 }

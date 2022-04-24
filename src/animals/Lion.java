@@ -1,10 +1,16 @@
 package animals;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 import diet.Carnivore;
 import food.EFoodType;
 import food.IEdible;
+import graphics.ZooPanel;
 import mobility.Point;
 import utilities.MessageUtility;
 /**
@@ -25,12 +31,15 @@ public class Lion extends RoarAnimal {
 	 * @param name
 	 *            - Name of the Lion
 	 */
-	public Lion(String name,float weight , String color) {
-		super(name,starting_location,color);
+	public Lion(String name,float weight , String color,ZooPanel panel) {
+		super(name,starting_location,color,panel);
 		super.setWeight(weight);
 		super.setDiet(diet);
 		this.scarCount = 0;
+		String img1 = null;
 		MessageUtility.logConstractor("Lion", name);
+		this.loadImages("lio");
+		
 	}
 	/**
 	 * A constructor for the Lion class with a default location.
@@ -90,6 +99,8 @@ public class Lion extends RoarAnimal {
 		return EFoodType.NOTFOOD;
 	}
 	
-
+	
+	
+	
 
 }

@@ -27,9 +27,6 @@ import animals.Lion;
 
 public class ZooFrame extends JFrame implements ActionListener {
 	
-	
-	
-	
 	private JMenuBar menubar;
 	private JMenu file;
 	private JMenu background;
@@ -43,7 +40,6 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private JButton add_animal;
 	private JButton move_animal;
 	private Animal animals_list[];
-	private int count_animals = 0;
 	private String[] animals_names;
 	private JButton clear; 
 	private JButton food;
@@ -54,8 +50,12 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private JPanel food_panel;
 	private ZooPanel a;
 	private BufferedImage food_image;
-
+	private ZooPanel zoopanel;
 	private ImageIcon image_background;
+	private BufferedImage img = null;
+	private static final int LETTUCE = 1; 
+	private static final int CABBAGE = 2;
+	 
 	public ZooFrame() {
 		super("Zoo");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,12 +63,9 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.menubar = new JMenuBar();
 		this.setJMenuBar(this.menubar);	
 		food_panel = new JPanel();
-		
+		this.zoopanel = new ZooPanel();
 		icon =new ImageIcon("Mpicture.png");
 		
-		
-		 
-
 		
 		this.file = new JMenu("File");
 		this.menubar.add(this.file);
@@ -97,7 +94,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.help_item.addActionListener(this);
 		
 		this.label = new JLabel();
-		this.add(label);
+		//this.add(label);
 		this.image_background = new ImageIcon("hh.jpg");
 		
 		JPanel southPanel = new  JPanel();
@@ -117,12 +114,9 @@ public class ZooFrame extends JFrame implements ActionListener {
 		southPanel.add(exit_button = new JButton("Exit"));
 		exit_button.addActionListener(this);
 		this.add(southPanel, BorderLayout.SOUTH);
-		
+		this.add(zoopanel);
+		zoopanel.setVisible(false);
 	
-		
-
-		
-
 		this.setVisible(true);
 		this.pack();
 		this.setSize(450,300);
@@ -131,52 +125,54 @@ public class ZooFrame extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		
-		
+	
 		if (e.getSource() == this.exit) {
 			System.exit(0);
 		}
 		
 		if (e.getSource() == this.image) {
+			zoopanel.setImage("savanna.jpg");
+			zoopanel.repaint();	
+			zoopanel.setVisible(true);
+			this.setVisible(true);
 			
-			this.label.setIcon(null);
-			this.label.setIcon(image_background);
-			this.label.setOpaque(true);
 		}
 		if(e.getSource() == this.green) {
-			this.label.setIcon(null);
-			this.label.setBackground(Color.GREEN);
-			this.label.setOpaque(true);
-			
+			zoopanel.setColor(1);
+			zoopanel.setImage(null);
+			zoopanel.repaint();
+			zoopanel.setVisible(true);
+			this.setVisible(true);
+//			
+//			
 		
 		}
 		
 		if(e.getSource() == this.none) {
-			this.label.setIcon(null);
-			this.label.setBackground(Color.WHITE);
-			this.label.setOpaque(true);
+			zoopanel.setColor(0);
+			zoopanel.setImage(null);
+			zoopanel.repaint();
+			zoopanel.setVisible(true);
+			this.setVisible(true);
 		}
 		
 		if (e.getSource() ==this.help_item) {
-	
-			//ImageIcon icon = new ImageIcon("Mpicture.png");
 	        JOptionPane.showMessageDialog(null, "Home Work 2 GUI", 
-	                "Message", JOptionPane.INFORMATION_MESSAGE, icon);
-			
+	                "Message", JOptionPane.INFORMATION_MESSAGE, icon);		
 		}
 		
 		
 		if (e.getSource() ==this.add_animal) {
-			new AddAnimalDialog(this);
+			new AddAnimalDialog(zoopanel, this);
+			
 		}
 		
 		if (e.getSource() ==this.move_animal) {
-			new MoveAnimalDialog(this);
+			new MoveAnimalDialog(this,zoopanel);
 		}
 		
 		if(e.getSource() == clear) {
-			this.DeleteAllAnimals();
+			zoopanel.DeleteAllAnimals();
 		}
 			
 		if(e.getSource() == this.food) {
@@ -190,12 +186,14 @@ public class ZooFrame extends JFrame implements ActionListener {
         			try {
 						food_image = ImageIO.read(new File("lettuce.png"));
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
         			if(a != null)
         			a.removeAll();
-        			a = new ZooPanel(food_image);
+        			
+        			a = new ZooPanel();
+
+        			a.setPlant(LETTUCE);
         			a.repaint();
         			add(a);		
         			
@@ -213,13 +211,13 @@ public class ZooFrame extends JFrame implements ActionListener {
         			try {
 						food_image = ImageIO.read(new File("cabbage.png"));
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
         			if(a != null)
 
         			a.removeAll();
-        			a = new ZooPanel(food_image);	
+        			a = new ZooPanel();
+        			a.setPlant(CABBAGE); //TODO add null to plant
         			a.repaint();
         			add(a);		
         			foodDialog.dispose();
@@ -241,7 +239,7 @@ public class ZooFrame extends JFrame implements ActionListener {
         			if(a != null)
 
         			a.removeAll();
-        			a = new ZooPanel(food_image);
+        			a = new ZooPanel();
         			a.repaint();
         			add(a);		
         			
@@ -266,14 +264,12 @@ public class ZooFrame extends JFrame implements ActionListener {
 	        foodDialog.pack();    
 	        foodDialog.setVisible(true); 
 	        this.setVisible(true);
-	       
-			
-	        
-			
+	       		
 		}
+		
 		if(e.getSource() == info) {
 			JDialog info_dialog = new JDialog(this,"Zoo info",true);
-			AnimalTable at = new AnimalTable(this);
+			AnimalTable at = new AnimalTable(zoopanel);
 			JTable table = new JTable(at);
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			table.setPreferredScrollableViewportSize(new Dimension(500, 70));
@@ -283,23 +279,14 @@ public class ZooFrame extends JFrame implements ActionListener {
 			info_dialog.pack();
 			info_dialog.setVisible(true);
 			
-			
-			
-			
-			
-			
-			
-			
-			
 		}
+		
 		
 		if(e.getSource() == exit_button) {
 			System.exit(0);
 			
 		}
-		
 	
-		
 		
 	}
 	
@@ -308,47 +295,11 @@ public class ZooFrame extends JFrame implements ActionListener {
 		
 		
 		new ZooFrame();
-        
-
 
 	
 	}
 
-	public void addAnimalAlist(Animal animal) {
-		try {
-			if (count_animals == 10) {
-				throw new ArrayIndexOutOfBoundsException();
-			}
-			Animal[] temp = new Animal[count_animals];
-			for(int i=0; i<count_animals; i++) {
-				temp[i]=this.animals_list[i];
-			}
-			this.animals_list = new Animal[count_animals+1];
-			for(int i=0; i<count_animals; i++) {
-				this.animals_list[i]=temp[i];
-			}
-			this.animals_list[count_animals] =  animal;
-			this.count_animals ++;
-			
-		}
-		catch(ArrayIndexOutOfBoundsException error) {
-			
-			JOptionPane.showMessageDialog(null, "You cannot add more than 10 animlas", 
-                "Message", JOptionPane.ERROR_MESSAGE, icon);
-	}
-	}
 	
-	public Animal[] getAnimals() {
-		return this.animals_list;
-	}
-	
-	public void DeleteAllAnimals() {
-		for(int i = 0 ; i < animals_list.length ; i++ ) {
-			animals_list[i] = null;
-		}
-		
-		
-	}
 	
 	
 

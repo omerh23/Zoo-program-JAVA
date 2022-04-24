@@ -1,5 +1,6 @@
 package animals;
 
+import graphics.ZooPanel;
 import mobility.Point;
 
 /**
@@ -17,8 +18,8 @@ public abstract class RoarAnimal extends Animal{
 	 * @param location
 	 *            - Starting location of the RoarAnimal
 	 */
-	public RoarAnimal(String name, Point location,String color) {
-		super(name, location,color);
+	public RoarAnimal(String name, Point location,String color,ZooPanel panel) {
+		super(name, location,color,panel);
 	}
 
 	/**

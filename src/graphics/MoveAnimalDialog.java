@@ -36,7 +36,8 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 	private JButton move;
 	
 	
-	public MoveAnimalDialog(ZooFrame Zoo) {
+	
+	public MoveAnimalDialog(ZooFrame Zoo,ZooPanel zoopanel) {
 		super(Zoo, "Move animal", true);
 		displayPanel = new JPanel();
 		displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.PAGE_AXIS));
@@ -45,7 +46,7 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 		
 		
 		
-		int size = Zoo.getAnimals().length ;
+		int size = zoopanel.getAnimals().size() ;
 		int counter = 0;
 		animals_string = new String[size];
 		int LionCounter = 0;
@@ -59,28 +60,28 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 		
 		for(int i = 0 ; i < size; i++) {
 			
-			if (Zoo.getAnimals()[i] == null)
+			if (zoopanel.getAnimals().get(i) == null)
 				break;
 			else {
-				if (Zoo.getAnimals()[i] instanceof Lion ) {
+				if (zoopanel.getAnimals().get(i) instanceof Lion ) {
 					LionCounter++;
-					animals_string[i] =  Zoo.getAnimals()[i].getClass().getSimpleName()+" "+ LionCounter;
+					animals_string[i] = zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ LionCounter;
 				}
-			if (Zoo.getAnimals()[i] instanceof Bear ) {
+			if (zoopanel.getAnimals().get(i) instanceof Bear ) {
 				BearCounter++;
-				animals_string[i] =  Zoo.getAnimals()[i].getClass().getSimpleName()+" "+ BearCounter;
+				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ BearCounter;
 			}
-			if (Zoo.getAnimals()[i] instanceof Elephant ) {
+			if (zoopanel.getAnimals().get(i) instanceof Elephant ) {
 				ElephantCounter++;
-				animals_string[i] =  Zoo.getAnimals()[i].getClass().getSimpleName()+" "+ ElephantCounter;
+				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ ElephantCounter;
 			}
-			if (Zoo.getAnimals()[i] instanceof Giraffe ) {
+			if (zoopanel.getAnimals().get(i) instanceof Giraffe ) {
 				GiraffeCounter++;
-				animals_string[i] =  Zoo.getAnimals()[i].getClass().getSimpleName()+" "+ GiraffeCounter;
+				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ GiraffeCounter;
 			}
-			if (Zoo.getAnimals()[i] instanceof Turtle ) {
+			if (zoopanel.getAnimals().get(i) instanceof Turtle ) {
 				TurtleCounter++;
-				animals_string[i] =  Zoo.getAnimals()[i].getClass().getSimpleName()+" "+ TurtleCounter;
+				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ TurtleCounter;
 			}
 			}
 			
@@ -104,7 +105,8 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 					int x = Integer.parseInt(x_field.getText());
 					int y = Integer.parseInt(y_field.getText());
 					int array_index = animals_box.getSelectedIndex();
-					if(ZooActions.move(Zoo.getAnimals()[array_index],new Point(x,y))) {
+					if(ZooActions.move(zoopanel.getAnimals().get(array_index),new Point(x,y))) {
+						
 						
 					}
 					else {
