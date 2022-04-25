@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import diet.Omnivore;
 import food.EFoodType;
 import food.IEdible;
+import graphics.ZooPanel;
 import mobility.Point;
 import utilities.MessageUtility;
 /**
@@ -17,6 +18,7 @@ public class Bear extends RoarAnimal  {
 	private String furColor ;
 	private static final Point starting_location = new Point(100,5);
 	private static final Omnivore diet = new Omnivore();
+	private ZooPanel panel;
 	/**
 	 * A constructor for the Bear class.
 	 * sets default furColor and weight and diet.
@@ -39,11 +41,14 @@ public class Bear extends RoarAnimal  {
 	 * @param name
 	 *            - Name of the Bear
 	 */
-	public Bear(String name,float weight,String color) {
-		super(name,starting_location,color);
+	public Bear(String name,float weight,String color,ZooPanel panel) {
+		super(name,starting_location,color, panel);
 		this.furColor = "gray";
 		super.setWeight(weight);
 		MessageUtility.logConstractor("Bear", name);
+		this.loadImages("bea");
+		this.panel = panel;
+		this.panel.repaint();
 		
 	}
 	/**

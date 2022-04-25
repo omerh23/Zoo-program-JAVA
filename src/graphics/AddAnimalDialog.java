@@ -27,14 +27,12 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 	private JComboBox<String> animal_color;
 	private JButton create;
 	private ZooPanel zoopanel;
-	//private Animal animals_array[];
-	//private int count_animals = 0;
 	private String colors[]= {"Red","Blue","Natural"};
 	private String[] animals = {"Lion","Bear","Elephant","Giraffe","Turtle"};
 	
 	
 	
-	// TODO add color logic and size to animals 
+
 	public AddAnimalDialog(ZooPanel zoopanel, ZooFrame Zoo) {
 		super(Zoo, "Add animal", true);
 		displayPanel = new JPanel();
@@ -47,7 +45,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 		animal_color.addActionListener(this);
 		displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.PAGE_AXIS));
 		ImageIcon icon =new ImageIcon("Mpicture.png");
-		//animals_array = new Animal[10]; 
+		
 
 		this.label = new JLabel();
 		this.label = new JLabel("Select animal");
@@ -74,27 +72,34 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 					int size = Integer.parseInt(size_field.getText());
 					int horizon_speed = Integer.parseInt(horizon_speed_field.getText());
 					int vertical_speed = Integer.parseInt(vertical_speed_field.getText());
-					String color = animal_color.getItemAt(box.getSelectedIndex());
+					String color = animal_color.getItemAt(animal_color.getSelectedIndex());
 					String name = "default";
 					float weight = 0;
-					switch(animal_choosen) { //need to change all animals constructors to add weight
+					switch(animal_choosen) { 
 					case "Lion":
 						weight = (float) (size * 0.8);
 						
 						
 						Animal lion = new Lion(name,weight,color,zoopanel);
-						lion.drawObject(getGraphics());
-						Zoo.add(lion.getPanel());
-						Zoo.setVisible(true);
 						lion.setHorSpeed(horizon_speed);
 						lion.setVerSpeed(vertical_speed);
 						lion.setSize(size);
-						zoopanel.addAnimallist(lion);				
+						zoopanel.addAnimallist(lion);
+						zoopanel.repaint();
+						
+						
+						
+//						lion.drawObject(getGraphics());
+//						lion.getPanel().repaint();
+//						Zoo.add(lion.getPanel());
+//						Zoo.setVisible(true);
+						
+										
 						break;
 						
 					case "Bear":
 						weight = (float) (size * 1.5);
-						Animal bear = new Bear(name,weight,color);
+						Animal bear = new Bear(name,weight,color,zoopanel);
 						bear.setHorSpeed(horizon_speed);
 						bear.setVerSpeed(vertical_speed);
 						bear.setSize(size);
@@ -103,7 +108,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 						
 					case "Giraffe":
 						weight = (float) (size * 2.2);					
-						Animal giraffe = new Giraffe(name,weight,color);
+						Animal giraffe = new Giraffe(name,weight,color,zoopanel);
 						giraffe.setHorSpeed(horizon_speed);
 						giraffe.setVerSpeed(vertical_speed);
 						giraffe.setSize(size);
@@ -113,7 +118,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 						
 					case "Elephant":
 						weight = size * 10;				
-						Animal elephant = new Elephant(name,weight,color);
+						Animal elephant = new Elephant(name,weight,color,zoopanel);
 						elephant.setHorSpeed(horizon_speed);
 						elephant.setVerSpeed(vertical_speed);
 						elephant.setSize(size);
@@ -123,7 +128,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 						
 					case "Turtle":
    					    weight = (float) (size * 0.5);		
-						Animal turtle = new Turtle(name,weight,color);
+						Animal turtle = new Turtle(name,weight,color,zoopanel);
 						turtle.setHorSpeed(horizon_speed);
 						turtle.setVerSpeed(vertical_speed);
 						turtle.setSize(size);
@@ -142,10 +147,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 			                "Message", JOptionPane.ERROR_MESSAGE, icon);
 				}
 				
-//				catch(ArrayIndexOutOfBoundsException error) {
-//					JOptionPane.showMessageDialog(null, "Max animals in the zoo", 
-//			                "Message", JOptionPane.ERROR_MESSAGE, icon);
-//				}
+
 						
 			dispose();	
 			

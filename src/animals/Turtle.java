@@ -6,6 +6,7 @@ import diet.*;
 
 import food.EFoodType;
 import food.IEdible;
+import graphics.ZooPanel;
 import mobility.Point;
 import utilities.MessageUtility;
 /**
@@ -19,6 +20,7 @@ public class Turtle extends ChewAnimal{
 	private int Age;
 	private static final Point starting_location = new Point(80,0);
 	private static final Herbivore diet = new Herbivore();
+	private ZooPanel panel;
 	/**
 	 * A constructor for the Turtle class.
 	 * sets default Age and weight and diet.
@@ -43,12 +45,15 @@ public class Turtle extends ChewAnimal{
 	 * @param name
 	 *            - Name of the Turtle
 	*/
-	public Turtle(String name,float weight,String color) {
-		super(name,starting_location,color);
+	public Turtle(String name,float weight,String color,ZooPanel panel) {
+		super(name,starting_location,color,panel);
 		super.setWeight(weight);
 		super.setDiet(diet);
 		this.Age = 1;
 		MessageUtility.logConstractor("Turtle", name);
+		this.loadImages("trt");
+		this.panel = panel;
+		this.panel.repaint();
 		
 	}
 	/**

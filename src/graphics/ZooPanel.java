@@ -2,6 +2,7 @@ package graphics;
 import animals.Animal;
 import plants.Cabbage;
 import plants.Lettuce;
+import plants.Meat;
 import plants.Plant;
 
 import java.awt.Color;
@@ -9,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -26,31 +28,73 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	private static final int GREEN = 1;
 	private static final int WHITE = 0;
 	private BufferedImage img = null;
+	private BufferedImage food_img = null;
 	private ArrayList<Animal> animals_list;
 	private Plant plant;
 	private int color; 
-	//private final String MEAT_PATH = "meat.gif";
+	private Boolean flag = false;
+	
+	public ZooPanel() {//to change the parameters in the constractor
+		animals_list = new ArrayList<Animal>();
+		plant = null;
+		this.setBackground(null);
+		this.setVisible(true);
+		try
+		{
+			img = ImageIO.read(new File(BACKGROUND_PATH +"\\savanna.jpg"));
+		}
+		catch (IOException e)
+		{
+		    e.printStackTrace();
+		}
+		 
+	}
+	
     @Override
-	public void paintComponent(Graphics g) {
-    	super.paintComponent(g);
-    	if(img!=null) {
-    		g.setColor(null);
-    		g.fillRect(0, 0, getWidth(),getHeight());
-    		g.drawImage(img,0,0,getWidth(),getHeight(), this);
-    	}
-    	else if(this.color == GREEN) {
-    	g.setColor(Color.GREEN);
-    	g.fillRect(0, 0, getWidth(),getHeight());
-    	}
-    	else {
-        	g.setColor(Color.WHITE);
-        	g.fillRect(0, 0, getWidth(),getHeight());
-        	}
-    	
-    		
-    	
-        
+    public void paintComponent(Graphics g)
+	{
+	    super.paintComponent(g);
+	    if(flag) //flag == true
+	    {
+	    	Dimension size = this.getSize();
+	    	g.drawImage(img, 0, 0, size.width, size.height, this);
+	    } //to set Background Image
+	    try
+	    {
+		    for(Animal animals: animals_list)
+		    	animals.drawObject(g);
+		    if(plant != null)
+		    	plant.drawObject(g);
+	    }
+	    catch(Exception e) //draw exception
+	    {
+	    	return;
+	    }
     }
+    
+    public void setBackground(int num)
+	{
+		if(num == 0) //if we select the image
+		{
+				flag = true;
+				setBackground(null); //we clean the background
+				this.paintComponent(this.getGraphics());
+		}
+		if(num == 1) //if we select the green
+		{
+			flag = false;
+			setBackground(null); //we clean the background
+			this.paintComponent(this.getGraphics());
+			setBackground(Color.GREEN);			
+		}
+		else if(num == 2) //if we select none
+		{			
+			flag = false;
+			setBackground(null); //clean the Background
+		}
+	}
+
+
 
     @Override
     public Dimension getPreferredSize() {
@@ -69,11 +113,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		
 	}
 	
-	public ZooPanel() {//to change the parameters in the constractor
-		animals_list = new ArrayList<Animal>();
-		plant = null;
-		 
-	}
+
 	
 	public void manageZoo() {
 		if(isChange())
@@ -113,15 +153,25 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		animals_list.clear();
 	}
 		
-	public void setPlant(int option) {
+	public void setPlant(int option ) {
 		if(option == 1) {
-			this.plant = new Lettuce();
+			this.plant = new Lettuce(this);
+			this.plant.loadImages("lettuce.png");
+			this.repaint();
+			
+		
+			
 		}
 		else if(option == 2) {
-			this.plant = new Cabbage();
+			this.plant = new Cabbage(this);
+			this.plant.loadImages("cabbage.png");
+			this.repaint();
+			
 		}
 		else if (option == 3) {
-			this.plant = null;
+			this.plant = new Meat(this);
+			this.plant.loadImages("meat.gif");
+			this.repaint();
 		}
 	}
 	
@@ -132,7 +182,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		}
 		else {
 		try {
-			this.img = ImageIO.read(new File(BACKGROUND_PATH+"//"+image));
+			this.img = ImageIO.read(new File(BACKGROUND_PATH+"\\"+image));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -142,9 +192,8 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		this.color = color;
 	}
 	
-//	public void setColorImage(Color colImage) {
-//		this.img.setRGB(ERROR, ALLBITS, colImage);
-//		
-//	}
+	public void setFlag(Boolean st) {
+		this.flag = st;
+	}
 
 }

@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import diet.Herbivore;
 import food.EFoodType;
 import food.IEdible;
+import graphics.ZooPanel;
 import mobility.Point;
 import utilities.MessageUtility;
 /**
@@ -19,6 +20,7 @@ public class Giraffe extends ChewAnimal {
 	private static final Herbivore diet = new Herbivore();
 	private static final Point starting_location = new Point(50,0);
 	private double neckLength;
+	private ZooPanel panel;
 	
 	/**
 	 * A constructor for the Giraffe class.
@@ -44,12 +46,15 @@ public class Giraffe extends ChewAnimal {
 	 * @param name
 	 *            - Name of the Giraffe
 	*/
-	public Giraffe(String name,float weight,String color) {
-		super(name,starting_location,color);
+	public Giraffe(String name,float weight,String color,ZooPanel panel) {
+		super(name,starting_location,color,panel);
 		super.setWeight(weight);
 		super.setDiet(diet);
 		MessageUtility.logConstractor("Giraffe", name);
 		this.neckLength = 1.5 ;
+		this.loadImages("grf");
+		this.panel = panel;
+		this.panel.repaint();
 			
 	}
 	/**

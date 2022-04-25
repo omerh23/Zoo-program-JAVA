@@ -282,6 +282,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	public ZooPanel getPanel() {
 		return this.pan;
 	}
+	
 	public void drawObject (Graphics g)
 	{
 	 int size =this.getSize();
@@ -293,6 +294,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	g.drawImage(this.getImage2(), this.getLocation().get_x(), this.getLocation().get_y()-size/10, size/2, size, pan);
 	}
 	
+
 	
 
 }

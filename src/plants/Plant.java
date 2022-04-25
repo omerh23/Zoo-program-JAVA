@@ -1,11 +1,18 @@
 package plants;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 import food.EFoodType;
 import food.IEdible;
 import graphics.IDrawable;
+import graphics.ZooPanel;
 import mobility.*;
 import utilities.MessageUtility;
 
@@ -13,7 +20,7 @@ import utilities.MessageUtility;
  * @author baroh
  *
  */
-public abstract class Plant implements IEdible, Ilocatable,IDrawable {
+public abstract class Plant  implements IEdible, Ilocatable,IDrawable {
 	/**
 	 * 
 	 */
@@ -26,11 +33,13 @@ public abstract class Plant implements IEdible, Ilocatable,IDrawable {
 	 * 
 	 */
 	private double weight;
+	private ZooPanel zoopanel;
+	private BufferedImage plant_image = null;
 
 	/**
 	 * 
 	 */
-	public Plant() {
+	public Plant(ZooPanel zoopanel) {
 		Random rand = new Random();
 		int x = rand.nextInt(30);
 		int y = rand.nextInt(12);
@@ -38,6 +47,7 @@ public abstract class Plant implements IEdible, Ilocatable,IDrawable {
 		this.height = rand.nextInt(30);
 		this.weight = rand.nextInt(12);
 		MessageUtility.logConstractor("Plant", "Plant");
+		this.zoopanel = zoopanel;
 	}
 
 	/*
@@ -101,7 +111,7 @@ public abstract class Plant implements IEdible, Ilocatable,IDrawable {
 	 */
 	@Override
 	public boolean setLocation(Point newLocation) {
-		boolean isSuccess = Point.cheackBounderies(newLocation);
+		boolean isSuccess = Point.checkBoundaris(newLocation);
 		if (isSuccess) {
 			this.location = newLocation;
 		}
@@ -134,5 +144,31 @@ public abstract class Plant implements IEdible, Ilocatable,IDrawable {
 	public String toString() {
 		return "[" + this.getClass().getSimpleName() + "] ";
 	}
+	
+	public void drawObject(Graphics g)
+	{
+		if (plant_image != null)
+			g.drawImage(plant_image, zoopanel.getWidth()/2 - 20, zoopanel.getHeight()/2 - 20, 40, 40, zoopanel);
+	}
+	
+	public void loadImages(String nm)
+	{
+		try
+		{
+			plant_image = ImageIO.read(new File(PICTURE_PATH +"\\"+ nm));
+		}
+		catch (IOException e)
+		{
+		    e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public String getColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

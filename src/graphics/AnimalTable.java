@@ -30,7 +30,7 @@ public class AnimalTable extends AbstractTableModel  {
 			animals.add(zoopanel.getAnimals().get(i));
 			tot_eat += zoopanel.getAnimals().get(i).getEatCount();
 		}
-		Animal total = new Lion("Total",10,"Red");
+		Animal total = new Lion("Total",10,"Red", zoopanel);
 		total.setEat(tot_eat);
 		animals.add(total);
 		

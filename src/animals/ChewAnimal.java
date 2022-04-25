@@ -1,5 +1,6 @@
 package animals;
 
+import graphics.ZooPanel;
 import mobility.Point;
 /**
  * An abstract class describing animals that chew implementing the makeSound method and defines the chew method, inherits from Animal class
@@ -16,8 +17,8 @@ public abstract class ChewAnimal extends Animal {
 	 * @param location
 	 *            - Starting location of the ChewAnimal
 	 */
-	public ChewAnimal(String name, Point location,String color) {
-		super(name, location,color);
+	public ChewAnimal(String name, Point location,String color,ZooPanel panel) {
+		super(name, location,color,panel);
 		
 	}
 	/**

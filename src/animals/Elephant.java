@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import diet.Herbivore;
 import food.EFoodType;
 import food.IEdible;
+import graphics.ZooPanel;
 import mobility.Point;
 import utilities.MessageUtility;
 /**
@@ -17,6 +18,7 @@ public class Elephant extends ChewAnimal{
 	private double trunkLength ;
 	private static final Herbivore diet = new Herbivore();
 	private static final Point starting_location = new Point(50,90);
+	private ZooPanel panel;
 	/**
 	 * A constructor for the Elephant class.
 	 * sets default trunkLenght and weight and diet.
@@ -39,11 +41,14 @@ public class Elephant extends ChewAnimal{
 	 * @param name
 	 *            - Name of the Elephant
 	*/
-	public Elephant(String name,float weight,String color){
-		super(name, starting_location,color);
+	public Elephant(String name,float weight,String color,ZooPanel panel){
+		super(name, starting_location,color,panel);
 		super.setWeight(weight);
 		this.trunkLength = 1;
 		MessageUtility.logConstractor("Elephant", name);
+		this.loadImages("elf");
+		this.panel = panel;
+		this.panel.repaint();
 	}
 	/**
 	 * Setter method for the trunk variable

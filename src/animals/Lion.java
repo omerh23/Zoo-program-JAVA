@@ -24,6 +24,7 @@ public class Lion extends RoarAnimal {
 	private static final Point starting_location = new Point(20,0);
 	private static final Carnivore diet = new Carnivore();
 	private int scarCount ;
+	private ZooPanel panel;
 	/**
 	 * A constructor for the Lion class.
 	 * sets default scarCount and weight and diet.
@@ -39,6 +40,8 @@ public class Lion extends RoarAnimal {
 		String img1 = null;
 		MessageUtility.logConstractor("Lion", name);
 		this.loadImages("lio");
+		this.panel = panel;
+		this.panel.repaint();
 		
 	}
 	/**

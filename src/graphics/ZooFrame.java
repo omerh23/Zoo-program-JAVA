@@ -36,7 +36,6 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private JMenuItem green;
 	private JMenuItem none;
 	private JMenuItem help_item;
-	private JLabel label;
 	private JButton add_animal;
 	private JButton move_animal;
 	private Animal animals_list[];
@@ -49,12 +48,12 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private Image food_icon;
 	private JPanel food_panel;
 	private ZooPanel a;
-	private BufferedImage food_image;
+	
 	private ZooPanel zoopanel;
-	private ImageIcon image_background;
 	private BufferedImage img = null;
 	private static final int LETTUCE = 1; 
 	private static final int CABBAGE = 2;
+	protected static final int MEAT = 3;
 	 
 	public ZooFrame() {
 		super("Zoo");
@@ -65,7 +64,6 @@ public class ZooFrame extends JFrame implements ActionListener {
 		food_panel = new JPanel();
 		this.zoopanel = new ZooPanel();
 		icon =new ImageIcon("Mpicture.png");
-		
 		
 		this.file = new JMenu("File");
 		this.menubar.add(this.file);
@@ -93,9 +91,6 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.help.add(help_item);
 		this.help_item.addActionListener(this);
 		
-		this.label = new JLabel();
-		//this.add(label);
-		this.image_background = new ImageIcon("hh.jpg");
 		
 		JPanel southPanel = new  JPanel();
 		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.LINE_AXIS));
@@ -115,11 +110,10 @@ public class ZooFrame extends JFrame implements ActionListener {
 		exit_button.addActionListener(this);
 		this.add(southPanel, BorderLayout.SOUTH);
 		this.add(zoopanel);
-		zoopanel.setVisible(false);
 	
 		this.setVisible(true);
 		this.pack();
-		this.setSize(450,300);
+		this.setSize(500,300);
 		
 	}
 	
@@ -131,29 +125,20 @@ public class ZooFrame extends JFrame implements ActionListener {
 		}
 		
 		if (e.getSource() == this.image) {
-			zoopanel.setImage("savanna.jpg");
-			zoopanel.repaint();	
+			zoopanel.setBackground(0);
 			zoopanel.setVisible(true);
-			this.setVisible(true);
+			
 			
 		}
 		if(e.getSource() == this.green) {
-			zoopanel.setColor(1);
-			zoopanel.setImage(null);
-			zoopanel.repaint();
+			zoopanel.setBackground(1);
 			zoopanel.setVisible(true);
-			this.setVisible(true);
-//			
-//			
 		
 		}
 		
 		if(e.getSource() == this.none) {
-			zoopanel.setColor(0);
-			zoopanel.setImage(null);
-			zoopanel.repaint();
+			zoopanel.setBackground(2);
 			zoopanel.setVisible(true);
-			this.setVisible(true);
 		}
 		
 		if (e.getSource() ==this.help_item) {
@@ -183,70 +168,37 @@ public class ZooFrame extends JFrame implements ActionListener {
         		
         		@Override
         		public void actionPerformed(ActionEvent e1) {
-        			try {
-						food_image = ImageIO.read(new File("lettuce.png"));
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-        			if(a != null)
-        			a.removeAll();
         			
-        			a = new ZooPanel();
-
-        			a.setPlant(LETTUCE);
-        			a.repaint();
-        			add(a);		
-        			
+        			if(zoopanel != null) {
+        					
+        			zoopanel.setPlant(LETTUCE);
         			foodDialog.dispose();
         			
         }
-        		
+        		}
 		});
 	        
 	        JButton Cabbage = new JButton ("Cabbage");
 	        Cabbage.addActionListener(new ActionListener() {
-        		
-        		@Override
+	        	@Override
         		public void actionPerformed(ActionEvent e1) {
-        			try {
-						food_image = ImageIO.read(new File("cabbage.png"));
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-        			if(a != null)
-
-        			a.removeAll();
-        			a = new ZooPanel();
-        			a.setPlant(CABBAGE); //TODO add null to plant
-        			a.repaint();
-        			add(a);		
-        			foodDialog.dispose();
-        			
-        }
         		
+	        	if(zoopanel != null) {		
+        			zoopanel.setPlant(CABBAGE);
+        			foodDialog.dispose();
+	        	}
+	        	}
 		});
 	        JButton Meat = new JButton ("Meat"); 
 	        Meat.addActionListener(new ActionListener() {
-        		
-        		@Override
+	        	@Override
         		public void actionPerformed(ActionEvent e1) {
-        			try {
-						food_image = ImageIO.read(new File("meat.gif"));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-        			if(a != null)
-
-        			a.removeAll();
-        			a = new ZooPanel();
-        			a.repaint();
-        			add(a);		
-        			
-        			foodDialog.dispose();
-        			
-        }
         		
+	        	if(zoopanel != null) {		
+        			zoopanel.setPlant(MEAT);
+        			foodDialog.dispose();
+	        	}
+	        	}
 		});
 	        JLabel foodLabel = new JLabel("Please choose food");
 	        foodLabel.setIcon(icon);

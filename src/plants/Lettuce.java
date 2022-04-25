@@ -2,6 +2,7 @@ package plants;
 
 import java.awt.Graphics;
 
+import graphics.ZooPanel;
 import utilities.MessageUtility;
 
 /**
@@ -9,20 +10,9 @@ import utilities.MessageUtility;
  *
  */
 public class Lettuce extends Plant {
-	public Lettuce() {
+	public Lettuce(ZooPanel zoopanel) {
+		super(zoopanel);
 		MessageUtility.logConstractor("Lettuce", "Lettuce");
-	}
-
-	@Override
-	public void loadImages(String nm) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void drawObject(Graphics g) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -30,4 +20,5 @@ public class Lettuce extends Plant {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

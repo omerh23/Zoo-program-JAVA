@@ -1,5 +1,6 @@
 package animals;
 
+import graphics.ZooFrame;
 import graphics.ZooPanel;
 import mobility.Point;
 
