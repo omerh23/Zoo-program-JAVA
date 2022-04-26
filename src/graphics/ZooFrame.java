@@ -53,7 +53,8 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private BufferedImage img = null;
 	private static final int LETTUCE = 1; 
 	private static final int CABBAGE = 2;
-	protected static final int MEAT = 3;
+	private static final int MEAT = 3;
+	private static final int DELETE = 4;
 	 
 	public ZooFrame() {
 		super("Zoo");
@@ -93,7 +94,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 		
 		
 		JPanel southPanel = new  JPanel();
-		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.LINE_AXIS));
+		southPanel.setLayout(new FlowLayout());
 		this.add_animal = new JButton("Add animal");
 		southPanel.add(add_animal);
 		this.add_animal.addActionListener(this);
@@ -158,6 +159,8 @@ public class ZooFrame extends JFrame implements ActionListener {
 		
 		if(e.getSource() == clear) {
 			zoopanel.DeleteAllAnimals();
+			zoopanel.setPlant(DELETE);
+			zoopanel.repaint();
 		}
 			
 		if(e.getSource() == this.food) {

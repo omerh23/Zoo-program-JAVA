@@ -1,5 +1,8 @@
 package graphics;
 import animals.Animal;
+import diet.*;
+import mobility.Point;
+import animals.*;
 import plants.Cabbage;
 import plants.Lettuce;
 import plants.Meat;
@@ -10,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,17 +58,20 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
     public void paintComponent(Graphics g)
 	{
 	    super.paintComponent(g);
+	    Graphics2D gr = (Graphics2D) g;
+	    gr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
 	    if(flag) //flag == true
 	    {
 	    	Dimension size = this.getSize();
-	    	g.drawImage(img, 0, 0, size.width, size.height, this);
+	    	gr.drawImage(img, 0, 0, size.width, size.height, this);
 	    } //to set Background Image
 	    try
 	    {
 		    for(Animal animals: animals_list)
-		    	animals.drawObject(g);
-		    if(plant != null)
-		    	plant.drawObject(g);
+		    	animals.drawObject(gr);
+		    
+		    plant.drawObject(gr);
 	    }
 	    catch(Exception e) //draw exception
 	    {
@@ -116,13 +123,54 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 
 	
 	public void manageZoo() {
-		if(isChange())
+		if(isChange()) { //if the animals moves
 			repaint();
+			for(Animal animal : animals_list) {
+				if(animal.getDiet() instanceof Carnivore || animal.getDiet() instanceof Omnivore) {		
+					for(int i = 0 ; i < animals_list.size(); i++ ) {
+						
+						if(animal.calcDistance(animals_list.get(i).getLocation()) < animals_list.get(i).getWeight())
+							if(animal.getWeight() > 2 * animals_list.get(i).getWeight())
+								if(animal.eat(animals_list.get(i))) {
+									//TODO check if need to increase the eat counter
+									animals_list.remove(i);
+									animal.eatInc();
+									repaint();
+									
+								}
+						
+							
+							
+						}
+						
+					} // bear or lion
+				
+				if(this.plant != null) {
+					
+					if( animal.calcDistance(new Point((int)this.getWidth()/2 - 20,(int)this.getHeight()/2 - 20)) < 10 && animal.eat(this.plant)) {
+						this.plant = null;
+						animal.eatInc();
+						repaint();
+						
+					}
+					
+					
+				}
+				
+				
+			}
+		
+			
+		}
 	}
 
 	private boolean isChange() {
-		// TODO Auto-generated method stub
+		for(Animal animal: animals_list) {
+			if(animal.getChanges())
+				return true;
+		}
 		return false;
+		
 	}
 	
 	public int getAnimalSize() {
@@ -152,6 +200,9 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	public void DeleteAllAnimals() {
 		animals_list.clear();
 	}
+	
+	
+	
 		
 	public void setPlant(int option ) {
 		if(option == 1) {
@@ -173,6 +224,8 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 			this.plant.loadImages("meat.gif");
 			this.repaint();
 		}
+		else
+			this.plant = null;
 	}
 	
 	public void setImage(String image) {

@@ -1,6 +1,8 @@
 package animals;
 import java.awt.Graphics;
 
+import diet.Carnivore;
+import diet.IDiet;
 import diet.Omnivore;
 import food.EFoodType;
 import food.IEdible;
@@ -108,6 +110,10 @@ public class Bear extends RoarAnimal  {
 		return false;
 	}
 	
-	
+	public IDiet getDiet() {
+		
+		return this.diet;
+		
+	}
 
 }

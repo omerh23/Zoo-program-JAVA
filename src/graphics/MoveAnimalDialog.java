@@ -107,6 +107,9 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 					int array_index = animals_box.getSelectedIndex();
 					if(ZooActions.move(zoopanel.getAnimals().get(array_index),new Point(x,y))) {
 						
+						zoopanel.getAnimals().get(array_index).setChanges(true);
+						zoopanel.manageZoo();
+						
 						
 					}
 					else {

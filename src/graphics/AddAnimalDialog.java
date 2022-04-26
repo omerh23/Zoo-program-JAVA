@@ -27,7 +27,7 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 	private JComboBox<String> animal_color;
 	private JButton create;
 	private ZooPanel zoopanel;
-	private String colors[]= {"Red","Blue","Natural"};
+	private String colors[]= {"Natural","Red","Blue"};
 	private String[] animals = {"Lion","Bear","Elephant","Giraffe","Turtle"};
 	
 	

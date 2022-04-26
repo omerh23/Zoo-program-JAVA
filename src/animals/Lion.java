@@ -8,6 +8,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import diet.Carnivore;
+import diet.IDiet;
 import food.EFoodType;
 import food.IEdible;
 import graphics.ZooPanel;
@@ -103,7 +104,11 @@ public class Lion extends RoarAnimal {
 	}
 	
 	
-	
+	public IDiet getDiet() {
+		
+		return this.diet;
+		
+	}
 	
 
 }
