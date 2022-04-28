@@ -35,7 +35,7 @@ public abstract class ZooActions {
 		{
 			if(((Lion) animal).eat(food)) 
 			{
-				MessageUtility.logBooleanFunction(((Lion)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]"+((Animal)food).getName(), true);
+				//MessageUtility.logBooleanFunction(((Lion)animal).getName(), "eat","["+ food.getClass().getSimpleName()+"]"+((Animal)food).getName(), true);
 				
 				return true;
 			}

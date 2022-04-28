@@ -24,7 +24,11 @@ import javax.swing.*;
 import animals.Animal;
 import animals.Lion;
 
-
+ /**
+  * Class that the main frame of the zoo.
+  * @author Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+  *
+  */
 public class ZooFrame extends JFrame implements ActionListener {
 	
 	private JMenuBar menubar;
@@ -114,7 +118,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 	
 		this.setVisible(true);
 		this.pack();
-		this.setSize(500,300);
+		this.setSize(600,400);
 		
 	}
 	

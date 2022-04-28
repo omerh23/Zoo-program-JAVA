@@ -32,14 +32,13 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	private int horSpeed;
 	private int verSpeed;
 	private boolean coordChanged;
-	private Thread thread;
 	private int x_dir = 1;
 	private int y_dir = 1;
 	private int eatCount;
 	private ZooPanel pan;
 	private BufferedImage img1, img2;
-	private Point location;
-	//private static final String BACKGROUND_PATH = "C:\\Users\\omerh\\OneDrive\\שולחן העבודה\\לימודים שנה ב\\סימסטר ב\\מונחה עצמים מתקדם\\Home Work\\HW1\\HW1";
+	
+	
 	
 	/**
 	 * A constructor for the animal class.
@@ -88,10 +87,10 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	public boolean setWeight(double weight) {
 		if (weight > 0) {
 			this.weight = weight;
-			MessageUtility.logSetter(this.name, "setWeight", this.weight, true);
+			//MessageUtility.logSetter(this.name, "setWeight", this.weight, true);
 			return true;
 		}
-		MessageUtility.logSetter(this.name, "setWeight", this.weight, false);
+		//MessageUtility.logSetter(this.name, "setWeight", this.weight, false);
 		return false;
 	}
 	/**
@@ -105,7 +104,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	 */
 	public boolean setDiet(IDiet diet) { 
 		this.diet = diet;
-		MessageUtility.logSetter(this.name, "setDiet", this.diet.getClass().getSimpleName(), true);
+		//MessageUtility.logSetter(this.name, "setDiet", this.diet.getClass().getSimpleName(), true);
 		return true;
 		}
 	
@@ -117,7 +116,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	 *            - Returns the name of the animal
 	 */
 	public String getName() {
-		MessageUtility.logGetter(this.name, "getName", this.name);
+		//MessageUtility.logGetter(this.name, "getName", this.name);
 		return this.name;
 	}
 	/**
@@ -127,7 +126,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	 *            - Returns the weight of the animal
 	 */
 	public double getWeight() {
-		MessageUtility.logGetter(this.name, "getWeight", this.weight);
+	//	MessageUtility.logGetter(this.name, "getWeight", this.weight);
 		return this.weight;
 	}
 	
@@ -217,7 +216,14 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		return true;
 	}
 	
+	/**
+	 * set color for the animals
+	 * 
+	 * @param nm - string of the picture name  
+	 * 
+	 */
 	public void loadImages(String nm)
+		
 	{
 		if(this.col == "Red")
 		{
@@ -283,6 +289,11 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		return this.pan;
 	}
 	
+	/**
+	 * function that draw the animal
+	 * @param g draw the pictures
+	 * 
+	 */
 	public void drawObject (Graphics g)
 	{
 	 int size =this.getSize();
@@ -300,5 +311,10 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		return this.diet;
 		
 	}
+	
+	public int getEatDistance() {
+		return this.EAT_DISTANCE;
+	}
+	
 
 }

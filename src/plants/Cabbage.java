@@ -10,7 +10,7 @@ import utilities.MessageUtility;
 public class Cabbage extends Plant {
 	public Cabbage(ZooPanel zoopanel) {
 		super(zoopanel);
-		MessageUtility.logConstractor("Cabbage", "Cabbage");
+		//MessageUtility.logConstractor("Cabbage", "Cabbage");
 	}
 
 }

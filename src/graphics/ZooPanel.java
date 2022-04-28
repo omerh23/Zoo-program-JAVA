@@ -1,5 +1,6 @@
 package graphics;
 import animals.Animal;
+
 import diet.*;
 import mobility.Point;
 import animals.*;
@@ -21,12 +22,19 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+/**
+ * Class that show visual the animals on frame
+ * @author   Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @see     ZooFrame
+ */
+
 public class ZooPanel extends JPanel implements Runnable , ActionListener{
-	
 	
 	private static final String BACKGROUND_PATH = "C:\\Users\\omerh\\OneDrive\\שולחן העבודה\\לימודים שנה ב\\סימסטר ב\\מונחה עצמים מתקדם\\Home Work\\HW1\\HW1";
 	private static final int GREEN = 1;
@@ -38,7 +46,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	private int color; 
 	private Boolean flag = false;
 	
-	public ZooPanel() {//to change the parameters in the constractor
+	public ZooPanel() {
 		animals_list = new ArrayList<Animal>();
 		plant = null;
 		this.setBackground(null);
@@ -61,11 +69,11 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	    Graphics2D gr = (Graphics2D) g;
 	    gr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-	    if(flag) //flag == true
+	    if(flag) 
 	    {
 	    	Dimension size = this.getSize();
 	    	gr.drawImage(img, 0, 0, size.width, size.height, this);
-	    } //to set Background Image
+	    } 
 	    try
 	    {
 		    for(Animal animals: animals_list)
@@ -73,7 +81,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		    
 		    plant.drawObject(gr);
 	    }
-	    catch(Exception e) //draw exception
+	    catch(Exception e) 
 	    {
 	    	return;
 	    }
@@ -81,23 +89,23 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
     
     public void setBackground(int num)
 	{
-		if(num == 0) //if we select the image
+		if(num == 0) 
 		{
 				flag = true;
-				setBackground(null); //we clean the background
+				setBackground(null); 
 				this.paintComponent(this.getGraphics());
 		}
-		if(num == 1) //if we select the green
+		if(num == 1)
 		{
 			flag = false;
-			setBackground(null); //we clean the background
+			setBackground(null); 
 			this.paintComponent(this.getGraphics());
 			setBackground(Color.GREEN);			
 		}
-		else if(num == 2) //if we select none
+		else if(num == 2) 
 		{			
 			flag = false;
-			setBackground(null); //clean the Background
+			setBackground(null); 
 		}
 	}
 
@@ -121,10 +129,14 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	}
 	
 
-	
+	/**
+	 * The controller that manage the zoo
+	 */
 	public void manageZoo() {
 		if(isChange()) { //if the animals moves
 			repaint();
+			
+			List<Animal> toRemove = new ArrayList<Animal>();
 			for(Animal animal : animals_list) {
 				if(animal.getDiet() instanceof Carnivore || animal.getDiet() instanceof Omnivore) {		
 					for(int i = 0 ; i < animals_list.size(); i++ ) {
@@ -132,8 +144,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 						if(animal.calcDistance(animals_list.get(i).getLocation()) < animals_list.get(i).getWeight())
 							if(animal.getWeight() > 2 * animals_list.get(i).getWeight())
 								if(animal.eat(animals_list.get(i))) {
-									//TODO check if need to increase the eat counter
-									animals_list.remove(i);
+									toRemove.add(animals_list.get(i));
 									animal.eatInc();
 									repaint();
 									
@@ -147,7 +158,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 				
 				if(this.plant != null) {
 					
-					if( animal.calcDistance(new Point((int)this.getWidth()/2 - 20,(int)this.getHeight()/2 - 20)) < 10 && animal.eat(this.plant)) {
+					if( animal.calcDistance(new Point((int)this.getWidth()/2 - 20,(int)this.getHeight()/2 - 20)) < animal.getEatDistance() && animal.eat(this.plant)) {
 						this.plant = null;
 						animal.eatInc();
 						repaint();
@@ -158,9 +169,10 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 				}
 				
 				
-			}
+			}//outside for
 		
-			
+		animals_list.removeAll(toRemove);
+		
 		}
 	}
 
@@ -203,7 +215,11 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	
 	
 	
-		
+		/**
+		 * the method selected the the food type
+		 * @param option- 1 : lettuce . 2: cabbage . 3:meat
+		 * 
+		 */
 	public void setPlant(int option ) {
 		if(option == 1) {
 			this.plant = new Lettuce(this);

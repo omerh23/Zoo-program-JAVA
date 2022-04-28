@@ -1,22 +1,21 @@
 package graphics;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import javax.swing.JDialog;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-
 import animals.Animal;
 import animals.Lion;
-import mobility.Point;
+
+
+/**
+ * Class that represent info about the animals in the zoo
+ * @author Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @see ZooFrame
+ */
 
 public class AnimalTable extends AbstractTableModel  {
 	
-	private JTable table;
 	
-	private int sizeRow;
 	private ArrayList<Animal> animals;
 	private ZooPanel zoopanel;
 	private final String[] columnNames = {"Name","Color","Weight","Hor","Ver","Eat"};
@@ -52,6 +51,11 @@ public class AnimalTable extends AbstractTableModel  {
 	public String getColumnName(int column) {
 		return columnNames[column];
 	}
+	
+	/**
+	 * @param rowindex- rows
+	 * columnIndex- column
+	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Animal a = animals.get(rowIndex);

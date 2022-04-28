@@ -1,19 +1,20 @@
 package graphics;
 
-import java.awt.Dimension;
 
-import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-
 import animals.*;
 
-import food.IEdible;
+/**
+ * Class that add animals to the zoo  
+ * 
+ * @author   Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @see     ZooFrame
+ */
 
-public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawable,ActionListener {
+
+public class AddAnimalDialog extends JDialog  implements ActionListener {
 	
 	private JLabel label;
 	private JComboBox<String> box;
@@ -75,6 +76,9 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 					String color = animal_color.getItemAt(animal_color.getSelectedIndex());
 					String name = "default";
 					float weight = 0;
+					if(50 > size || size > 300 || horizon_speed < 1 || horizon_speed > 10 
+							||vertical_speed < 1 || vertical_speed > 10 )
+						throw new NumberFormatException();
 					switch(animal_choosen) { 
 					case "Lion":
 						weight = (float) (size * 0.8);
@@ -87,14 +91,6 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 						zoopanel.addAnimallist(lion);
 						zoopanel.repaint();
 						
-						
-						
-//						lion.drawObject(getGraphics());
-//						lion.getPanel().repaint();
-//						Zoo.add(lion.getPanel());
-//						Zoo.setVisible(true);
-						
-										
 						break;
 						
 					case "Bear":
@@ -136,18 +132,13 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 						break;
 
 						
-					}
-				
-				
-				
+					}				
 			
 			}
 				catch(NumberFormatException err) {
 			        JOptionPane.showMessageDialog(null, "Wrong input entered", 
 			                "Message", JOptionPane.ERROR_MESSAGE, icon);
 				}
-				
-
 						
 			dispose();	
 			
@@ -161,68 +152,6 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 		this.pack();
 		this.setVisible(true);
 	}
-	
-	
-	
-	
-
-	@Override
-	public void loadImages(String nm) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void drawObject(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getAnimalName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getSize() {
-		
-		int x = 2;
-		
-		return x;
-	}
-
-	@Override
-	public void eatInc() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getEatCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean getChanges() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setChanges(boolean state) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 
 
 	@Override
@@ -230,11 +159,9 @@ public class AddAnimalDialog extends JDialog  implements IAnimalBehavior,IDrawab
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-
 	
 	
+		
 	
 
 

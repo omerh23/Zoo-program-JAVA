@@ -1,20 +1,15 @@
 package graphics;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import animals.Animal;
 import animals.Bear;
 import animals.Elephant;
 import animals.Giraffe;
@@ -23,6 +18,11 @@ import animals.Turtle;
 import mobility.Point;
 import zoo.ZooActions;
 
+/**
+ * Class to move animals in the zoo
+ * @author   Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
+ * @see     ZooFrame
+ */
 public class MoveAnimalDialog extends JDialog implements ActionListener {
 	
 	private Point location;
@@ -43,8 +43,7 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 		displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.PAGE_AXIS));
 		move = new JButton("Move");
 		move.addActionListener(this);
-		
-		
+	
 		
 		int size = zoopanel.getAnimals().size() ;
 		int counter = 0;
@@ -65,23 +64,28 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 			else {
 				if (zoopanel.getAnimals().get(i) instanceof Lion ) {
 					LionCounter++;
-					animals_string[i] = zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ LionCounter;
+					animals_string[i] = zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+
+					LionCounter+" ("+zoopanel.getAnimals().get(i).getColor()+")";
 				}
 			if (zoopanel.getAnimals().get(i) instanceof Bear ) {
 				BearCounter++;
-				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ BearCounter;
+				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+
+				BearCounter+" ("+zoopanel.getAnimals().get(i).getColor()+")";
 			}
 			if (zoopanel.getAnimals().get(i) instanceof Elephant ) {
 				ElephantCounter++;
-				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ ElephantCounter;
+				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ 
+				ElephantCounter+" ("+zoopanel.getAnimals().get(i).getColor()+")";
 			}
 			if (zoopanel.getAnimals().get(i) instanceof Giraffe ) {
 				GiraffeCounter++;
-				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ GiraffeCounter;
+				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+
+				GiraffeCounter+" ("+zoopanel.getAnimals().get(i).getColor()+")";
 			}
 			if (zoopanel.getAnimals().get(i) instanceof Turtle ) {
 				TurtleCounter++;
-				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ TurtleCounter;
+				animals_string[i] =  zoopanel.getAnimals().get(i).getClass().getSimpleName()+" "+ 
+				TurtleCounter+" ("+zoopanel.getAnimals().get(i).getColor()+")";
 			}
 			}
 			
