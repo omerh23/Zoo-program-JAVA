@@ -29,7 +29,7 @@ public abstract class ZooActions {
 	 *            - true if the animal can eat the food and false otherwise
 	 */
 	
-	public static boolean eat(Object animal, IEdible food) {
+	public  static boolean eat(Object animal, IEdible food) {
 		
 		if(animal instanceof Lion)
 		{

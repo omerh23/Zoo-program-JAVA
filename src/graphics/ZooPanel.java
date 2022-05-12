@@ -8,6 +8,7 @@ import plants.Cabbage;
 import plants.Lettuce;
 import plants.Meat;
 import plants.Plant;
+import zoo.ZooActions;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -45,9 +46,12 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	private Plant plant;
 	private int color; 
 	private Boolean flag = false;
+	private Thread controller;
+	private boolean exit = false;
 	
 	public ZooPanel() {
 		animals_list = new ArrayList<Animal>();
+		controller = new Thread(this);
 		plant = null;
 		this.setBackground(null);
 		this.setVisible(true);
@@ -60,6 +64,18 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		    e.printStackTrace();
 		}
 		 
+	}
+	
+	@Override
+	public void run() {
+		while(!exit) {
+			//this.manageZoo();	
+			
+		}
+	}
+	
+	public void startPanelThread() {
+		this.controller.start();
 	}
 	
     @Override
@@ -77,7 +93,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	    try
 	    {
 		    for(Animal animals: animals_list)
-		    	animals.drawObject(gr);
+		    		animals.drawObject(gr);
 		    
 		    plant.drawObject(gr);
 	    }
@@ -116,11 +132,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
         return new Dimension(50, 50);
     }
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -132,7 +144,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	/**
 	 * The controller that manage the zoo
 	 */
-	public void manageZoo() {
+	public synchronized void manageZoo() {
 		if(isChange()) { //if the animals moves
 			repaint();
 			
@@ -141,17 +153,15 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 				if(animal.getDiet() instanceof Carnivore || animal.getDiet() instanceof Omnivore) {		
 					for(int i = 0 ; i < animals_list.size(); i++ ) {
 						
-						if(animal.calcDistance(animals_list.get(i).getLocation()) < animals_list.get(i).getWeight())
+						if(animal.calcDistance(animals_list.get(i).getLocation()) < animals_list.get(i).getSize())
 							if(animal.getWeight() > 2 * animals_list.get(i).getWeight())
 								if(animal.eat(animals_list.get(i))) {
+									animals_list.get(i).setAlive();
 									toRemove.add(animals_list.get(i));
 									animal.eatInc();
 									repaint();
 									
-								}
-						
-							
-							
+								}				
 						}
 						
 					} // bear or lion
@@ -210,6 +220,9 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	}
 	
 	public void DeleteAllAnimals() {
+		for(Animal animal : animals_list) {
+			animal.setAlive();}
+		
 		animals_list.clear();
 	}
 	
@@ -263,6 +276,40 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	
 	public void setFlag(Boolean st) {
 		this.flag = st;
+	}
+	
+	
+	public synchronized void sleep() {
+		
+		for(Animal animal : animals_list) 	
+				animal.setSuspended();
+			
+	}				
+	
+		
+	
+	
+	
+	public synchronized void wakeUp() {
+		
+		for(Animal animal : animals_list) 	
+			animal.setResumed();
+		
+	}
+	
+	public void setExit() {
+		this.exit = true;
+	}
+	
+	public boolean getExit() {
+		
+		return this.exit;
+	}
+	
+	public void addToThread(Animal animal) {
+		
+		this.controller = new Thread(animal);
+		
 	}
 
 }

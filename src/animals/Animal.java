@@ -1,10 +1,12 @@
 package animals;
 import java.awt.*;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.SwingUtilities;
 
 import diet.*;
 import utilities.*;
@@ -21,7 +23,7 @@ import mobility.Point;
  * @see     Mobile, IEdible
  */
 
-public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,IDrawable {
+public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,IDrawable,Runnable {
 
 	private String name;
 	private double weight;
@@ -37,7 +39,11 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	private int eatCount;
 	private ZooPanel pan;
 	private BufferedImage img1, img2;
-	
+	protected Thread thread;
+	protected boolean threadSuspended;
+	private int new_x = 0;
+	private int new_y = 0;
+	private boolean alive = true;
 	
 	
 	/**
@@ -57,13 +63,57 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		this.img1 = null;
 		this.img2 =null;
 		this.pan = zoopanel;
-		
-			
-			
+		threadSuspended = false;
+		new_x = location.get_x();
+		new_y = location.get_y();	
+		thread = new Thread(this);	
 		
 	}
 	
 	
+	public void run() {
+		
+			while(alive) {
+				while(!threadSuspended) {
+			
+					try {
+						Thread.sleep(20);
+			
+					} catch (InterruptedException e) { }
+					if(new_x >= 800) {
+						x_dir = -1;
+					}
+					else if(new_x <= 0) {
+						x_dir = 1;
+					}
+					if(new_y >= 600) {
+						y_dir = -1;
+					}
+					else if(new_y <= 0) {
+						y_dir = 1;
+					}
+					new_x = new_x + (horSpeed * x_dir);
+					new_y = new_y + (verSpeed * y_dir);
+					this.setLocation(new Point(new_x,new_y));
+					coordChanged = true;
+					pan.manageZoo();
+			
+				}
+				while(threadSuspended) {
+					synchronized(this) {
+						try {
+							this.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}//alive
+	}
+	
+	public void startThread() {
+		thread.start();
+	}
 	
 	
 	/**
@@ -300,9 +350,10 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	 
 	
 	 if(this.getXdir() == 1) 
-	g.drawImage(this.getImage1(), this.getLocation().get_x()-size/2, this.getLocation().get_y()-size/10, size, size, pan);
+	g.drawImage(this.getImage1(), this.new_x-size/2, this.new_y-size/10, size, size, pan);
+	 
 	 else 
-	g.drawImage(this.getImage2(), this.getLocation().get_x(), this.getLocation().get_y()-size/10, size, size, pan);
+	g.drawImage(this.getImage2(), this.new_x-size/2, this.new_y-size/10, size, size, pan);
 	}
 	
 
@@ -314,6 +365,35 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	
 	public int getEatDistance() {
 		return this.EAT_DISTANCE;
+	}
+	
+	
+	public synchronized void setSuspended() {
+		this.threadSuspended = true;
+		
+	}
+	
+	public synchronized void setResumed() {
+		this.notify();
+		this.threadSuspended = false;
+	}
+	
+	public int getNewX() {
+		return this.new_x;
+	}
+	
+	public int getNewY() {
+		return this.new_y;
+	}
+	
+	public boolean getSuspended(){
+		return this.threadSuspended;
+		
+	}
+	
+	public void setAlive() {
+		
+		this.alive = false;
 	}
 	
 

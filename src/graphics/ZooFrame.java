@@ -41,7 +41,8 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private JMenuItem none;
 	private JMenuItem help_item;
 	private JButton add_animal;
-	private JButton move_animal;
+	private JButton sleep;
+	private JButton wake_up;
 	private Animal animals_list[];
 	private String[] animals_names;
 	private JButton clear; 
@@ -68,6 +69,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.setJMenuBar(this.menubar);	
 		food_panel = new JPanel();
 		this.zoopanel = new ZooPanel();
+		zoopanel.startPanelThread();
 		icon =new ImageIcon("Mpicture.png");
 		
 		this.file = new JMenu("File");
@@ -102,9 +104,12 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.add_animal = new JButton("Add animal");
 		southPanel.add(add_animal);
 		this.add_animal.addActionListener(this);
-		this.move_animal = new JButton("Move animal");
-		southPanel.add(this.move_animal);
-		this.move_animal.addActionListener(this);
+		this.sleep = new JButton("Sleep");
+		southPanel.add(this.sleep);
+		this.sleep.addActionListener(this);
+		this.wake_up = new JButton("Wake up");
+		southPanel.add(this.wake_up);
+		this.wake_up.addActionListener(this);
 		southPanel.add(clear = new JButton("Clear"));
 		clear.addActionListener(this);
 		southPanel.add(this.food = new JButton("Food"));
@@ -118,7 +123,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 	
 		this.setVisible(true);
 		this.pack();
-		this.setSize(600,400);
+		this.setSize(800,700);
 		
 	}
 	
@@ -155,10 +160,17 @@ public class ZooFrame extends JFrame implements ActionListener {
 		if (e.getSource() ==this.add_animal) {
 			new AddAnimalDialog(zoopanel, this);
 			
+			
 		}
 		
-		if (e.getSource() ==this.move_animal) {
-			new MoveAnimalDialog(this,zoopanel);
+		if (e.getSource() ==this.sleep) {
+			zoopanel.sleep();
+			
+		}
+		
+		if (e.getSource() ==this.wake_up) {
+			zoopanel.wakeUp();
+			
 		}
 		
 		if(e.getSource() == clear) {
@@ -242,6 +254,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 		
 		
 		if(e.getSource() == exit_button) {
+			zoopanel.setExit();
 			System.exit(0);
 			
 		}

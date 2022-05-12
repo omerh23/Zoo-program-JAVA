@@ -127,6 +127,12 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 			        JOptionPane.showMessageDialog(null, "Wrong input entered", 
 			                "Message", JOptionPane.ERROR_MESSAGE, icon);
 				}
+					
+				catch(IndexOutOfBoundsException err) {
+			        JOptionPane.showMessageDialog(null, "There is no animlas at the zoo yet", 
+			                "Message", JOptionPane.ERROR_MESSAGE, icon);
+				}
+				
 				dispose();
 			}
 		

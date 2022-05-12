@@ -89,7 +89,8 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 						lion.setVerSpeed(vertical_speed);
 						lion.setSize(size);
 						zoopanel.addAnimallist(lion);
-						zoopanel.repaint();
+						//zoopanel.addToThread(lion);
+						lion.startThread();
 						
 						break;
 						
@@ -99,7 +100,9 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 						bear.setHorSpeed(horizon_speed);
 						bear.setVerSpeed(vertical_speed);
 						bear.setSize(size);
-						zoopanel.addAnimallist(bear);						
+						zoopanel.addAnimallist(bear);
+						//zoopanel.addToThread(bear);
+						bear.startThread();
 						break;
 						
 					case "Giraffe":
@@ -108,7 +111,8 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 						giraffe.setHorSpeed(horizon_speed);
 						giraffe.setVerSpeed(vertical_speed);
 						giraffe.setSize(size);
-						zoopanel.addAnimallist(giraffe);					
+						zoopanel.addAnimallist(giraffe);
+						giraffe.startThread();
 						break;
 
 						
@@ -118,7 +122,8 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 						elephant.setHorSpeed(horizon_speed);
 						elephant.setVerSpeed(vertical_speed);
 						elephant.setSize(size);
-						zoopanel.addAnimallist(elephant);						
+						zoopanel.addAnimallist(elephant);
+						elephant.startThread();
 						break;
 
 						
@@ -128,7 +133,8 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 						turtle.setHorSpeed(horizon_speed);
 						turtle.setVerSpeed(vertical_speed);
 						turtle.setSize(size);
-						zoopanel.addAnimallist(turtle);						
+						zoopanel.addAnimallist(turtle);	
+						turtle.startThread();
 						break;
 
 						
@@ -139,6 +145,9 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 			        JOptionPane.showMessageDialog(null, "Wrong input entered", 
 			                "Message", JOptionPane.ERROR_MESSAGE, icon);
 				}
+				
+				
+				
 						
 			dispose();	
 			
