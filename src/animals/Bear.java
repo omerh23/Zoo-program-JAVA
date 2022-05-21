@@ -47,6 +47,7 @@ public class Bear extends RoarAnimal  {
 		super(name,starting_location,color, panel);
 		this.furColor = "gray";
 		super.setWeight(weight);
+		super.setDiet(diet);
 		MessageUtility.logConstractor("Bear", name);
 		this.loadImages("bea");
 		this.panel = panel;

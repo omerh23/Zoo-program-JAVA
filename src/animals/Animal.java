@@ -44,7 +44,8 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	private int new_x = 0;
 	private int new_y = 0;
 	private boolean alive = true;
-	
+	private float centercoor_x;  
+	private float centercoor_y; 
 	
 	/**
 	 * A constructor for the animal class.
@@ -67,10 +68,13 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		new_x = location.get_x();
 		new_y = location.get_y();	
 		thread = new Thread(this);	
-		
+		centercoor_x = (int)pan.getWidth()/2 - 20;
+		centercoor_y = (int)pan.getHeight()/2 - 20;
 	}
 	
-	
+	/*
+	 * life cycle of animal that work as thread
+	 */
 	public void run() {
 		
 			while(alive) {
@@ -80,25 +84,68 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 						Thread.sleep(20);
 			
 					} catch (InterruptedException e) { }
-					if(new_x >= 800) {
-						x_dir = -1;
+					
+					
+					if(pan.getCenterFoodFlag()&& this.diet.canEat(pan.getCenterFood())) {
+						
+						if(new_x >= centercoor_x) {
+							x_dir = -1;
+						}
+						if(new_x <= centercoor_x) {
+							x_dir = 1;
+						}
+						if(new_y >= centercoor_y) {
+							y_dir = -1;
+						}
+						if(new_y <= centercoor_y) {
+							y_dir = 1;
+						}
+						
+						if(Math.abs(new_x - centercoor_x)  < 9 ) 
+							new_y = new_y + (verSpeed * y_dir);
+							
+					
+						else if(Math.abs(new_y - centercoor_y ) < 9 ) 
+							new_x = new_x + (horSpeed * x_dir);
+							
+						
+						
+						else {
+							new_x = new_x + (horSpeed * x_dir);
+							new_y = new_y + (verSpeed * y_dir);
+						}
+						
+						this.setLocation(new Point(new_x,new_y));
+						coordChanged = true;
+						pan.manageZoo();
+						
 					}
-					else if(new_x <= 0) {
-						x_dir = 1;
-					}
-					if(new_y >= 600) {
-						y_dir = -1;
-					}
-					else if(new_y <= 0) {
-						y_dir = 1;
-					}
-					new_x = new_x + (horSpeed * x_dir);
-					new_y = new_y + (verSpeed * y_dir);
-					this.setLocation(new Point(new_x,new_y));
-					coordChanged = true;
-					pan.manageZoo();
+					
+					else {
+						
+						if(new_x >= 800) {
+							x_dir = -1;
+						}
+						if(new_x <= 0) {
+							x_dir = 1;
+						}
+						if(new_y >= 600) {
+							y_dir = -1;
+						}
+						if(new_y <= 0) {
+							y_dir = 1;
+						}
+						new_x = new_x + (horSpeed * x_dir);
+						new_y = new_y + (verSpeed * y_dir);
+						this.setLocation(new Point(new_x,new_y));
+						coordChanged = true;
+						pan.manageZoo();
+					
 			
+					}
+				
 				}
+				
 				while(threadSuspended) {
 					synchronized(this) {
 						try {

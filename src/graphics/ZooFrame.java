@@ -123,7 +123,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 	
 		this.setVisible(true);
 		this.pack();
-		this.setSize(800,700);
+		this.setSize(800,680);
 		
 	}
 	

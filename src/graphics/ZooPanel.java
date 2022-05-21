@@ -2,6 +2,7 @@ package graphics;
 import animals.Animal;
 
 import diet.*;
+import food.EFoodType;
 import mobility.Point;
 import animals.*;
 import plants.Cabbage;
@@ -40,6 +41,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	private static final String BACKGROUND_PATH = "C:\\Users\\omerh\\OneDrive\\שולחן העבודה\\לימודים שנה ב\\סימסטר ב\\מונחה עצמים מתקדם\\Home Work\\HW1\\HW1";
 	private static final int GREEN = 1;
 	private static final int WHITE = 0;
+	private static final int NULLFOOD = 4;
 	private BufferedImage img = null;
 	private BufferedImage food_img = null;
 	private ArrayList<Animal> animals_list;
@@ -48,6 +50,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	private Boolean flag = false;
 	private Thread controller;
 	private boolean exit = false;
+	private boolean centerFoodFlag = false ;
 	
 	public ZooPanel() {
 		animals_list = new ArrayList<Animal>();
@@ -169,7 +172,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 				if(this.plant != null) {
 					
 					if( animal.calcDistance(new Point((int)this.getWidth()/2 - 20,(int)this.getHeight()/2 - 20)) < animal.getEatDistance() && animal.eat(this.plant)) {
-						this.plant = null;
+						this.setPlant(NULLFOOD);
 						animal.eatInc();
 						repaint();
 						
@@ -236,6 +239,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	public void setPlant(int option ) {
 		if(option == 1) {
 			this.plant = new Lettuce(this);
+			centerFoodFlag = true;
 			this.plant.loadImages("lettuce.png");
 			this.repaint();
 			
@@ -244,17 +248,21 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		}
 		else if(option == 2) {
 			this.plant = new Cabbage(this);
+			centerFoodFlag = true;
 			this.plant.loadImages("cabbage.png");
 			this.repaint();
 			
 		}
 		else if (option == 3) {
 			this.plant = new Meat(this);
+			centerFoodFlag = true;
 			this.plant.loadImages("meat.gif");
 			this.repaint();
 		}
-		else
+		else {
+			centerFoodFlag = false;
 			this.plant = null;
+		}
 	}
 	
 	public void setImage(String image) {
@@ -311,5 +319,13 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		this.controller = new Thread(animal);
 		
 	}
-
+	
+	public  boolean getCenterFoodFlag() {
+		return this.centerFoodFlag;
+	}
+	
+	public  EFoodType getCenterFood()
+	{
+		return this.plant.getFoodtype();
+	}
 }

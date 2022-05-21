@@ -44,6 +44,7 @@ public class Elephant extends ChewAnimal{
 	public Elephant(String name,float weight,String color,ZooPanel panel){
 		super(name, starting_location,color,panel);
 		super.setWeight(weight);
+		super.setDiet(diet);
 		this.trunkLength = 1;
 		MessageUtility.logConstractor("Elephant", name);
 		this.loadImages("elf");
