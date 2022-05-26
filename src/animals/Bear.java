@@ -21,21 +21,7 @@ public class Bear extends RoarAnimal  {
 	private static final Point starting_location = new Point(100,5);
 	private static final Omnivore diet = new Omnivore();
 	private ZooPanel panel;
-	/**
-	 * A constructor for the Bear class.
-	 * sets default furColor and weight and diet.
-	 * 
-	 * @param name
-	 *            - Name of the Bear
-	 * @param location
-	 *            - Starting location of the Bear
-	 */
-//	public Bear(String name, Point location,float weight) {
-//		super(name,location);
-//		super.setWeight(weight);
-//		this.furColor = "gray";
-//		MessageUtility.logConstractor("Bear", name);
-//	}
+	
 	/**
 	 * A constructor for the Bear class with a default starting location.
 	 * sets default furColor and weight and diet.

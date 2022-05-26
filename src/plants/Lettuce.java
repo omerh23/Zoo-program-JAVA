@@ -10,7 +10,16 @@ import utilities.MessageUtility;
  *
  */
 public class Lettuce extends Plant {
-	public Lettuce(ZooPanel zoopanel) {
+	
+public static Lettuce lettuce = null;
+	
+	public static Lettuce getInstance(ZooPanel panel) {
+		if(lettuce == null)
+			lettuce = new Lettuce(panel);
+		return  lettuce;
+	}
+	
+	private Lettuce(ZooPanel zoopanel) {
 		super(zoopanel);
 		//MessageUtility.logConstractor("Lettuce", "Lettuce");
 	}

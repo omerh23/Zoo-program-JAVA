@@ -9,9 +9,15 @@ import utilities.MessageUtility;
 public class Meat extends Plant
 {
 	
+	public static Meat meat = null;
 	
+	public static Meat getInstance(ZooPanel panel) {
+		if(meat == null)
+			meat = new Meat(panel);
+		return  meat;
+	}
 	
-	public Meat(ZooPanel pan)
+	private Meat(ZooPanel pan)
 	{	
 		super(pan);
 		this.loadImages("meat.gif");

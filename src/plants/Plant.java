@@ -21,24 +21,22 @@ import utilities.MessageUtility;
  *
  */
 public abstract class Plant  implements IEdible, Ilocatable,IDrawable {
-	/**
-	 * 
-	 */
+	
 	private double height;
-	/**
-	 * 
-	 */
+	
 	private Point location;
-	/**
-	 * 
-	 */
+	
 	private double weight;
 	private ZooPanel zoopanel;
 	private BufferedImage plant_image = null;
-
-	/**
-	 * 
-	 */
+	//public static Plant plant = null;
+	
+//	public static Plant getInstance(ZooPanel panel) {
+//		if(plant == null)
+//			plant = new Plant(panel);
+//		return plant;
+//	}
+	
 	public Plant(ZooPanel zoopanel) {
 		Random rand = new Random();
 		int x = rand.nextInt(30);

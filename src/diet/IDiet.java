@@ -1,6 +1,8 @@
 package diet;
 import animals.*;
+import factory.AnimalFactory;
 import  food.*;
+import graphics.ZooPanel;
 /**
  * An interface organizing the diet of the animals declaring the canEat and eat methods
  *
@@ -18,5 +20,7 @@ public interface IDiet {
 	 * A declaration of the eat method
 	 * */
 	public double eat(Animal animal, IEdible food); // check if is edible and calculate the weight
-
+	
+	//creates new animal from type interface AnimalFactory
+	public AnimalFactory getAnimal(String animalType , float weight , String color,ZooPanel panel);
 }

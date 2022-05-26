@@ -8,7 +8,16 @@ import utilities.MessageUtility;
  *
  */
 public class Cabbage extends Plant {
-	public Cabbage(ZooPanel zoopanel) {
+	
+public static Cabbage cabbage = null;
+	
+	public static Cabbage getInstance(ZooPanel panel) {
+		if(cabbage == null)
+			cabbage = new Cabbage(panel);
+		return  cabbage;
+	}
+	
+	private Cabbage(ZooPanel zoopanel) {
 		super(zoopanel);
 		//MessageUtility.logConstractor("Cabbage", "Cabbage");
 	}

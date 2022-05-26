@@ -4,12 +4,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.Future;
 
 import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
 
 import diet.*;
+import factory.AnimalFactory;
 import utilities.*;
+import zoo.ZooActions;
 import food.*;
 import graphics.*;
 import mobility.*;
@@ -23,7 +26,7 @@ import mobility.Point;
  * @see     Mobile, IEdible
  */
 
-public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,IDrawable,Runnable {
+public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,IDrawable,Runnable,AnimalFactory {
 
 	private String name;
 	private double weight;
@@ -39,13 +42,14 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	private int eatCount;
 	private ZooPanel pan;
 	private BufferedImage img1, img2;
-	protected Thread thread;
+	//protected Thread thread;
 	protected boolean threadSuspended;
 	private int new_x = 0;
 	private int new_y = 0;
 	private boolean alive = true;
 	private float centercoor_x;  
-	private float centercoor_y; 
+	private float centercoor_y;
+	private Future task;
 	
 	/**
 	 * A constructor for the animal class.
@@ -67,7 +71,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		threadSuspended = false;
 		new_x = location.get_x();
 		new_y = location.get_y();	
-		thread = new Thread(this);	
+		//thread = new Thread(this);	
 		centercoor_x = (int)pan.getWidth()/2 - 20;
 		centercoor_y = (int)pan.getHeight()/2 - 20;
 	}
@@ -76,9 +80,11 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	 * life cycle of animal that work as thread
 	 */
 	public void run() {
-		
+				
 			while(alive) {
 				while(!threadSuspended) {
+					if(!alive)
+						break;
 			
 					try {
 						Thread.sleep(20);
@@ -115,9 +121,10 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 							new_y = new_y + (verSpeed * y_dir);
 						}
 						
-						this.setLocation(new Point(new_x,new_y));
-						coordChanged = true;
-						pan.manageZoo();
+//						Point point = new Point(new_x,new_y);
+//						this.setLocation(point);
+//						coordChanged = true;
+						//pan.manageZoo();
 						
 					}
 					
@@ -137,14 +144,18 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 						}
 						new_x = new_x + (horSpeed * x_dir);
 						new_y = new_y + (verSpeed * y_dir);
-						this.setLocation(new Point(new_x,new_y));
-						coordChanged = true;
-						pan.manageZoo();
+						
+						//pan.manageZoo();
 					
 			
-					}
+					}//else
+					
+					Point point = new Point(new_x,new_y);
+					this.Move(point);
+					this.setLocation(point);
+					coordChanged = true;
 				
-				}
+				}//inside loop
 				
 				while(threadSuspended) {
 					synchronized(this) {
@@ -155,12 +166,13 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 						}
 					}
 				}
+				
 			}//alive
+			
+			
 	}
 	
-	public void startThread() {
-		thread.start();
-	}
+	
 	
 	
 	/**
@@ -438,10 +450,29 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		
 	}
 	
-	public void setAlive() {
+	public void kill() {
 		
 		this.alive = false;
+		//task.cancel(true); 
+		
+	}
+//	public void setFuture(Future task) {
+//	
+//		this.task = task;
+//	}
+//	
+	public void Move(Point point) {
+	
+		weight = weight - (this.move(point)*weight*0.00025);
+		
 	}
 	
+	@Override
+	public Animal create() {
+			
+		return this;
+		
+		
+	}
 
 }

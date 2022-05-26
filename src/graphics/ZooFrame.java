@@ -23,6 +23,10 @@ import javax.swing.*;
 
 import animals.Animal;
 import animals.Lion;
+import diet.Carnivore;
+import diet.IDiet;
+import factory.AnimalFactory;
+import factory.FactoryProducer;
 
  /**
   * Class that the main frame of the zoo.
@@ -68,7 +72,8 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.menubar = new JMenuBar();
 		this.setJMenuBar(this.menubar);	
 		food_panel = new JPanel();
-		this.zoopanel = new ZooPanel();
+		zoopanel = ZooPanel.getInstance();
+		//this.zoopanel = new ZooPanel();
 		zoopanel.startPanelThread();
 		icon =new ImageIcon("Mpicture.png");
 		

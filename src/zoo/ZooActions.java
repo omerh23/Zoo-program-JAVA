@@ -112,7 +112,7 @@ public abstract class ZooActions {
 			distance = ((Lion) animal).move(point);
 			double animal_weight = ((Lion) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
-			MessageUtility.logBooleanFunction(((Lion)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
+			//MessageUtility.logBooleanFunction(((Lion)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
 			((Lion) animal).setLocation(point);
 			((Lion)animal).setChanges(true);
 			return ((Lion) animal).setWeight(weight);
@@ -122,7 +122,7 @@ public abstract class ZooActions {
 			distance = ((Bear) animal).move(point);
 			double animal_weight = ((Bear) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
-			MessageUtility.logBooleanFunction(((Bear)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
+			//MessageUtility.logBooleanFunction(((Bear)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
 			((Bear) animal).setLocation(point);
 			((Bear)animal).setChanges(true);
 			return ((Bear) animal).setWeight(weight);
@@ -132,7 +132,7 @@ public abstract class ZooActions {
 			distance = ((Elephant) animal).move(point);
 			double animal_weight = ((Elephant) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
-			MessageUtility.logBooleanFunction(((Elephant)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
+			//MessageUtility.logBooleanFunction(((Elephant)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
 			((Elephant) animal).setLocation(point);
 			((Elephant)animal).setChanges(true);
 			return ((Elephant) animal).setWeight(weight);
@@ -142,7 +142,7 @@ public abstract class ZooActions {
 			distance = ((Giraffe) animal).move(point);
 			double animal_weight = ((Giraffe) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
-			MessageUtility.logBooleanFunction(((Giraffe)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
+			//MessageUtility.logBooleanFunction(((Giraffe)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
 			((Giraffe) animal).setLocation(point);
 			((Giraffe)animal).setChanges(true);
 			return ((Giraffe) animal).setWeight(weight);
@@ -152,7 +152,7 @@ public abstract class ZooActions {
 			distance = ((Turtle) animal).move(point);
 			double animal_weight = ((Turtle) animal).getWeight();
 			weight = animal_weight - (distance*animal_weight*0.00025);
-			MessageUtility.logBooleanFunction(((Turtle)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
+			//MessageUtility.logBooleanFunction(((Turtle)animal).getName(), "move","("+ point.get_x()+","+point.get_y()+")", true);
 			((Turtle) animal).setLocation(point);
 			((Turtle)animal).setChanges(true);
 			return ((Turtle) animal).setWeight(weight);

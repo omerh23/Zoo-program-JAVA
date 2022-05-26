@@ -1,10 +1,15 @@
 package graphics;
 
 
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
 import animals.*;
+import diet.IDiet;
+import factory.AnimalFactory;
+import factory.FactoryProducer;
 
 /**
  * Class that add animals to the zoo  
@@ -83,14 +88,14 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 					case "Lion":
 						weight = (float) (size * 0.8);
 						
+						IDiet animalfac = FactoryProducer.getFactory("Carnivore");
+						AnimalFactory animal = animalfac.getAnimal("Lion",weight,color,zoopanel);			
+						//Animal lion = new Lion(name,weight,color,zoopanel);
+						((Animal) animal).setHorSpeed(horizon_speed);
+						((Animal) animal).setVerSpeed(vertical_speed);
+						((Animal) animal).setSize(size);
+						zoopanel.addAnimallist(animal.create());
 						
-						Animal lion = new Lion(name,weight,color,zoopanel);
-						lion.setHorSpeed(horizon_speed);
-						lion.setVerSpeed(vertical_speed);
-						lion.setSize(size);
-						zoopanel.addAnimallist(lion);
-						//zoopanel.addToThread(lion);
-						lion.startThread();
 						
 						break;
 						
@@ -100,9 +105,9 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 						bear.setHorSpeed(horizon_speed);
 						bear.setVerSpeed(vertical_speed);
 						bear.setSize(size);
-						zoopanel.addAnimallist(bear);
-						//zoopanel.addToThread(bear);
-						bear.startThread();
+						zoopanel.addAnimallist(bear);		
+						//zoopanel.addToExecutor(bear);
+						//bear.startThread();
 						break;
 						
 					case "Giraffe":
@@ -112,7 +117,8 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 						giraffe.setVerSpeed(vertical_speed);
 						giraffe.setSize(size);
 						zoopanel.addAnimallist(giraffe);
-						giraffe.startThread();
+						//zoopanel.addToExecutor(giraffe);
+						//giraffe.startThread();
 						break;
 
 						
@@ -123,7 +129,8 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 						elephant.setVerSpeed(vertical_speed);
 						elephant.setSize(size);
 						zoopanel.addAnimallist(elephant);
-						elephant.startThread();
+						//zoopanel.addToExecutor(elephant);
+						//elephant.startThread();
 						break;
 
 						
@@ -133,8 +140,9 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 						turtle.setHorSpeed(horizon_speed);
 						turtle.setVerSpeed(vertical_speed);
 						turtle.setSize(size);
-						zoopanel.addAnimallist(turtle);	
-						turtle.startThread();
+						zoopanel.addAnimallist(turtle);
+						//zoopanel.addToExecutor(turtle);
+						//turtle.startThread();
 						break;
 
 						

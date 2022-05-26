@@ -1,8 +1,12 @@
 package diet;
 
 import animals.Animal;
+import animals.Bear;
+import animals.Lion;
+import factory.AnimalFactory;
 import food.EFoodType;
 import food.IEdible;
+import graphics.ZooPanel;
 /**
  * A class organizing the omnivore diet for the animals implementing the canEat and eat methods
  * for the omnivore animals
@@ -54,7 +58,13 @@ public class Omnivore implements IDiet{
 	}
 	
 	
-	
+	public AnimalFactory getAnimal(String animalType , float weight , String color,ZooPanel panel) {   //Lion(String name,float weight , String color,ZooPanel panel)
+		if(animalType.equalsIgnoreCase("Bear")) { 
+			return new Bear("default",weight ,color ,panel);
+		}
+		
+		return null;
+	}
 	
 
 }

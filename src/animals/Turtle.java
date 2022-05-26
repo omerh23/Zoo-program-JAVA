@@ -30,14 +30,7 @@ public class Turtle extends ChewAnimal{
 	 * @param location
 	 *            - Starting location of the Turtle
 	*/
-//	public Turtle(String name, Point location,float weight,String color) {
-//		super(name,location,color);
-//		super.setWeight(weight);
-//		super.setDiet(diet);
-//		this.Age = 1;
-//		MessageUtility.logConstractor("Turtle", name);
-//		
-//	}
+
 	/**
 	 * A constructor for the Turtle class with a default starting location.
 	 * sets default nechLength and weight and diet.

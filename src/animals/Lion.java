@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import diet.Carnivore;
 import diet.IDiet;
+import factory.AnimalFactory;
 import food.EFoodType;
 import food.IEdible;
 import graphics.ZooPanel;
@@ -20,7 +21,7 @@ import utilities.MessageUtility;
  * @author  Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     RoarAnimal
  */
-public class Lion extends RoarAnimal {
+public class Lion extends RoarAnimal  {
 
 	private static final Point starting_location = new Point(20,0);
 	private static final Carnivore diet = new Carnivore();
@@ -45,20 +46,7 @@ public class Lion extends RoarAnimal {
 		this.panel.repaint();
 		
 	}
-	/**
-	 * A constructor for the Lion class with a default location.
-	 * sets default scarCount and weight and diet.
-	 * 
-	 * @param name
-	 *            - Name of the Lion
-	 */
-//	public Lion(String name, Point location, float weight) {
-//		super(name,location);
-//		super.setWeight(weight);
-//		super.setDiet(diet);
-//		this.scarCount = 0 ;
-//		MessageUtility.logConstractor("Lion", name);
-//	}
+
 	
 	/**
 	 * An implementation of the roar method using the MessageUtility method and the Lion special message 
@@ -99,7 +87,7 @@ public class Lion extends RoarAnimal {
 	
 	@Override
 	public EFoodType getFoodtype() {
-		MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.NOTFOOD);
+		//MessageUtility.logGetter(this.getClass().getSimpleName(), "getFoodType", EFoodType.NOTFOOD);
 		return EFoodType.NOTFOOD;
 	}
 	
@@ -109,6 +97,8 @@ public class Lion extends RoarAnimal {
 		return this.diet;
 		
 	}
+
+	
 	
 
 }

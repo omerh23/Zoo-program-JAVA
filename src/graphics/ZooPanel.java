@@ -1,6 +1,7 @@
 package graphics;
 import animals.Animal;
 
+
 import diet.*;
 import food.EFoodType;
 import mobility.Point;
@@ -10,7 +11,6 @@ import plants.Lettuce;
 import plants.Meat;
 import plants.Plant;
 import zoo.ZooActions;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -23,9 +23,17 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -45,15 +53,28 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	private BufferedImage img = null;
 	private BufferedImage food_img = null;
 	private ArrayList<Animal> animals_list;
+	private LinkedList<Animal> animals_queue;
 	private Plant plant;
 	private int color; 
 	private Boolean flag = false;
 	private Thread controller;
 	private boolean exit = false;
 	private boolean centerFoodFlag = false ;
+	private ExecutorService executor ;
+	private final int THREADS_COUNT = 10 ;
+	private static ZooPanel zoopanel = null;
 	
-	public ZooPanel() {
+	
+	public static ZooPanel getInstance() {
+		if (zoopanel == null)
+			zoopanel = new ZooPanel();
+		return zoopanel;
+		}
+
+	
+	private ZooPanel() {
 		animals_list = new ArrayList<Animal>();
+		animals_queue = new LinkedList<Animal>();
 		controller = new Thread(this);
 		plant = null;
 		this.setBackground(null);
@@ -66,13 +87,15 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		{
 		    e.printStackTrace();
 		}
-		 
+		
+		executor = Executors.newFixedThreadPool(THREADS_COUNT);
+		
 	}
 	
 	@Override
 	public void run() {
 		while(!exit) {
-			//this.manageZoo();	
+			this.manageZoo();	
 			
 		}
 	}
@@ -95,11 +118,13 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	    } 
 	    try
 	    {
-		    for(Animal animals: animals_list)
-		    		animals.drawObject(gr);
-		    
-		    plant.drawObject(gr);
+	    	
+	    	for(Animal animal : animals_list )
+	    		animal.drawObject(gr);
+	    	
+	    	plant.drawObject(gr);
 	    }
+	    
 	    catch(Exception e) 
 	    {
 	    	return;
@@ -151,23 +176,36 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		if(isChange()) { //if the animals moves
 			repaint();
 			
-			List<Animal> toRemove = new ArrayList<Animal>();
+			
 			for(Animal animal : animals_list) {
+				boolean chase = false;
 				if(animal.getDiet() instanceof Carnivore || animal.getDiet() instanceof Omnivore) {		
-					for(int i = 0 ; i < animals_list.size(); i++ ) {
+					for(Animal prey : animals_list ) {
 						
-						if(animal.calcDistance(animals_list.get(i).getLocation()) < animals_list.get(i).getSize())
-							if(animal.getWeight() > 2 * animals_list.get(i).getWeight())
-								if(animal.eat(animals_list.get(i))) {
-									animals_list.get(i).setAlive();
-									toRemove.add(animals_list.get(i));
-									animal.eatInc();
-									repaint();
+						if(animal.calcDistance(prey.getLocation()) < prey.getSize())
+							if(animal.getWeight() > 2 * prey.getWeight())
+								if(animal.eat(prey)) {
 									
+									//prey.interrupt();
+									animals_list.remove(prey);
+									prey.kill();
+									animal.eatInc();
+								if(animals_queue!= null && !animals_queue.isEmpty()) {
+									this.executor.execute(animals_queue.peek());
+									this.animals_list.add(animals_queue.remove());
+								//	this.newExecutor();
+									
+								}
+									repaint();
+									chase = true;
+									break;
+								
 								}				
 						}
 						
 					} // bear or lion
+					if(chase)
+						break;
 				
 				if(this.plant != null) {
 					
@@ -183,8 +221,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 				
 				
 			}//outside for
-		
-		animals_list.removeAll(toRemove);
+
 		
 		}
 	}
@@ -207,26 +244,39 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		return this.animals_list;		
 	}
 	
-	public void addAnimallist(Animal animal) {
+	public synchronized void addAnimallist(Animal animal) {
 		try {
-			if ( animals_list.size() == 10) {
-				throw new ArrayIndexOutOfBoundsException();
+			if(animals_list.size() == 10) 
+				if(animals_queue != null && animals_queue.size() < 5)
+					this.animals_queue.add(animal);
+				else
+					throw new ArrayIndexOutOfBoundsException();
+			else {
+				animals_list.add(animal);
+				executor.execute(animal);
 			}
-			animals_list.add(animal);
+
 			
+				
 		}
 		catch(ArrayIndexOutOfBoundsException error) {
 			ImageIcon icon =new ImageIcon("Mpicture.png");
-			JOptionPane.showMessageDialog(null, "You cannot add more than 10 animlas", 
+			JOptionPane.showMessageDialog(null, "You cannot add more than 10 animlas and 5 animlas waiting", 
                 "Message", JOptionPane.ERROR_MESSAGE, icon);
 	}
 	}
 	
-	public void DeleteAllAnimals() {
-		for(Animal animal : animals_list) {
-			animal.setAlive();}
-		
+	public synchronized void DeleteAllAnimals() {
+		for(Animal animal : animals_list) {  
+			animal.kill();
+			
+		}
+		animals_queue.clear();
 		animals_list.clear();
+		//this.executor.shutdown();
+
+
+		
 	}
 	
 	
@@ -238,7 +288,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		 */
 	public void setPlant(int option ) {
 		if(option == 1) {
-			this.plant = new Lettuce(this);
+			this.plant = Lettuce.getInstance(this);
 			centerFoodFlag = true;
 			this.plant.loadImages("lettuce.png");
 			this.repaint();
@@ -247,14 +297,14 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 			
 		}
 		else if(option == 2) {
-			this.plant = new Cabbage(this);
+			this.plant = Cabbage.getInstance(this);
 			centerFoodFlag = true;
 			this.plant.loadImages("cabbage.png");
 			this.repaint();
 			
 		}
-		else if (option == 3) {
-			this.plant = new Meat(this);
+		else if (option == 3) {;
+			this.plant = Meat.getInstance(this);
 			centerFoodFlag = true;
 			this.plant.loadImages("meat.gif");
 			this.repaint();
@@ -328,4 +378,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	{
 		return this.plant.getFoodtype();
 	}
+	
+
+	
 }
