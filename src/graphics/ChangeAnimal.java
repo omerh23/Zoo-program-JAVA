@@ -15,6 +15,7 @@ import animals.Elephant;
 import animals.Giraffe;
 import animals.Lion;
 import animals.Turtle;
+import decorator.colorDecorator;
 import mobility.Point;
 import zoo.ZooActions;
 
@@ -23,26 +24,29 @@ import zoo.ZooActions;
  * @author   Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     ZooFrame
  */
-public class MoveAnimalDialog extends JDialog implements ActionListener {
+public class ChangeAnimal extends JDialog implements ActionListener {
 	
 	private Point location;
 	private JComboBox<String> animals_box;
+	private JComboBox<String> color_box;
+
 	private String[] animals_string;
+	private String[] color_string = {"Natural","Red","Blue"};
 	private JLabel labelX;
 	private JTextField x_field ;
 	private JTextField y_field ;
 	private JLabel labelY;
 	private JPanel displayPanel;
-	private JButton move;
+	private JButton change_color;
 	
 	
 	
-	public MoveAnimalDialog(ZooFrame Zoo,ZooPanel zoopanel) {
-		super(Zoo, "Move animal", true);
+	public ChangeAnimal(ZooFrame Zoo,ZooPanel zoopanel) {
+		super(Zoo, "Change color", true);
 		displayPanel = new JPanel();
 		displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.PAGE_AXIS));
-		move = new JButton("Move");
-		move.addActionListener(this);
+		change_color = new JButton("OK");
+		change_color.addActionListener(this);
 	
 		
 		int size = zoopanel.getAnimals().size() ;
@@ -94,55 +98,35 @@ public class MoveAnimalDialog extends JDialog implements ActionListener {
 		animals_box = new JComboBox(animals_string);
 		animals_box.addActionListener(this);
 		displayPanel.add(animals_box);
-		displayPanel.add(labelX = new JLabel("Enter X:"));
-		displayPanel.add(x_field= new JTextField());
-		displayPanel.add(labelY = new JLabel("Enter Y:"));
-		displayPanel.add(y_field= new JTextField());
+		
+		color_box = new JComboBox(color_string);
+		animals_box.addActionListener(this);
+		displayPanel.add(color_box);
+	
 		
 		
-		move.addActionListener(new ActionListener() {
+		change_color.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					
-					int x = Integer.parseInt(x_field.getText());
-					int y = Integer.parseInt(y_field.getText());
-					int array_index = animals_box.getSelectedIndex();
-					if(ZooActions.move(zoopanel.getAnimals().get(array_index),new Point(x,y))) {
-						
-						zoopanel.getAnimals().get(array_index).setChanges(true);
-						zoopanel.manageZoo();
-						
-						
-					}
-					else {
-						 JOptionPane.showMessageDialog(null, "Out of bounds", 
-					                "Message", JOptionPane.ERROR_MESSAGE, icon);
-					}
-						
 				
-				}
-				catch(NumberFormatException err) {
-			        JOptionPane.showMessageDialog(null, "Wrong input entered", 
-			                "Message", JOptionPane.ERROR_MESSAGE, icon);
-				}
-					
-				catch(IndexOutOfBoundsException err) {
-			        JOptionPane.showMessageDialog(null, "There is no animlas at the zoo yet", 
-			                "Message", JOptionPane.ERROR_MESSAGE, icon);
-				}
+					synchronized(this) {
+					int array_index = animals_box.getSelectedIndex();
+					String color_index = color_string[color_box.getSelectedIndex()];
+					colorDecorator change = new colorDecorator(zoopanel.getAnimals().get(array_index));
+					change.changeAnimal(color_index);
+					}
 				
 				dispose();
+			
 			}
-		
 		});
 		
 		
 		
-		displayPanel.add(move);
+		displayPanel.add(change_color);
 		this.add(displayPanel);
-		this.pack();
+		this.setSize(250,150);
 		this.setVisible(true);
 		
 	}

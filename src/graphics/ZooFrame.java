@@ -22,7 +22,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import animals.Animal;
+import animals.Bear;
+import animals.Elephant;
+import animals.Giraffe;
 import animals.Lion;
+import animals.Turtle;
 import diet.Carnivore;
 import diet.IDiet;
 import factory.AnimalFactory;
@@ -47,19 +51,17 @@ public class ZooFrame extends JFrame implements ActionListener {
 	private JButton add_animal;
 	private JButton sleep;
 	private JButton wake_up;
-	private Animal animals_list[];
-	private String[] animals_names;
 	private JButton clear; 
 	private JButton food;
 	private JButton info;
 	private JButton exit_button;
+	private JButton change_color;
+	private JButton save_state;
+	private JButton restore_state;
 	private ImageIcon icon;
-	private Image food_icon;
-	private JPanel food_panel;
-	private ZooPanel a;
-	
 	private ZooPanel zoopanel;
-	private BufferedImage img = null;
+	private JComboBox<String> animals_box;
+	private String[] animals_string;
 	private static final int LETTUCE = 1; 
 	private static final int CABBAGE = 2;
 	private static final int MEAT = 3;
@@ -71,9 +73,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 		this.setLayout(new BorderLayout());
 		this.menubar = new JMenuBar();
 		this.setJMenuBar(this.menubar);	
-		food_panel = new JPanel();
 		zoopanel = ZooPanel.getInstance();
-		//this.zoopanel = new ZooPanel();
 		zoopanel.startPanelThread();
 		icon =new ImageIcon("Mpicture.png");
 		
@@ -106,9 +106,13 @@ public class ZooFrame extends JFrame implements ActionListener {
 		
 		JPanel southPanel = new  JPanel();
 		southPanel.setLayout(new FlowLayout());
+		
 		this.add_animal = new JButton("Add animal");
 		southPanel.add(add_animal);
 		this.add_animal.addActionListener(this);
+		this.change_color = new JButton("Change color");
+		this.change_color.addActionListener(this);
+		southPanel.add(change_color);
 		this.sleep = new JButton("Sleep");
 		southPanel.add(this.sleep);
 		this.sleep.addActionListener(this);
@@ -121,6 +125,13 @@ public class ZooFrame extends JFrame implements ActionListener {
 		food.addActionListener(this);
 		southPanel.add(info = new JButton("Info"));
 		info.addActionListener(this);
+		
+		southPanel.add(save_state = new JButton("save state"));
+		save_state.addActionListener(this);
+		
+		southPanel.add(restore_state = new JButton("restore state"));
+		restore_state.addActionListener(this);
+		
 		southPanel.add(exit_button = new JButton("Exit"));
 		exit_button.addActionListener(this);
 		this.add(southPanel, BorderLayout.SOUTH);
@@ -128,7 +139,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 	
 		this.setVisible(true);
 		this.pack();
-		this.setSize(800,680);
+		this.setSize(880,680);
 		
 	}
 	
@@ -163,10 +174,72 @@ public class ZooFrame extends JFrame implements ActionListener {
 		
 		
 		if (e.getSource() ==this.add_animal) {
-			new AddAnimalDialog(zoopanel, this);
+			
+			JDialog typeDialog = new JDialog(this , "Type of animals", true);  
+			JButton carnivore = new JButton ("Carnivore");
+			JButton omnivore = new JButton ("Omnivore");
+			JButton herbivore = new JButton ("Herbivore");
+			carnivore.addActionListener(new ActionListener() {
+					@Override
+	        		public void actionPerformed(ActionEvent e1) {
+						
+	        		zoopanel.setAnimalType(1);   		
+	        		typeDialog.dispose();
+	        				
+	        		}
+			});
+			
+			omnivore.addActionListener(new ActionListener() {
+				@Override
+        		public void actionPerformed(ActionEvent e1) {
+        			
+        		zoopanel.setAnimalType(2);
+        		typeDialog.dispose();
+        		AddAnimalDialog animaldialog = null;	
+        			
+        		}
+		});
+			herbivore.addActionListener(new ActionListener() {
+				@Override
+        		public void actionPerformed(ActionEvent e1) {
+        		zoopanel.setAnimalType(3);
+        		typeDialog.dispose();
+        			
+        			
+        		}
+		});
+			
+			JLabel typeLabel = new JLabel("Please choose type");
+			typeLabel.setIcon(icon);
+			typeLabel.setIconTextGap(30);
+	        JPanel typepanel = new JPanel();
+	        JPanel typebuttonPanel = new JPanel();
+	        typebuttonPanel.setLayout(new FlowLayout());
+	        typebuttonPanel.add(carnivore);
+	        typebuttonPanel.add(omnivore);
+	        typebuttonPanel.add(herbivore);
+	        typepanel.setLayout(new BorderLayout());
+	        typepanel.add(typebuttonPanel, BorderLayout.SOUTH);
+	        typepanel.add(typeLabel,BorderLayout.CENTER);
+	        typeDialog.add(typepanel);
+	        typeDialog.pack();    
+	        typeDialog.setVisible(true); 
+	        this.setVisible(true);
+	        
+			if(zoopanel.getAnimalType() != null)
+				new AddAnimalDialog(zoopanel, this);
+			
+			zoopanel.setAnimalType(4);
+			
+		}
+		
+		if(e.getSource() == this.change_color) {
+			new ChangeAnimal(this , zoopanel);
+			
 			
 			
 		}
+		
 		
 		if (e.getSource() ==this.sleep) {
 			zoopanel.sleep();
@@ -186,7 +259,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 			
 		if(e.getSource() == this.food) {
 			
-			JDialog foodDialog = new JDialog(this , "Food for animlas", true);  
+			JDialog foodDialog = new JDialog(this , "Food for animals", true);  
 	        JButton Lettuce = new JButton ("Lettuce");
 	        Lettuce.addActionListener(new ActionListener() {
         		
@@ -256,6 +329,15 @@ public class ZooFrame extends JFrame implements ActionListener {
 			info_dialog.setVisible(true);
 			
 		}
+		
+		if(e.getSource() == save_state) {
+			zoopanel.saveState();
+		}
+		
+		if(e.getSource() == restore_state) {
+			zoopanel.restoreState();
+		}
+		
 		
 		
 		if(e.getSource() == exit_button) {

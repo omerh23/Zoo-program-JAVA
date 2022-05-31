@@ -21,6 +21,5 @@ public interface IDiet {
 	 * */
 	public double eat(Animal animal, IEdible food); // check if is edible and calculate the weight
 	
-	//creates new animal from type interface AnimalFactory
-	public AnimalFactory getAnimal(String animalType , float weight , String color,ZooPanel panel);
+	
 }

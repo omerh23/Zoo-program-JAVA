@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Observable;
 import java.util.concurrent.Future;
 
 import javax.imageio.ImageIO;
@@ -17,6 +18,7 @@ import food.*;
 import graphics.*;
 import mobility.*;
 import mobility.Point;
+import momento.MomentoZoo;
 
 
 /**
@@ -26,7 +28,7 @@ import mobility.Point;
  * @see     Mobile, IEdible
  */
 
-public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,IDrawable,Runnable,AnimalFactory {
+public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,IDrawable,Runnable {
 
 	private String name;
 	private double weight;
@@ -42,15 +44,16 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	private int eatCount;
 	private ZooPanel pan;
 	private BufferedImage img1, img2;
-	//protected Thread thread;
 	protected boolean threadSuspended;
 	private int new_x = 0;
 	private int new_y = 0;
 	private boolean alive = true;
 	private float centercoor_x;  
 	private float centercoor_y;
-	private Future task;
+	private boolean change_state =false;
 	
+	
+					
 	/**
 	 * A constructor for the animal class.
 	 * 
@@ -71,9 +74,12 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		threadSuspended = false;
 		new_x = location.get_x();
 		new_y = location.get_y();	
-		//thread = new Thread(this);	
 		centercoor_x = (int)pan.getWidth()/2 - 20;
 		centercoor_y = (int)pan.getHeight()/2 - 20;
+		
+		
+		
+					
 	}
 	
 	/*
@@ -83,6 +89,8 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 				
 			while(alive) {
 				while(!threadSuspended) {
+					
+					
 					if(!alive)
 						break;
 			
@@ -121,10 +129,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 							new_y = new_y + (verSpeed * y_dir);
 						}
 						
-//						Point point = new Point(new_x,new_y);
-//						this.setLocation(point);
-//						coordChanged = true;
-						//pan.manageZoo();
+
 						
 					}
 					
@@ -145,7 +150,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 						new_x = new_x + (horSpeed * x_dir);
 						new_y = new_y + (verSpeed * y_dir);
 						
-						//pan.manageZoo();
+						
 					
 			
 					}//else
@@ -153,7 +158,10 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 					Point point = new Point(new_x,new_y);
 					this.Move(point);
 					this.setLocation(point);
-					coordChanged = true;
+					this.setChanged();
+					this.notifyObservers();
+					
+					
 				
 				}//inside loop
 				
@@ -165,7 +173,9 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 							e.printStackTrace();
 						}
 					}
+					
 				}
+				
 				
 			}//alive
 			
@@ -331,7 +341,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	 * @param nm - string of the picture name  
 	 * 
 	 */
-	public void loadImages(String nm)
+	public synchronized void loadImages(String nm)
 		
 	{
 		if(this.col == "Red")
@@ -467,12 +477,20 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		
 	}
 	
-	@Override
-	public Animal create() {
-			
-		return this;
-		
-		
+	public void setColor(String color) {
+		this.col = color;
 	}
+	
+	
+	
+	@Override
+	public boolean setLocation(Point point) {
+		super.setLocation(point);
+		this.new_x = point.get_x();
+		this.new_y = point.get_y();
+		return true;
+	}
+	
+	
 
 }

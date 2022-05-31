@@ -30,21 +30,36 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 	private  JTextField horizon_speed_field;
 	private  JTextField vertical_speed_field;
 	private JPanel displayPanel;
+	private JPanel display_type;
 	private JComboBox<String> animal_color;
 	private JButton create;
 	private ZooPanel zoopanel;
 	private String colors[]= {"Natural","Red","Blue"};
-	private String[] animals = {"Lion","Bear","Elephant","Giraffe","Turtle"};
+	private String[] animals  ; 
+	private String animalType = null;
 	
 	
 	
 
-	public AddAnimalDialog(ZooPanel zoopanel, ZooFrame Zoo) {
+	public AddAnimalDialog(ZooPanel zoopanel, ZooFrame Zoo ) {
 		super(Zoo, "Add animal", true);
 		displayPanel = new JPanel();
+		this.animalType = zoopanel.getAnimalType();
 		this.zoopanel = zoopanel;
 		create = new JButton("Create");
 		create.addActionListener(this);
+		
+		if(this.animalType == "Carnivore")
+			animals = new String[]{"Lion"};
+		
+		else if(this.animalType == "Omnivore")
+			animals = new String[]{"Bear"};
+		
+		else
+			animals = new String[]{"Elephant","Giraffe","Turtle"};
+		
+		
+		
 		box = new JComboBox(animals);
 		box.addActionListener(this);
 		animal_color = new JComboBox(colors);
@@ -81,72 +96,46 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 					String color = animal_color.getItemAt(animal_color.getSelectedIndex());
 					String name = "default";
 					float weight = 0;
+					
+					
+					
 					if(50 > size || size > 300 || horizon_speed < 1 || horizon_speed > 10 
 							||vertical_speed < 1 || vertical_speed > 10 )
 						throw new NumberFormatException();
+					
+					AnimalFactory animalfac = FactoryProducer.getFactory(zoopanel.getAnimalType());
+				
+					
 					switch(animal_choosen) { 
 					case "Lion":
-						weight = (float) (size * 0.8);
-						
-						IDiet animalfac = FactoryProducer.getFactory("Carnivore");
-						AnimalFactory animal = animalfac.getAnimal("Lion",weight,color,zoopanel);			
-						//Animal lion = new Lion(name,weight,color,zoopanel);
-						((Animal) animal).setHorSpeed(horizon_speed);
-						((Animal) animal).setVerSpeed(vertical_speed);
-						((Animal) animal).setSize(size);
-						zoopanel.addAnimallist(animal.create());
-						
-						
+						weight = (float) (size * 0.8);																
 						break;
 						
 					case "Bear":
 						weight = (float) (size * 1.5);
-						Animal bear = new Bear(name,weight,color,zoopanel);
-						bear.setHorSpeed(horizon_speed);
-						bear.setVerSpeed(vertical_speed);
-						bear.setSize(size);
-						zoopanel.addAnimallist(bear);		
-						//zoopanel.addToExecutor(bear);
-						//bear.startThread();
 						break;
 						
 					case "Giraffe":
-						weight = (float) (size * 2.2);					
-						Animal giraffe = new Giraffe(name,weight,color,zoopanel);
-						giraffe.setHorSpeed(horizon_speed);
-						giraffe.setVerSpeed(vertical_speed);
-						giraffe.setSize(size);
-						zoopanel.addAnimallist(giraffe);
-						//zoopanel.addToExecutor(giraffe);
-						//giraffe.startThread();
+						weight = (float) (size * 2.2);							
 						break;
 
 						
 					case "Elephant":
 						weight = size * 10;				
-						Animal elephant = new Elephant(name,weight,color,zoopanel);
-						elephant.setHorSpeed(horizon_speed);
-						elephant.setVerSpeed(vertical_speed);
-						elephant.setSize(size);
-						zoopanel.addAnimallist(elephant);
-						//zoopanel.addToExecutor(elephant);
-						//elephant.startThread();
 						break;
 
 						
 					case "Turtle":
    					    weight = (float) (size * 0.5);		
-						Animal turtle = new Turtle(name,weight,color,zoopanel);
-						turtle.setHorSpeed(horizon_speed);
-						turtle.setVerSpeed(vertical_speed);
-						turtle.setSize(size);
-						zoopanel.addAnimallist(turtle);
-						//zoopanel.addToExecutor(turtle);
-						//turtle.startThread();
 						break;
 
 						
-					}				
+					}
+					Animal animal = animalfac.createAnimal(animal_choosen,weight,color,zoopanel);
+					animal.setHorSpeed(horizon_speed);
+					animal.setVerSpeed(vertical_speed);
+					animal.setSize(size);
+					zoopanel.addAnimallist(animal);
 			
 			}
 				catch(NumberFormatException err) {
@@ -161,11 +150,8 @@ public class AddAnimalDialog extends JDialog  implements ActionListener {
 			
 			}});
 		
-		displayPanel.add(create);
-		
+		displayPanel.add(create);	
 		this.add(displayPanel);
-		
-		
 		this.pack();
 		this.setVisible(true);
 	}

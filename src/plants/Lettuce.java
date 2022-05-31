@@ -1,7 +1,6 @@
 package plants;
 
 import java.awt.Graphics;
-
 import graphics.ZooPanel;
 import utilities.MessageUtility;
 

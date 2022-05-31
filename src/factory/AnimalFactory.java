@@ -6,6 +6,6 @@ import graphics.ZooPanel;
 
 public interface AnimalFactory {
 
-	public Animal create();
+	public Animal createAnimal(String animalType ,float weight , String color,ZooPanel panel); 
 	
 }

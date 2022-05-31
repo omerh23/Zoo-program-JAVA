@@ -1,11 +1,15 @@
 package mobility;
+
+import java.util.Observable;
+
 /**
  * An abstract class describing animal mobility implements the Ilocatable interface
  *
  * @author Vladislav Shevtsov id: 322162553; Omer Halfon id: 315429951
  * @see     Ilocatable
  */
-public abstract class Mobile implements Ilocatable {
+@SuppressWarnings("deprecation")
+public abstract class Mobile extends Observable implements Ilocatable {
 	
 	private Point location;
 	private double totalDistance;

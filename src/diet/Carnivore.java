@@ -48,14 +48,7 @@ public class Carnivore implements IDiet {
 			weight = (animal.getWeight()/10);
 		return weight;
 	}
-	@Override
-	public  AnimalFactory getAnimal(String animalType , float weight , String color,ZooPanel panel) {   //Lion(String name,float weight , String color,ZooPanel panel)
-		if(animalType.equalsIgnoreCase("Lion")) { 
-			return new Lion("default",weight ,color ,panel);
-		}
-		
-		return null;
-	}
+	
 	
 	
 	

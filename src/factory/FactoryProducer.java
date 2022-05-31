@@ -1,5 +1,6 @@
 package factory;
 
+import animals.Animal;
 import diet.Carnivore;
 import diet.Herbivore;
 import diet.IDiet;
@@ -7,18 +8,19 @@ import diet.Omnivore;
 
 public class FactoryProducer {
 	
-	public static IDiet getFactory(String st) {
-		if (st == "Carnivore") 
-			return new Carnivore();
+	
+	
+	public static AnimalFactory getFactory(String st) {
 		
-		else if (st == "Herbivore") 
-			 return new Herbivore();
 		
-		else if (st == "Herbivore") 
-			return new Herbivore();
+		if (st.equalsIgnoreCase("Carnivore")) 
+			return new CarnivoreFactory();
 		
-		else if (st == "Omnivore") 
-			return new Omnivore();
+		else if (st.equalsIgnoreCase("Herbivore")) 
+			 return new HerbivoreFactory();	
+		
+		else if (st.equalsIgnoreCase("Omnivore"))
+			return new OmnivoreFactory();
 		
 		return null;
 	}

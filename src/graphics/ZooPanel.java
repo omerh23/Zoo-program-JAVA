@@ -5,6 +5,9 @@ import animals.Animal;
 import diet.*;
 import food.EFoodType;
 import mobility.Point;
+import momento.CareTaker;
+import momento.MomentoZoo;
+import observer.Controller;
 import animals.*;
 import plants.Cabbage;
 import plants.Lettuce;
@@ -57,12 +60,17 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	private Plant plant;
 	private int color; 
 	private Boolean flag = false;
-	private Thread controller;
+	private Controller controller;
 	private boolean exit = false;
 	private boolean centerFoodFlag = false ;
 	private ExecutorService executor ;
 	private final int THREADS_COUNT = 10 ;
 	private static ZooPanel zoopanel = null;
+	private String animalType = null;
+	private MomentoZoo momento;
+	private CareTaker caretaker;
+
+	
 	
 	
 	public static ZooPanel getInstance() {
@@ -75,8 +83,9 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	private ZooPanel() {
 		animals_list = new ArrayList<Animal>();
 		animals_queue = new LinkedList<Animal>();
-		controller = new Thread(this);
+		controller = new Controller(this);
 		plant = null;
+		caretaker = new CareTaker();
 		this.setBackground(null);
 		this.setVisible(true);
 		try
@@ -95,7 +104,9 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	@Override
 	public void run() {
 		while(!exit) {
-			this.manageZoo();	
+			if(isChange())  //if the animals moves
+				repaint();
+				
 			
 		}
 	}
@@ -173,9 +184,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	 * The controller that manage the zoo
 	 */
 	public synchronized void manageZoo() {
-		if(isChange()) { //if the animals moves
-			repaint();
-			
+		
 			
 			for(Animal animal : animals_list) {
 				boolean chase = false;
@@ -186,14 +195,12 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 							if(animal.getWeight() > 2 * prey.getWeight())
 								if(animal.eat(prey)) {
 									
-									//prey.interrupt();
 									animals_list.remove(prey);
 									prey.kill();
 									animal.eatInc();
 								if(animals_queue!= null && !animals_queue.isEmpty()) {
 									this.executor.execute(animals_queue.peek());
 									this.animals_list.add(animals_queue.remove());
-								//	this.newExecutor();
 									
 								}
 									repaint();
@@ -224,7 +231,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 
 		
 		}
-	}
+	
 
 	private boolean isChange() {
 		for(Animal animal: animals_list) {
@@ -252,6 +259,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 				else
 					throw new ArrayIndexOutOfBoundsException();
 			else {
+				animal.addObserver(controller);
 				animals_list.add(animal);
 				executor.execute(animal);
 			}
@@ -364,11 +372,11 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		return this.exit;
 	}
 	
-	public void addToThread(Animal animal) {
-		
-		this.controller = new Thread(animal);
-		
-	}
+//	public void addToThread(Animal animal) {
+//		
+//		this.controller = new Controller(animal);
+//		
+//	}
 	
 	public  boolean getCenterFoodFlag() {
 		return this.centerFoodFlag;
@@ -379,6 +387,47 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		return this.plant.getFoodtype();
 	}
 	
-
+	public void setAnimalType(int type) {
+		
+		if(type == 1)
+			animalType  = "Carnivore";
+		
+		else if(type == 2)
+			animalType  = "Omnivore";
+		
+		else if(type == 3)
+			animalType  = "Herbivore";
+		else
+			animalType = null;
 	
-}
+	}
+	
+	public String getAnimalType() {
+		return animalType;
+	}
+	
+	public void saveState() {
+		momento = new MomentoZoo(animals_list);
+		caretaker.addMomento(momento);
+	}
+	
+	public synchronized void restoreState() {
+		
+		if(!caretaker.isEmpty()) {
+		int i = 0;  
+		for(Animal animal : animals_list) {
+			animal.setLocation(caretaker.getMomento().get(i));
+			i++;
+		}}
+		else {
+			ImageIcon icon =new ImageIcon("Mpicture.png");
+		JOptionPane.showMessageDialog(null, "no memento saved", 
+            "Message", JOptionPane.ERROR_MESSAGE, icon);
+		}
+
+		repaint();
+	}}
+		
+	
+	
+
