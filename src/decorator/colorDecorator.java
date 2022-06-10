@@ -1,6 +1,9 @@
 package decorator;
 
 import animals.Animal;
+/*
+ * class to change color of animals 
+ */
 
 public class colorDecorator implements picDecorator {
 	

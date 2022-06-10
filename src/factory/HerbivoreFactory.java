@@ -5,7 +5,9 @@ import animals.Elephant;
 import animals.Giraffe;
 import animals.Turtle;
 import graphics.ZooPanel;
-
+/*
+ * factory of herbivorous 
+ */
 public class HerbivoreFactory implements AnimalFactory {
 
 	@Override

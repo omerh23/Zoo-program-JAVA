@@ -4,9 +4,9 @@ import animals.Animal;
 
 import diet.*;
 import food.EFoodType;
+import memento.CareTaker;
+import memento.MementoZoo;
 import mobility.Point;
-import momento.CareTaker;
-import momento.MomentoZoo;
 import observer.Controller;
 import animals.*;
 import plants.Cabbage;
@@ -67,8 +67,9 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	private final int THREADS_COUNT = 10 ;
 	private static ZooPanel zoopanel = null;
 	private String animalType = null;
-	private MomentoZoo momento;
+	private MementoZoo momento;
 	private CareTaker caretaker;
+	private int background = 2 ;
 
 	
 	
@@ -144,6 +145,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
     
     public void setBackground(int num)
 	{
+    	this.background = num;
 		if(num == 0) 
 		{
 				flag = true;
@@ -372,11 +374,7 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		return this.exit;
 	}
 	
-//	public void addToThread(Animal animal) {
-//		
-//		this.controller = new Controller(animal);
-//		
-//	}
+
 	
 	public  boolean getCenterFoodFlag() {
 		return this.centerFoodFlag;
@@ -384,7 +382,10 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 	
 	public  EFoodType getCenterFood()
 	{
-		return this.plant.getFoodtype();
+		if(plant != null)
+			return this.plant.getFoodtype();
+		return null;
+		
 	}
 	
 	public void setAnimalType(int type) {
@@ -406,19 +407,36 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		return animalType;
 	}
 	
-	public void saveState() {
-		momento = new MomentoZoo(animals_list);
-		caretaker.addMomento(momento);
+	public void saveState() throws CloneNotSupportedException {
+	
+		momento = new MementoZoo(animals_list,animals_queue,plant,this);
+	
+		caretaker.addMemento(momento);
 	}
 	
 	public synchronized void restoreState() {
 		
 		if(!caretaker.isEmpty()) {
-		int i = 0;  
-		for(Animal animal : animals_list) {
-			animal.setLocation(caretaker.getMomento().get(i));
-			i++;
-		}}
+			ArrayList<Animal> memento_list = caretaker.getMemento();	
+			Plant mementoPlant = caretaker.getPlantMemento();
+			LinkedList<Animal> queue_list = caretaker.getQueueMemento();
+
+			this.DeleteAllAnimals();
+			for(Animal animal : memento_list) {	
+				this.addAnimallist(animal);
+			}
+			this.plant = mementoPlant;
+			centerFoodFlag = true;
+		
+			if(!caretaker.queueIsEmpty()) {		
+				for(Animal animal : queue_list) {	
+					this.addAnimallist(animal);
+				}
+			}
+			this.setBackground(caretaker.getMementoBackground());
+			
+		}
+		
 		else {
 			ImageIcon icon =new ImageIcon("Mpicture.png");
 		JOptionPane.showMessageDialog(null, "no memento saved", 
@@ -426,7 +444,13 @@ public class ZooPanel extends JPanel implements Runnable , ActionListener{
 		}
 
 		repaint();
-	}}
+
+	}
+	public int getBackGround() {
+		
+		return this.background;
+	}
+}
 		
 	
 	

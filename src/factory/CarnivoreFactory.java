@@ -3,7 +3,9 @@ package factory;
 import animals.Animal;
 import animals.Lion;
 import graphics.ZooPanel;
-
+/*
+ * Factory of carnivorous
+ */
 public class CarnivoreFactory implements AnimalFactory {
 
 	@Override

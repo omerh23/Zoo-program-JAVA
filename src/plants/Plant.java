@@ -20,7 +20,7 @@ import utilities.MessageUtility;
  * @author baroh
  *
  */
-public abstract class Plant  implements IEdible, Ilocatable,IDrawable {
+public class Plant  implements IEdible, Ilocatable,IDrawable,Cloneable {
 	
 	private double height;
 	
@@ -30,7 +30,15 @@ public abstract class Plant  implements IEdible, Ilocatable,IDrawable {
 	private ZooPanel zoopanel;
 	private BufferedImage plant_image = null;
 	
-	public Plant(ZooPanel zoopanel) {
+public static Plant plant = null;
+	
+	public static Plant getInstance(ZooPanel panel) {
+		if(plant == null)
+			plant = new Plant(panel);
+		return  plant;
+	}
+	
+	protected Plant(ZooPanel zoopanel) {
 		Random rand = new Random();
 		int x = rand.nextInt(30);
 		int y = rand.nextInt(12);
@@ -161,6 +169,9 @@ public abstract class Plant  implements IEdible, Ilocatable,IDrawable {
 		return null;
 	}
 
-
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 
 }

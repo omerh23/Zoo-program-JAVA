@@ -5,6 +5,9 @@ import diet.Carnivore;
 import diet.Herbivore;
 import diet.IDiet;
 import diet.Omnivore;
+/*
+ * factroy of factory's  to produce animals
+ */
 
 public class FactoryProducer {
 	

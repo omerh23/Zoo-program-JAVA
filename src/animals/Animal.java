@@ -16,9 +16,9 @@ import utilities.*;
 import zoo.ZooActions;
 import food.*;
 import graphics.*;
+import memento.MementoZoo;
 import mobility.*;
 import mobility.Point;
-import momento.MomentoZoo;
 
 
 /**
@@ -28,7 +28,7 @@ import momento.MomentoZoo;
  * @see     Mobile, IEdible
  */
 
-public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,IDrawable,Runnable {
+public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,IDrawable,Runnable,Cloneable {
 
 	private String name;
 	private double weight;
@@ -44,12 +44,12 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 	private int eatCount;
 	private ZooPanel pan;
 	private BufferedImage img1, img2;
-	protected boolean threadSuspended;
+	protected boolean threadSuspended = false;
 	private int new_x = 0;
 	private int new_y = 0;
 	private boolean alive = true;
-	private float centercoor_x;  
-	private float centercoor_y;
+	private float centercoor_x ;
+	private float centercoor_y ;
 	private boolean change_state =false;
 	
 	
@@ -71,16 +71,29 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		this.img1 = null;
 		this.img2 =null;
 		this.pan = zoopanel;
-		threadSuspended = false;
 		new_x = location.get_x();
-		new_y = location.get_y();	
-		centercoor_x = (int)pan.getWidth()/2 - 20;
+		new_y = location.get_y();
+		centercoor_x =(int)pan.getWidth()/2 - 20;
 		centercoor_y = (int)pan.getHeight()/2 - 20;
-		
-		
-		
-					
+						
 	}
+	
+//	public Animal(Animal animal) {
+//		super(animal.getLocation());
+//		this.name = animal.getName();
+//		MessageUtility.logConstractor("Animal", name);
+//		eatCount = animal.getEatCount() ;
+//		this.col = animal.getColor();
+//		this.img1 = animal.getImage1();
+//		this.img2 =animal.getImage2();
+//		this.pan = animal.getPanel();
+//		new_x = animal.getLocation().get_x();
+//		new_y = animal.getLocation().get_y();
+//		centercoor_x =(int)pan.getWidth()/2 - 20;
+//		centercoor_y = (int)pan.getHeight()/2 - 20;
+//	}
+//	
+	
 	
 	/*
 	 * life cycle of animal that work as thread
@@ -100,7 +113,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 					} catch (InterruptedException e) { }
 					
 					
-					if(pan.getCenterFoodFlag()&& this.diet.canEat(pan.getCenterFood())) {
+					if(pan.getCenterFood() != null && pan.getCenterFoodFlag()&& this.diet.canEat(pan.getCenterFood())) {
 						
 						if(new_x >= centercoor_x) {
 							x_dir = -1;
@@ -489,6 +502,11 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 		this.new_x = point.get_x();
 		this.new_y = point.get_y();
 		return true;
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 	
 	

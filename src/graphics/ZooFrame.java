@@ -195,7 +195,7 @@ public class ZooFrame extends JFrame implements ActionListener {
         			
         		zoopanel.setAnimalType(2);
         		typeDialog.dispose();
-        		AddAnimalDialog animaldialog = null;	
+        			
         			
         		}
 		});
@@ -331,7 +331,12 @@ public class ZooFrame extends JFrame implements ActionListener {
 		}
 		
 		if(e.getSource() == save_state) {
-			zoopanel.saveState();
+			try {
+				zoopanel.saveState();
+			} catch (CloneNotSupportedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 		if(e.getSource() == restore_state) {

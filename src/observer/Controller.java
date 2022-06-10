@@ -4,7 +4,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import graphics.ZooPanel;
-
+/*
+ * class that control at the zoo
+ */
 @SuppressWarnings("deprecation")
 public class Controller extends Thread implements Observer{
 	
