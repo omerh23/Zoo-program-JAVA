@@ -78,21 +78,7 @@ public abstract class Animal extends Mobile implements IEdible,IAnimalBehavior,I
 						
 	}
 	
-//	public Animal(Animal animal) {
-//		super(animal.getLocation());
-//		this.name = animal.getName();
-//		MessageUtility.logConstractor("Animal", name);
-//		eatCount = animal.getEatCount() ;
-//		this.col = animal.getColor();
-//		this.img1 = animal.getImage1();
-//		this.img2 =animal.getImage2();
-//		this.pan = animal.getPanel();
-//		new_x = animal.getLocation().get_x();
-//		new_y = animal.getLocation().get_y();
-//		centercoor_x =(int)pan.getWidth()/2 - 20;
-//		centercoor_y = (int)pan.getHeight()/2 - 20;
-//	}
-//	
+
 	
 	
 	/*
