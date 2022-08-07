@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\omerh\OneDrive\שולחן העבודה\לימודים שנה ב\סימסטר ב\מונחה עצמים מתקדם\Home Work\HW1\HW1\.metadata\.plugins\org.eclipse.jdt.core
+2050128087.index
+39645565.index
+1865797976.index

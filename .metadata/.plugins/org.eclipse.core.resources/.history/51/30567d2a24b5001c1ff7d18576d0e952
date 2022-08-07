@@ -1,0 +1,20 @@
+package lab5;
+
+public class PanelDrawing extends JPanel {
+@Override
+public void paintComponent(Graphics g) {
+super.paintComponent(g);
+g.drawRect(10, 10, 50, 60);
+}
+@Override
+public Dimension getPreferredSize() {
+return new Dimension(400, 400);
+}
+public static void main(String[] args) {
+JFrame frame = new JFrame("Basic Drawing");
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+frame.add(new PanelDrawing());
+frame.pack();
+frame.setVisible(true);
+}
+}

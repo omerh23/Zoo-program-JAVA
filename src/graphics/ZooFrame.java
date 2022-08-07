@@ -70,7 +70,7 @@ public class ZooFrame extends JFrame implements ActionListener {
 	public ZooFrame() {
 		super("Zoo");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
+		//this.setLayout(new BorderLayout());
 		this.menubar = new JMenuBar();
 		this.setJMenuBar(this.menubar);	
 		zoopanel = ZooPanel.getInstance();
